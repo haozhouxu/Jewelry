@@ -51,6 +51,12 @@ namespace student
         {
 
         }
+
+        private void Open(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            Add openAdd = new Add();
+            openAdd.Show();
+        }
     }
 
     public class Student

@@ -6,6 +6,11 @@
         xmlns:local="clr-namespace:student"
         mc:Ignorable="d"
         Title="学生信息管理" Height="350" Width="525">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="Open" Executed="Open" />
+    </Window.CommandBindings>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -18,7 +23,7 @@
         <Border BorderBrush="LightGray" BorderThickness="1" Grid.Row="0" Grid.Column="0">
             <StackPanel Orientation="Horizontal">
                 <Button Content="查询" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" Click="Search_Click"/>
-                <Button Content="新增" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"/>
+                <Button Content="新增" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" Command="Open"/>
                 <Button Content="删除" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"/>
             </StackPanel>
         </Border>

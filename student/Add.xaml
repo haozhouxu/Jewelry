@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:student"
         mc:Ignorable="d"
-        Title="Add" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+        Title="新增" Height="300" Width="300">
+    <DockPanel LastChildFill="False">
+        <StackPanel DockPanel.Dock="Top" Margin="5" Orientation="Horizontal">
+            <TextBlock Text="姓名" />
+            <TextBox MinWidth="50" MinHeight="10"/>
+            <TextBlock Text="编号" />
+            <TextBox MinWidth="50" MinHeight="10"/>
+            <TextBlock Text="头像" />
+            <Image x:Name="image"/>
+            <Button Content="选择头像" Margin="10,0,0,0" Click="Add_Click"/>
+        </StackPanel>
+    </DockPanel>
 </Window>
