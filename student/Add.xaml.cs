@@ -32,5 +32,21 @@ namespace student
                 this.image.Source = new BitmapImage(new Uri(ofd.FileName, UriKind.Absolute));
             }
         }
+
+        private void Save_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            string name = this.name.Text;
+            string number = this.number.Text;
+
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(number))
+            {
+                MessageBox.Show("姓名或者编号不能为空！！");
+            }
+        }
+
+        private void Open_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+
+        }
     }
 }
