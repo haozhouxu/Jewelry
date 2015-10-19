@@ -5,6 +5,8 @@ using System.Windows.Controls;
 using MySql.Data;
 using MySql.Data.MySqlClient; //引用Mysql.data.dll中的类
 using System.Data;
+using System.Windows.Media.Imaging;
+
 namespace student
 {
     /// <summary>
@@ -23,13 +25,25 @@ namespace student
             DataSet ds = MySqlHelper.ExecuteDataset(myConnection, query);
             //MySqlDataReader myDataReader = myCommand.ExecuteReader();
 
+            //获取图片
+            Image img = new Image();
+
             //新建一个student集合
             List<Student> StudentList = new List<Student>();
             foreach (DataTable dt in ds.Tables)
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    Student stu = new Student(dr["name"].ToString(), dr["number"].ToString());
+                    byte[] by = (byte[])dr["image"];
+                    System.IO.MemoryStream ms = new System.IO.MemoryStream(by);
+                    //System.IO.Stream ss =  System.IO.Stream;
+                    //ms.CopyTo(ss);
+                    System.Drawing.Image imgg = System.Drawing.Image.FromStream(ms,true);
+                    System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(imgg);
+                    IntPtr hb = bmp.GetHbitmap();
+                    System.Windows.Media.ImageSource wpfbitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hb, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                    img.Source = wpfbitmap;
+                    Student stu = new Student(dr["name"].ToString(), dr["number"].ToString(), wpfbitmap);
                     StudentList.Add(stu);
                 }
             }
@@ -45,6 +59,8 @@ namespace student
             myConnection.Close();
             
             this.student.ItemsSource = StudentList;
+
+
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -61,15 +77,16 @@ namespace student
 
     public class Student
     {
-        public Student(string name,string number)
+        public Student(string name,string number, System.Windows.Media.ImageSource imageSource)
         {
             Name = name;
             Number = number;
+            ImageSource = imageSource;
         }
 
         private string name; //学生姓名
         private string number; //学生编号
-        private Image image; //学生头像
+        private System.Windows.Media.ImageSource imageSource; //学生头像
 
         public string Name
         {
@@ -81,10 +98,10 @@ namespace student
             get { return number; }
             set { number = value; }
         }
-        public Image Image
+        public System.Windows.Media.ImageSource ImageSource
         {
-            get { return image; }
-            set { image = value; }
+            get { return imageSource; }
+            set { imageSource = value; }
         }
     }
 }

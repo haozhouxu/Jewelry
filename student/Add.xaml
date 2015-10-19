@@ -20,11 +20,11 @@
         <StackPanel DockPanel.Dock="Top" Margin="5" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock Text="姓名：" />
-                <TextBox MinWidth="50" MinHeight="10" x:Name="name"/>
+                <TextBox MinWidth="50" MinHeight="10" x:Name="name1"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock Text="编号：" />
-                <TextBox MinWidth="50" MinHeight="10" x:Name="number"/>
+                <TextBox MinWidth="50" MinHeight="10" x:Name="number1"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock Text="头像：" />

@@ -61,7 +61,7 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Image     Grid.Row="0" Grid.Column="0" />
+                            <Image     Grid.Row="0" Grid.Column="0" Width="50" Height="50" Source="{Binding Path='ImageSource'}" />
                             <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path='Name'}" />
                             <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Path='Number'}" />
                         </Grid>
