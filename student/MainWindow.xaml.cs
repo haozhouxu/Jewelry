@@ -43,7 +43,8 @@ namespace student
                     IntPtr hb = bmp.GetHbitmap();
                     System.Windows.Media.ImageSource wpfbitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hb, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                     img.Source = wpfbitmap;
-                    Student stu = new Student(dr["name"].ToString(), dr["number"].ToString(), wpfbitmap);
+                    System.Windows.Media.ImageSource wpftooltip = wpfbitmap;
+                    Student stu = new Student(dr["name"].ToString(), dr["number"].ToString(), wpfbitmap, wpftooltip);
                     StudentList.Add(stu);
                 }
             }
@@ -65,7 +66,48 @@ namespace student
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
+            string query = "SELECT * FROM student";
+            MySqlConnection myConnection = new MySqlConnection("server=localhost;user=root;password=root;database=xhz1;port=3306;");
+            //MySqlCommand myCommand = new MySqlCommand(query, myConnection);
+            //myConnection.Open();
+            DataSet ds = MySqlHelper.ExecuteDataset(myConnection, query);
+            //MySqlDataReader myDataReader = myCommand.ExecuteReader();
 
+            //获取图片
+            Image img = new Image();
+
+            //新建一个student集合
+            List<Student> StudentList = new List<Student>();
+            foreach (DataTable dt in ds.Tables)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    byte[] by = (byte[])dr["image"];
+                    System.IO.MemoryStream ms = new System.IO.MemoryStream(by);
+                    //System.IO.Stream ss =  System.IO.Stream;
+                    //ms.CopyTo(ss);
+                    System.Drawing.Image imgg = System.Drawing.Image.FromStream(ms, true);
+                    System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(imgg);
+                    IntPtr hb = bmp.GetHbitmap();
+                    System.Windows.Media.ImageSource wpfbitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hb, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                    img.Source = wpfbitmap;
+                    System.Windows.Media.ImageSource wpftooltip = wpfbitmap;
+                    Student stu = new Student(dr["name"].ToString(), dr["number"].ToString(), wpfbitmap, wpftooltip);
+                    StudentList.Add(stu);
+                }
+            }
+
+            //新建一个student集合
+            //List<Student> StudentList = null;
+            //while (myDataReader.Read() == true)
+            //{
+            //    Student stu = new Student(myDataReader["name"].ToString(),myDataReader["number"].ToString());
+            //    StudentList.Add(stu);
+            //}
+            //myDataReader.Close();
+            myConnection.Close();
+
+            this.student.ItemsSource = StudentList;
         }
 
         private void Open(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
@@ -84,9 +126,18 @@ namespace student
             ImageSource = imageSource;
         }
 
+        public Student(string name, string number, System.Windows.Media.ImageSource imageSource, System.Windows.Media.ImageSource toolTip)
+        {
+            Name = name;
+            Number = number;
+            ImageSource = imageSource;
+            ToolTip = toolTip;
+        }
+
         private string name; //学生姓名
         private string number; //学生编号
         private System.Windows.Media.ImageSource imageSource; //学生头像
+        private System.Windows.Media.ImageSource tooltip;
 
         public string Name
         {
@@ -102,6 +153,11 @@ namespace student
         {
             get { return imageSource; }
             set { imageSource = value; }
+        }
+        public System.Windows.Media.ImageSource ToolTip
+        {
+            get { return tooltip; }
+            set { tooltip = value; }
         }
     }
 }

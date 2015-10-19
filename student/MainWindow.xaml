@@ -10,7 +10,7 @@
     <Window.CommandBindings>
         <CommandBinding Command="Open" Executed="Open" />
     </Window.CommandBindings>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -22,52 +22,64 @@
         <!--操作栏-->
         <Border BorderBrush="LightGray" BorderThickness="1" Grid.Row="0" Grid.Column="0">
             <StackPanel Orientation="Horizontal">
-                <Button Content="查询" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" Click="Search_Click"/>
+                <Button Content="刷新" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" Click="Search_Click"/>
                 <Button Content="新增" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" Command="Open"/>
                 <Button Content="删除" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center"/>
             </StackPanel>
         </Border>
         <!--数据区-->
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-            <Border BorderBrush="LightGray" BorderThickness="0,0,1,1" Grid.Row="0" Grid.Column="0">
-                <TextBlock Text="头像" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            </Border>
-            <Border BorderBrush="LightGray" BorderThickness="0,0,1,1" Grid.Row="0" Grid.Column="1">
-                <TextBlock Text="姓名" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            </Border>
-            <Border BorderBrush="LightGray" BorderThickness="0,0,1,1" Grid.Row="0" Grid.Column="2">
-                <TextBlock Text="编码" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            </Border>
+                <Border BorderBrush="LightGray" BorderThickness="0,0,1,1" Grid.Row="0" Grid.Column="0">
+                    <TextBlock Text="头像" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border BorderBrush="LightGray" BorderThickness="0,0,1,1" Grid.Row="0" Grid.Column="1">
+                    <TextBlock Text="姓名" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Border BorderBrush="LightGray" BorderThickness="0,0,1,1" Grid.Row="0" Grid.Column="2">
+                    <TextBlock Text="编码" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
 
-            <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="student">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Image     Grid.Row="0" Grid.Column="0" Width="50" Height="50" Source="{Binding Path='ImageSource'}" />
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path='Name'}" />
-                            <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Path='Number'}" />
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Grid>
+                <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="student">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1,0,1,1" >
+                                    <Image Width="50" Height="50" Source="{Binding Path='ImageSource'}" >
+                                        <Image.ToolTip>
+                                            <Image Source="{Binding Path='ToolTip'}" />
+                                        </Image.ToolTip>
+                                    </Image>
+                                </Border>
+                                <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="0,0,1,1" >
+                                    <TextBlock  Text="{Binding Path='Name'}" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Row="0" Grid.Column="2" BorderBrush="LightGray" BorderThickness="0,0,1,1" >
+                                    <TextBlock Text="{Binding Path='Number'}" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Window>

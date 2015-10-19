@@ -82,11 +82,19 @@ namespace student
 
             //第四步：关闭数据库连接
             con.Close();
+
+            //提示新增成功
+            MessageBox.Show("新增成功");
         }
 
         private void Open_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
 
+        }
+
+        private void Close_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            this.add.Close();
         }
     }
 }

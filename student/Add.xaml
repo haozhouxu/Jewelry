@@ -5,17 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:student"
         mc:Ignorable="d"
-        Title="新增" Height="300" Width="300">
+        Title="新增" Height="300" Width="300" x:Name="add">
 
     <Window.CommandBindings>
         <CommandBinding Command="Open" Executed="Open_Executed" />
         <CommandBinding Command="Save" Executed="Save_Executed" />
+        <CommandBinding Command="Close" Executed="Close_Executed" />
     </Window.CommandBindings>
 
     <DockPanel LastChildFill="False">
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
             <Button Content="保存" Margin="5" Command="Save" />
-            <Button Content="取消" Margin="5" />
+            <Button Content="取消" Margin="5" Command="Close"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Top" Margin="5" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Margin="10">
