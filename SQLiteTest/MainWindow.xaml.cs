@@ -18,7 +18,7 @@ namespace student
             InitializeComponent();
 
             string query = "select name,number from student;";
-            SQLiteConnection conn = new SQLiteConnection("Data Source=DB/test.db;");
+            SQLiteConnection conn = new SQLiteConnection(@"Data Source=DB/test.db;");
             conn.Open();
             
 
