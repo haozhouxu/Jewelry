@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
-namespace ManagementSystem.DB
+namespace ManagementSystem.Models
 {
-    public class Gold: INotifyPropertyChanged
+    public class Jade : INotifyPropertyChanged
     {
         #region 字段
+        private JadeTypeEnum type;
+        private int number;
         private float weight;
         private float unitPrice;
         private float totalPrice;
@@ -17,6 +19,30 @@ namespace ManagementSystem.DB
         #endregion
 
         #region 属性
+        public JadeTypeEnum Type
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                type = value;
+                NotifyPropertyChanged("Type");
+            }
+        }
+        public int Number
+        {
+            get
+            {
+                return number;
+            }
+            set
+            {
+                number = value;
+                NotifyPropertyChanged("Number");
+            }
+        }
         public float Weight
         {
             get
@@ -56,15 +82,17 @@ namespace ManagementSystem.DB
         #endregion
 
         #region 方法
-        Gold()
+        Jade()
         {
 
         }
-        Gold(float we,float un)
+        Jade(JadeTypeEnum ty, int num,float we,float un)
         {
+            this.Type = ty;
+            this.Number = num;
             this.Weight = we;
             this.UnitPrice = un;
-            this.TotalPrice = we * un;
+            this.TotalPrice = num * un;
         }
 
         public void NotifyPropertyChanged(string propertyName)
@@ -75,5 +103,17 @@ namespace ManagementSystem.DB
             }
         }
         #endregion
+    }
+
+    public enum JadeTypeEnum
+    {
+        CircleType = 1,
+        DripType = 2,
+        GemType = 3,
+        PrincessType = 4,
+        HorseEyeType = 5,
+        YellowType = 6,
+        LadderType = 7,
+        JasperType = 8
     }
 }

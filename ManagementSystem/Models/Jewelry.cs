@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
-namespace ManagementSystem.DB
+namespace ManagementSystem.Models
 {
     public class Jewelry:INotifyPropertyChanged
     {
@@ -129,9 +129,11 @@ namespace ManagementSystem.DB
         {
 
         }
-        Jewelry(Image im,float tw,ObservableCollection<Gold> go,ObservableCollection<Jade> ja,)
+        Jewelry(Image im,float tw,ObservableCollection<Gold> go,ObservableCollection<Jade> ja, float pf,float of)
         {
-            this.
+            this.Image = im;
+            this.OtherFee = of;
+            this.ProcessFee = pf;
         }
 
         public void NotifyPropertyChanged(string propertyName)
