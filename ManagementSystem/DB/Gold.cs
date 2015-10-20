@@ -56,11 +56,15 @@ namespace ManagementSystem.DB
         #endregion
 
         #region 方法
+        Gold()
+        {
+
+        }
         Gold(float we,float un)
         {
-            Weight = we;
-            UnitPrice = un;
-            TotalPrice = we * un;
+            this.Weight = we;
+            this.UnitPrice = un;
+            this.TotalPrice = we * un;
         }
 
         public void NotifyPropertyChanged(string propertyName)

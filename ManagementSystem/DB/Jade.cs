@@ -82,13 +82,17 @@ namespace ManagementSystem.DB
         #endregion
 
         #region 方法
+        Jade()
+        {
+
+        }
         Jade(JadeTypeEnum ty, int num,float we,float un)
         {
-            Type = ty;
-            Number = num;
-            Weight = we;
-            UnitPrice = un;
-            TotalPrice = num * un;
+            this.Type = ty;
+            this.Number = num;
+            this.Weight = we;
+            this.UnitPrice = un;
+            this.TotalPrice = num * un;
         }
 
         public void NotifyPropertyChanged(string propertyName)

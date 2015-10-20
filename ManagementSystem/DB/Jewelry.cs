@@ -4,41 +4,110 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace ManagementSystem.DB
 {
     public class Jewelry:INotifyPropertyChanged
     {
         #region 字段
-        private float weight;
-        private float unitPrice;
+        private string guid;
+        private Image image;
+        private float totalWeight;
+        private float jadeWeight;
+        private float goldWeight;
+        private ObservableCollection<Gold> gold;
+        private ObservableCollection<Jade> jade;
+        private float processFee;
+        private float otherFee;
         private float totalPrice;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region 属性
-        public float Weight
+        public string Guid
         {
             get
             {
-                return weight;
+                return guid;
             }
             set
             {
-                weight = value;
-                NotifyPropertyChanged("Weight");
+                guid = value;
+                NotifyPropertyChanged("Guid");
             }
         }
-        public float UnitPrice
+        public Image Image
         {
             get
             {
-                return unitPrice;
+                return image;
             }
             set
             {
-                unitPrice = value;
-                NotifyPropertyChanged("UnitPrice");
+                image = value;
+                NotifyPropertyChanged("Image");
+            }
+        }
+        public float TotalWeight
+        {
+            get
+            {
+                return totalWeight;
+            }
+            set
+            {
+                totalWeight = value;
+                NotifyPropertyChanged("TotalWeight");
+            }
+        }
+        public float JadeWeight
+        {
+            get
+            {
+                return jadeWeight;
+            }
+            set
+            {
+                jadeWeight = value;
+                NotifyPropertyChanged("JadeWeight");
+            }
+        }
+        public float GoldWeight
+        {
+            get
+            {
+                return goldWeight;
+            }
+            set
+            {
+                goldWeight = value;
+                NotifyPropertyChanged("GoldWeight");
+            }
+        }
+        public float ProcessFee
+        {
+            get
+            {
+                return processFee;
+            }
+            set
+            {
+                processFee = value;
+                NotifyPropertyChanged("ProcessFee");
+            }
+        }
+        public float OtherFee
+        {
+            get
+            {
+                return otherFee;
+            }
+            set
+            {
+                otherFee = value;
+                NotifyPropertyChanged("OtherFee");
             }
         }
         public float TotalPrice
@@ -56,11 +125,13 @@ namespace ManagementSystem.DB
         #endregion
 
         #region 方法
-        Gold(float we, float un)
+        Jewelry()
         {
-            Weight = we;
-            UnitPrice = un;
-            TotalPrice = we * un;
+
+        }
+        Jewelry(Image im,float tw,ObservableCollection<Gold> go,ObservableCollection<Jade> ja,)
+        {
+            this.
         }
 
         public void NotifyPropertyChanged(string propertyName)
