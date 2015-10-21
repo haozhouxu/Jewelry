@@ -5,8 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementSystem"
         mc:Ignorable="d"
-        Title="管理系统" Height="350" Width="525">
-    <Grid>
+        Title="管理系统" Height="700" Width="1000">
+    <DockPanel Background="White" LastChildFill="True">
+        <!--菜单栏-->
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
+            <Button Content="刷新" Style="{StaticResource BtnNot}" Margin="0,0,5,0" />
+            <Button Content="新增" Style="{StaticResource BtnNot}" Margin="0,0,5,0" />
+        </StackPanel>
         
-    </Grid>
+        <!--内容-->
+        <Border BorderBrush="#FF5490C4" BorderThickness="0,2,0,0" DockPanel.Dock="Top" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Row="0" Grid.Column="0" Text="图片" Style="{StaticResource left_head_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="1" Text="玉重" Style="{StaticResource head_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="2" Text="金重" Style="{StaticResource head_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="3" Text="总价" Style="{StaticResource head_cell}" />
+
+                <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding Path=''}" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Border>
+    </DockPanel>
 </Window>
