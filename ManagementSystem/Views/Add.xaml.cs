@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ManagementSystem.ViewModels;
 
 namespace ManagementSystem.Views
 {
@@ -22,6 +23,7 @@ namespace ManagementSystem.Views
         public Add()
         {
             InitializeComponent();
+            
         }
     }
 }

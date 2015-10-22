@@ -11,10 +11,10 @@ namespace ManagementSystem.Models
     {
         #region 字段
         private JadeTypeEnum type;
-        private int number;
-        private float weight;
-        private float unitPrice;
-        private float totalPrice;
+        private int? number;
+        private float? weight;
+        private float? unitPrice;
+        private float? totalPrice;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
@@ -31,7 +31,7 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("Type");
             }
         }
-        public int Number
+        public int? Number
         {
             get
             {
@@ -43,7 +43,7 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("Number");
             }
         }
-        public float Weight
+        public float? Weight
         {
             get
             {
@@ -55,7 +55,7 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("Weight");
             }
         }
-        public float UnitPrice
+        public float? UnitPrice
         {
             get
             {
@@ -67,7 +67,7 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("UnitPrice");
             }
         }
-        public float TotalPrice
+        public float? TotalPrice
         {
             get
             {
@@ -82,11 +82,15 @@ namespace ManagementSystem.Models
         #endregion
 
         #region 方法
-        Jade()
+        public Jade()
         {
-
+            this.Type = JadeTypeEnum.CircleType;
+            this.Number = null;
+            this.Weight = null;
+            this.UnitPrice = null;
+            this.TotalPrice = null;
         }
-        Jade(JadeTypeEnum ty, int num,float we,float un)
+        public Jade(JadeTypeEnum ty, int num,float we,float un)
         {
             this.Type = ty;
             this.Number = num;

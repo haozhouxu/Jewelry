@@ -56,11 +56,11 @@ namespace ManagementSystem.Models
         #endregion
 
         #region 方法
-        Gold()
+        public Gold()
         {
 
         }
-        Gold(float we,float un)
+        public Gold(float we,float un)
         {
             this.Weight = we;
             this.UnitPrice = un;

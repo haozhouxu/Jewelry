@@ -5,8 +5,127 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementSystem.Views"
         mc:Ignorable="d"
-        Title="Add" Height="300" Width="300">
-    <Grid>
+        Title="新增" Height="600" Width="900">
+    
+    <DockPanel LastChildFill="True">
         
-    </Grid>
+        <!--底部按钮-->
+        <Border DockPanel.Dock="Bottom" Style="{StaticResource BorderTool}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+                <Button Content="保存" Style="{StaticResource BtnNew}" Margin="0,0,5,0"/>
+                <Button Content="取消" Style="{StaticResource BtnNot}" Margin="0,0,5,0"/>
+            </StackPanel>
+        </Border>
+        
+        <!--内容-->
+        <ScrollViewer HorizontalContentAlignment="Center" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Style="{StaticResource ScrollViewerStyle}" DockPanel.Dock="Top">
+            <DockPanel LastChildFill="False" Margin="5">
+                
+                <!--基本信息-->
+                <Grid DockPanel.Dock="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="/Resources/Images/01.jpg" />
+                    
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="编号："  TextAlignment="Center" />
+                    <TextBox   Grid.Row="0" Grid.Column="2" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="成品重："  TextAlignment="Center" />
+                    <TextBox   Grid.Row="1" Grid.Column="2" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="玉重：" TextAlignment="Center"  />
+                    <TextBox   Grid.Row="2" Grid.Column="2" />
+
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="金重：" TextAlignment="Center"  />
+                    <TextBox   Grid.Row="3" Grid.Column="2" />
+                </Grid>
+
+                <!--金信息-->
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBox HorizontalAlignment="Left" Text="金" Style="{StaticResource header_cell_top}" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="单价" />
+                        <TextBox Width="100" />
+                        <TextBlock Text="总价" />
+                        <TextBox Width="100" />
+                    </StackPanel>
+                </StackPanel>
+                
+                <!--玉信息-->
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBox HorizontalAlignment="Left" Text="玉" Style="{StaticResource header_cell_top}" />
+                    <Border BorderBrush="#FF5490C4" BorderThickness="0,2,0,0" DockPanel.Dock="Top" Margin="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Row="0" Grid.Column="0" Text="名称" Style="{StaticResource tb_header_cell_left}" />
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="数量" Style="{StaticResource tb_header_cell}" />
+                            <TextBox Grid.Row="0" Grid.Column="2" Text="重量" Style="{StaticResource tb_header_cell}" />
+                            <TextBox Grid.Row="0" Grid.Column="3" Text="单价" Style="{StaticResource tb_header_cell}" />
+                            <TextBox Grid.Row="0" Grid.Column="4" Text="总价" Style="{StaticResource tb_header_cell}" />
+
+                            <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource tup_cell}" />
+                                            <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource tup_cell}" />
+                                            <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource tup_cell}" />
+                                            <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource tup_cell}" />
+                                            <TextBox Grid.Row="0" Grid.Column="4" Style="{StaticResource tup_cell}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                
+                <!--其他信息-->
+                <StackPanel DockPanel.Dock="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="加工费" />
+                        <TextBox Width="100"/>
+                        <TextBlock Text="配件费" />
+                        <TextBox Width="100"/>
+                        <TextBlock Text="总价" />
+                        <TextBox Width="100"/>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+        </ScrollViewer>
+        
+    </DockPanel>
 </Window>

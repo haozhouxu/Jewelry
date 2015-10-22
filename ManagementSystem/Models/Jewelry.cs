@@ -125,11 +125,11 @@ namespace ManagementSystem.Models
         #endregion
 
         #region 方法
-        Jewelry()
+        public Jewelry()
         {
-
+            this.Guid = System.Guid.NewGuid().ToString();
         }
-        Jewelry(Image im,float tw,ObservableCollection<Gold> go,ObservableCollection<Jade> ja, float pf,float of)
+        public Jewelry(Image im,float tw,ObservableCollection<Gold> go,ObservableCollection<Jade> ja, float pf,float of)
         {
             this.Image = im;
             this.OtherFee = of;

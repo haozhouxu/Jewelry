@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ManagementSystem.ViewModels;
 
 namespace ManagementSystem
 {
@@ -23,6 +24,11 @@ namespace ManagementSystem
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            CC.Open_Executed(sender, e);
         }
     }
 }

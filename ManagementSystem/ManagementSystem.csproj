@@ -60,6 +60,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\AddViewModel.cs" />
+    <Compile Include="ViewModels\CommandCenter.cs" />
+    <Compile Include="ViewModels\Converter\ParameterConvertor.cs" />
     <Compile Include="ViewModels\SQLiteService.cs" />
     <Compile Include="Views\Add.xaml.cs">
       <DependentUpon>Add.xaml</DependentUpon>
@@ -120,10 +123,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\System.Data.SQLite.dll" />
+    <Resource Include="Resources\Images\01.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DB\" />
-    <Folder Include="Resources\Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
