@@ -4,15 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementSystem.Views"
+        xmlns:vm="clr-namespace:ManagementSystem.ViewModels"
         mc:Ignorable="d"
-        Title="新增" Height="600" Width="900">
+        Title="新增" Height="700" Width="1000"
+        x:Name="Window">
     
+    <Window.Resources>
+        <vm:ParameterConvertor x:Key="con_para" />
+    </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="Open" Executed="Open_Executed" />
+    </Window.CommandBindings>
+
     <DockPanel LastChildFill="True">
         
         <!--底部按钮-->
         <Border DockPanel.Dock="Bottom" Style="{StaticResource BorderTool}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
-                <Button Content="保存" Style="{StaticResource BtnNew}" Margin="0,0,5,0"/>
+                <Button Content="保存" Style="{StaticResource BtnNew}" Margin="0,0,5,0" Command="Open" CommandParameter="{Binding Path=DataContext, ElementName=Window, Converter={StaticResource con_para},ConverterParameter=type:saveLow:s}" />
                 <Button Content="取消" Style="{StaticResource BtnNot}" Margin="0,0,5,0"/>
             </StackPanel>
         </Border>

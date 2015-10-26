@@ -25,6 +25,9 @@ namespace ManagementSystem.ViewModels
                     case "addNew":
                         CC.AddNew(paraDic);
                         break;
+                    case "saveLow":
+                        CC.SaveLow(paraDic);
+                        break;
                     default:
                         break;
                 }
@@ -34,6 +37,11 @@ namespace ManagementSystem.ViewModels
             {
                 throw;
             }
+        }
+
+        private static void SaveLow(Dictionary<string, object> paraDic)
+        {
+            throw new NotImplementedException();
         }
 
         public static void AddNew(Dictionary<string ,object > paraDic)

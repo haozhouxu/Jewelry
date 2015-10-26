@@ -25,5 +25,10 @@ namespace ManagementSystem.Views
             InitializeComponent();
             
         }
+
+        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            CC.Open_Executed(sender, e);
+        }
     }
 }
