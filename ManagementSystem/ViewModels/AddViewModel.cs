@@ -13,5 +13,10 @@ namespace ManagementSystem.ViewModels
         {
             Jewelry jw = new Jewelry();
         }
+
+        public Jewelry GetNew()
+        {
+            return new Jewelry();
+        }
     }
 }

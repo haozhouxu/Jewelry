@@ -14,14 +14,14 @@ namespace ManagementSystem.Models
         #region 字段
         private string guid;
         private Image image;
-        private float totalWeight;
-        private float jadeWeight;
-        private float goldWeight;
+        private double totalWeight;
+        private double jadeWeight;
+        private double goldWeight;
         private ObservableCollection<Gold> gold;
         private ObservableCollection<Jade> jade;
-        private float processFee;
-        private float otherFee;
-        private float totalPrice;
+        private double processFee;
+        private double otherFee;
+        private double totalPrice;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
@@ -50,7 +50,7 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("Image");
             }
         }
-        public float TotalWeight
+        public double TotalWeight
         {
             get
             {
@@ -62,7 +62,7 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("TotalWeight");
             }
         }
-        public float JadeWeight
+        public double JadeWeight
         {
             get
             {
@@ -74,7 +74,7 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("JadeWeight");
             }
         }
-        public float GoldWeight
+        public double GoldWeight
         {
             get
             {
@@ -86,7 +86,7 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("GoldWeight");
             }
         }
-        public float ProcessFee
+        public double ProcessFee
         {
             get
             {
@@ -98,7 +98,7 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("ProcessFee");
             }
         }
-        public float OtherFee
+        public double OtherFee
         {
             get
             {
@@ -110,7 +110,7 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("OtherFee");
             }
         }
-        public float TotalPrice
+        public double TotalPrice
         {
             get
             {
@@ -122,14 +122,50 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("TotalPrice");
             }
         }
+        public ObservableCollection<Jade> Jade
+        {
+            get
+            {
+                return jade;
+            }
+            set
+            {
+                jade = value;
+                NotifyPropertyChanged("Jade");
+            }
+        }
+        public ObservableCollection<Gold> Gold
+        {
+            get
+            {
+                return gold;
+            }
+            set
+            {
+                gold = value;
+                NotifyPropertyChanged("Gold");
+            }
+        }
         #endregion
 
         #region 方法
         public Jewelry()
         {
             this.Guid = System.Guid.NewGuid().ToString();
+            this.Image = new Image();
+            this.TotalWeight = 10.9;
+            this.JadeWeight = 10.8;
+            this.GoldWeight = 10.7;
+            this.ProcessFee = 10.6;
+            this.OtherFee = 10.5;
+            this.TotalPrice = 10.4;
+            this.Jade = new ObservableCollection<Jade>();
+            Jade.Add(new Jade(JadeTypeEnum.CircleType,2,3,4));
+            Jade.Add(new Jade());
+            this.Gold = new ObservableCollection<Gold>();
+            Gold.Add(new Gold(5,6));
         }
-        public Jewelry(Image im,float tw,ObservableCollection<Gold> go,ObservableCollection<Jade> ja, float pf,float of)
+        public Jewelry(Image im,double tw,ObservableCollection<Gold> go,ObservableCollection<Jade> ja, double pf,double of)
         {
             this.Image = im;
             this.OtherFee = of;

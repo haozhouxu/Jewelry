@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ManagementSystem.Views;
+using System.Windows.Media.Imaging;
+using ManagementSystem.ViewModels;
+using ManagementSystem.Models;
 
 namespace ManagementSystem.ViewModels
 {
@@ -28,14 +31,35 @@ namespace ManagementSystem.ViewModels
                     case "saveLow":
                         CC.SaveLow(paraDic);
                         break;
+                    case "selectImage":
+                        CC.selectImage(paraDic);
+                        break;
                     default:
                         break;
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                System.Windows.MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private static void selectImage(Dictionary<string, object> paraDic)
+        {
+            System.Windows.Forms.OpenFileDialog ofd = new System.Windows.Forms.OpenFileDialog();
+            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            ofd.Filter = "图片文件 (*.jpg;*.jpeg;*.png;*.gif;*.bmp)|*.jpg;*.jpeg;*.png;*.gif;|所有文件|*.*";
+            ofd.ValidateNames = true;
+            ofd.DefaultExt = "*.jpg;*.jpeg;*.png;*.gif;";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string imageUrl = ofd.FileName;
+                Jewelry jw = paraDic["context"] as Jewelry;
+                if (null != jw)
+                {
+                    jw.Image.Source = new BitmapImage(new Uri(imageUrl, UriKind.Absolute));
+                }
             }
         }
 

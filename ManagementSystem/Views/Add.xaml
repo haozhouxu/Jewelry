@@ -6,11 +6,13 @@
         xmlns:local="clr-namespace:ManagementSystem.Views"
         xmlns:vm="clr-namespace:ManagementSystem.ViewModels"
         mc:Ignorable="d"
-        Title="新增" Height="700" Width="1000"
-        x:Name="Window">
-    
+        Title="新增" Height="700" Width="1000">
+
     <Window.Resources>
         <vm:ParameterConvertor x:Key="con_para" />
+        <ObjectDataProvider x:Key="products" ObjectType="{x:Type vm:AddViewModel}" MethodName="GetNew" >
+
+        </ObjectDataProvider>
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -18,59 +20,104 @@
     </Window.CommandBindings>
 
     <DockPanel LastChildFill="True">
-        
+
         <!--底部按钮-->
         <Border DockPanel.Dock="Bottom" Style="{StaticResource BorderTool}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
-                <Button Content="保存" Style="{StaticResource BtnNew}" Margin="0,0,5,0" Command="Open" CommandParameter="{Binding Path=DataContext, ElementName=Window, Converter={StaticResource con_para},ConverterParameter=type:saveLow:s}" />
+                <Button Content="保存" Style="{StaticResource BtnNew}" Margin="0,0,5,0" Command="Open" CommandParameter="{Binding Path=DataContext, ElementName=main, Converter={StaticResource con_para},ConverterParameter=type:saveLow:s}" />
                 <Button Content="取消" Style="{StaticResource BtnNot}" Margin="0,0,5,0"/>
             </StackPanel>
         </Border>
-        
+
         <!--内容-->
         <ScrollViewer HorizontalContentAlignment="Center" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Style="{StaticResource ScrollViewerStyle}" DockPanel.Dock="Top">
-            <DockPanel LastChildFill="False" Margin="5">
-                
+            <DockPanel LastChildFill="False" Margin="5" DataContext="{Binding Source={StaticResource products}}" x:Name="main">
+
                 <!--基本信息-->
-                <Grid DockPanel.Dock="Top">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                <StackPanel DockPanel.Dock="Top">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
 
-                    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="/Resources/Images/01.jpg" />
-                    
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="编号："  TextAlignment="Center" />
-                    <TextBox   Grid.Row="0" Grid.Column="2" />
+                        <TextBox Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  Text="基本信息"    Style="{StaticResource header_cell_top}" />
+                        <Button  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Content="选择图片" Style="{StaticResource BtnNew}"          Margin="5" Command="Open" CommandParameter="{Binding Converter={StaticResource con_para},ConverterParameter='type:selectImage:s|target:Image:s'}"/>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        
+                    </StackPanel>
+                    <Border BorderBrush="#FF5490C4" BorderThickness="0,2,0,0" DockPanel.Dock="Top" Margin="5">
+                        <Grid DockPanel.Dock="Top" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="成品重："  TextAlignment="Center" />
-                    <TextBox   Grid.Row="1" Grid.Column="2" />
-
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="玉重：" TextAlignment="Center"  />
-                    <TextBox   Grid.Row="2" Grid.Column="2" />
-
-                    <TextBlock Grid.Row="3" Grid.Column="1" Text="金重：" TextAlignment="Center"  />
-                    <TextBox   Grid.Row="3" Grid.Column="2" />
-                </Grid>
+                            <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding Image.Source}" />
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="编号：" Style="{StaticResource tb_header_cell_left}"/>
+                            <TextBox   Grid.Row="0" Grid.Column="2" Text="{Binding Path=Guid}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="成品重：" Style="{StaticResource tb_header_cell_left}"/>
+                            <TextBox   Grid.Row="1" Grid.Column="2" Text="{Binding Path=TotalWeight}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" Text="玉重：" Style="{StaticResource tb_header_cell_left}"/>
+                            <TextBox   Grid.Row="2" Grid.Column="2" Text="{Binding Path=JadeWeight}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
+                            <TextBox Grid.Row="3" Grid.Column="1" Text="金重：" Style="{StaticResource tb_header_cell_left}"/>
+                            <TextBox   Grid.Row="3" Grid.Column="2" Text="{Binding Path=GoldWeight}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
 
                 <!--金信息-->
                 <StackPanel DockPanel.Dock="Top">
                     <TextBox HorizontalAlignment="Left" Text="金" Style="{StaticResource header_cell_top}" />
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="单价" />
-                        <TextBox Width="100" />
-                        <TextBlock Text="总价" />
-                        <TextBox Width="100" />
-                    </StackPanel>
+                    <Border BorderBrush="#FF5490C4" BorderThickness="0,2,0,0" DockPanel.Dock="Top" Margin="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Row="0" Grid.Column="0" Text="单价" Style="{StaticResource tb_header_cell_left}" />
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="总价" Style="{StaticResource tb_header_cell}" />
+
+                            <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Gold}" >
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource tup_cell_left}" Text="{Binding Path=UnitPrice}" TextWrapping="Wrap"/>
+                                            <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource tup_cell}" Text="{Binding Path=TotalPrice}" TextWrapping="Wrap"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                        </Grid>
+                    </Border>
+
                 </StackPanel>
-                
+
                 <!--玉信息-->
                 <StackPanel DockPanel.Dock="Top">
                     <TextBox HorizontalAlignment="Left" Text="玉" Style="{StaticResource header_cell_top}" />
@@ -94,7 +141,7 @@
                             <TextBox Grid.Row="0" Grid.Column="3" Text="单价" Style="{StaticResource tb_header_cell}" />
                             <TextBox Grid.Row="0" Grid.Column="4" Text="总价" Style="{StaticResource tb_header_cell}" />
 
-                            <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5">
+                            <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" ItemsSource="{Binding Path=Jade}" >
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -109,11 +156,11 @@
                                                 <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource tup_cell}" />
-                                            <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource tup_cell}" />
-                                            <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource tup_cell}" />
-                                            <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource tup_cell}" />
-                                            <TextBox Grid.Row="0" Grid.Column="4" Style="{StaticResource tup_cell}" />
+                                            <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource tup_cell_left}" Text="{Binding Path=Type}" TextWrapping="Wrap"/>
+                                            <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource tup_cell}" Text="{Binding Path=Number}" TextWrapping="Wrap"/>
+                                            <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource tup_cell}" Text="{Binding Path=Weight}" TextWrapping="Wrap"/>
+                                            <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource tup_cell}" Text="{Binding Path=UnitPrice}" TextWrapping="Wrap"/>
+                                            <TextBox Grid.Row="0" Grid.Column="4" Style="{StaticResource tup_cell}" Text="{Binding Path=TotalPrice}" TextWrapping="Wrap"/>
                                         </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -122,20 +169,35 @@
                         </Grid>
                     </Border>
                 </StackPanel>
-                
+
                 <!--其他信息-->
                 <StackPanel DockPanel.Dock="Top">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="加工费" />
-                        <TextBox Width="100"/>
-                        <TextBlock Text="配件费" />
-                        <TextBox Width="100"/>
-                        <TextBlock Text="总价" />
-                        <TextBox Width="100"/>
-                    </StackPanel>
+                    <TextBox HorizontalAlignment="Left" Text="其他信息" Style="{StaticResource header_cell_top}" />
+                    <Border BorderBrush="#FF5490C4" BorderThickness="0,2,0,0" DockPanel.Dock="Top" Margin="5">
+                        <Grid DockPanel.Dock="Top" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Row="0" Grid.Column="0" Text="加工费：" Style="{StaticResource tb_header_cell_left}"/>
+                            <TextBox   Grid.Row="0" Grid.Column="1" Text="{Binding Path=ProcessFee}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
+                            <TextBox Grid.Row="0" Grid.Column="2" Text="配件费：" Style="{StaticResource tb_header_cell_left}"/>
+                            <TextBox   Grid.Row="0" Grid.Column="3" Text="{Binding Path=OtherFee}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
+                            <TextBox Grid.Row="1" Grid.Column="0" Text="总价：" Style="{StaticResource tb_header_cell_left}"/>
+                            <TextBox   Grid.Row="1" Grid.Column="1" Text="{Binding Path=TotalPrice}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
+                        </Grid>
+                    </Border>
                 </StackPanel>
+                
             </DockPanel>
         </ScrollViewer>
-        
+
     </DockPanel>
 </Window>
