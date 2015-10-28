@@ -5,14 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementSystem.Views"
         xmlns:vm="clr-namespace:ManagementSystem.ViewModels"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:og="clr-namespace:System.Collections;assembly=mscorlib"
         mc:Ignorable="d"
         Title="新增" Height="700" Width="1000">
 
     <Window.Resources>
         <vm:ParameterConvertor x:Key="con_para" />
-        <ObjectDataProvider x:Key="products" ObjectType="{x:Type vm:AddViewModel}" MethodName="GetNew" >
-
-        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="products" ObjectType="{x:Type vm:AddViewModel}" MethodName="GetNew" ></ObjectDataProvider>
+        <og:ArrayList x:Key="AL_玉种类">
+            <ComboBoxItem Name="圆钻" ToolTip="圆钻" />
+            <ComboBoxItem Name="水滴" ToolTip="水滴" />
+            <ComboBoxItem Name="碧玺" ToolTip="碧玺" />
+            <ComboBoxItem Name="黄钻" ToolTip="黄钻" />
+            <ComboBoxItem Name="公主方" ToolTip="公主方" />
+            <ComboBoxItem Name="宝石" ToolTip="宝石" /> 
+            <ComboBoxItem Name="梯方" ToolTip="梯方" />
+            <ComboBoxItem Name="马眼" ToolTip="马眼" />
+        </og:ArrayList>
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -64,7 +74,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding Image.Source}" />
+                            <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" MaxWidth="250" MaxHeight="250" Source="{Binding Image.Source}" />
                             <TextBox Grid.Row="0" Grid.Column="1" Text="编号：" Style="{StaticResource tb_header_cell_left}"/>
                             <TextBox   Grid.Row="0" Grid.Column="2" Text="{Binding Path=Guid}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
                             <TextBox Grid.Row="1" Grid.Column="1" Text="成品重：" Style="{StaticResource tb_header_cell_left}"/>
@@ -156,7 +166,7 @@
                                                 <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource tup_cell_left}" Text="{Binding Path=Type}" TextWrapping="Wrap"/>
+                                            <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{StaticResource AL_玉种类}" ItemTemplate="{StaticResource enumNormalTemplate}"/>
                                             <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource tup_cell}" Text="{Binding Path=Number}" TextWrapping="Wrap"/>
                                             <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource tup_cell}" Text="{Binding Path=Weight}" TextWrapping="Wrap"/>
                                             <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource tup_cell}" Text="{Binding Path=UnitPrice}" TextWrapping="Wrap"/>
