@@ -10,14 +10,14 @@ namespace ManagementSystem.Models
     public class Gold: INotifyPropertyChanged
     {
         #region 字段
-        private float weight;
-        private float unitPrice;
-        private float totalPrice;
+        private double? weight;
+        private double? unitPrice;
+        private double? totalPrice;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region 属性
-        public float Weight
+        public double? Weight
         {
             get
             {
@@ -29,7 +29,7 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("Weight");
             }
         }
-        public float UnitPrice
+        public double? UnitPrice
         {
             get
             {
@@ -41,7 +41,7 @@ namespace ManagementSystem.Models
                 NotifyPropertyChanged("UnitPrice");
             }
         }
-        public float TotalPrice
+        public double? TotalPrice
         {
             get
             {
@@ -60,7 +60,7 @@ namespace ManagementSystem.Models
         {
 
         }
-        public Gold(float we,float un)
+        public Gold(double we,double un)
         {
             this.Weight = we;
             this.UnitPrice = un;
