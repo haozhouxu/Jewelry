@@ -93,13 +93,17 @@ namespace ManagementSystem.ViewModels
 
             xdoc.Add(rootXE);
 
-            string sql = string.Format("insert into {0} Values({1},{2},{3},{4})","Detail", je.Guid.ToString(), xdoc.ToString(),System.DateTime.Now, System.DateTime.Now);
+            string sql = string.Format("insert into {0} Values('{1}','{2}','{3}','{4}')","detail", je.Guid.ToString(), xdoc.ToString(),System.DateTime.Now, System.DateTime.Now);
 
-            SQLiteConnection conn = new SQLiteConnection(@"Data Source=DB/MSS;");
+            //SQLiteConnection conn = new SQLiteConnection(@"Data Source=E:/vs_code/ms.db;");
+            SQLiteConnection conn = new SQLiteConnection(@"Data Source=DB/ms.db;");
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(sql, conn);
             
-            cmd.ExecuteNonQuery();
+            int i = cmd.ExecuteNonQuery();
+
+            System.Windows.MessageBox.Show(i.ToString());
+
             conn.Close();
             
         }

@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:ManagementSystem"
         xmlns:vm="clr-namespace:ManagementSystem.ViewModels"
         mc:Ignorable="d"
-        Title="管理系统" Height="700" Width="1000">
+        Title="管理系统" Height="600" Width="900">
 
     <Window.Resources>
         <vm:ParameterConvertor x:Key="con_para" />
+        <ObjectDataProvider x:Key="getAll" ObjectType="{x:Type vm:SQLiteService}" MethodName="GetAll" ></ObjectDataProvider>
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -41,7 +42,7 @@
                 <TextBox Grid.Row="0" Grid.Column="2" Text="金重" Style="{StaticResource tb_header_cell}" />
                 <TextBox Grid.Row="0" Grid.Column="3" Text="总价" Style="{StaticResource tb_header_cell}" />
 
-                <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding Path=''}" >
+                <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding }" DataContext="{StaticResource getAll}" >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>

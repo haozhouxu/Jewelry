@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using System.Collections.ObjectModel;
+
+using ManagementSystem.Models;
 
 namespace ManagementSystem.ViewModels
 {
     public class SQLiteService
     {
-        public static string connectionFormat = "Data Source=DB/{0}.db;Version=3;Password=123";
+        public static string connectionFormat = "Data Source=./DB/ms.db;";
 
         /// <summary>
         /// 查询全部
@@ -29,7 +32,7 @@ namespace ManagementSystem.ViewModels
                     sqlcon.Open();
                     using (SQLiteDataReader dr1 = cmd.ExecuteReader())
                     {
-                        while(dr1.Read())
+                        while (dr1.Read())
                         {
 
                         }
@@ -74,5 +77,37 @@ namespace ManagementSystem.ViewModels
         }
 
         //public static int Insert(string dbFile, string sql,)
+        public static ObservableCollection<Jewelry> GetAll()
+        {
+            ObservableCollection<Jewelry> ob = new ObservableCollection<Jewelry>();
+
+            //using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=E:/vs_code/ms.db;"))
+            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=DB/ms.db;"))
+            {
+                conn.Open();
+
+                string sql = string.Format("select * from detail");
+
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+
+                using (SQLiteDataReader dr1 = cmd.ExecuteReader())
+                {
+                    while (dr1.Read())
+                    {
+                        var d = dr1;
+                        var dd = dr1.GetValue(0);
+                        var data = dr1.GetValue(1);
+                        var insert = dr1.GetValue(2);
+                        var update = dr1.GetValue(3);
+                    }
+                }
+
+                conn.Close();
+            }
+
+            ob.Add(new Jewelry());
+
+            return ob;
+        }
     }
 }

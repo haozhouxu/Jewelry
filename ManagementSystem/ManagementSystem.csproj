@@ -64,6 +64,7 @@
     <Compile Include="ViewModels\AddViewModel.cs" />
     <Compile Include="ViewModels\CommandCenter.cs" />
     <Compile Include="ViewModels\Converter\ParameterConvertor.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SQLiteService.cs" />
     <Compile Include="Views\Add.xaml.cs">
       <DependentUpon>Add.xaml</DependentUpon>
@@ -110,11 +111,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="DB\MS.db" />
-    <None Include="DB\MSS">
+    <None Include="DB\ms.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="DB\test.db" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
