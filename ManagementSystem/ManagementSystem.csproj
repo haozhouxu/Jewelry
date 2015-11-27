@@ -61,9 +61,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\NotifyPropertyBase.cs" />
     <Compile Include="ViewModels\AddViewModel.cs" />
     <Compile Include="ViewModels\CommandCenter.cs" />
     <Compile Include="ViewModels\Converter\ParameterConvertor.cs" />
+    <Compile Include="ViewModels\helper.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SQLiteService.cs" />
     <Compile Include="Views\Add.xaml.cs">

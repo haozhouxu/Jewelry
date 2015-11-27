@@ -30,5 +30,36 @@ namespace ManagementSystem.Views
         {
             CC.Open_Executed(sender, e);
         }
+
+        private void Close_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            // Configure the message box to be displayed
+            string messageBoxText = "你确定要退出?";
+            string caption = "提示框";
+            MessageBoxButton button = MessageBoxButton.YesNoCancel;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+
+            // Display message box
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
+            // Process message box results
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    // User pressed Yes button
+                    // ...
+                    this.Close();
+                    break;
+                case MessageBoxResult.No:
+                    // User pressed No button
+                    // ...
+                    break;
+                case MessageBoxResult.Cancel:
+                    // User pressed Cancel button
+                    // ...
+                    break;
+            }
+
+        }
     }
 }

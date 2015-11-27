@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ManagementSystem.Models;
+using System.Collections.ObjectModel;
 
 namespace ManagementSystem.ViewModels
 {
@@ -16,7 +17,7 @@ namespace ManagementSystem.ViewModels
 
         public Jewelry GetNew()
         {
-            return new Jewelry();
+            return Jewelry.GetExample();
         }
     }
 }

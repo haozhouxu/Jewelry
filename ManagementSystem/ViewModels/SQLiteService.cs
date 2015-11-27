@@ -81,8 +81,8 @@ namespace ManagementSystem.ViewModels
         {
             ObservableCollection<Jewelry> ob = new ObservableCollection<Jewelry>();
 
-            //using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=E:/vs_code/ms.db;"))
-            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=DB/ms.db;"))
+            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=c:/xhz/ms.db;"))
+            //using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=DB/ms.db;"))
             {
                 conn.Open();
 

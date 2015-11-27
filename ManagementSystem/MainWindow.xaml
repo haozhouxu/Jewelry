@@ -10,14 +10,14 @@
 
     <Window.Resources>
         <vm:ParameterConvertor x:Key="con_para" />
-        <ObjectDataProvider x:Key="getAll" ObjectType="{x:Type vm:SQLiteService}" MethodName="GetAll" ></ObjectDataProvider>
+        <ObjectDataProvider x:Key="getAll" ObjectType="{x:Type vm:MainViewModel}" MethodName="GetAll" ></ObjectDataProvider>
     </Window.Resources>
 
     <Window.CommandBindings>
         <CommandBinding Command="Open" Executed="Open_Executed" />
     </Window.CommandBindings>
-    
-    <DockPanel Background="White" LastChildFill="True">
+
+    <DockPanel Background="White" LastChildFill="True" DataContext="{StaticResource getAll}">
         <!--菜单栏-->
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
             <Button Content="刷新" Style="{StaticResource BtnNew}" Margin="0,0,5,0" />
@@ -36,13 +36,15 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Row="0" Grid.Column="0" Text="图片" Style="{StaticResource tb_header_cell_left}" />
                 <TextBox Grid.Row="0" Grid.Column="1" Text="玉重" Style="{StaticResource tb_header_cell}" />
                 <TextBox Grid.Row="0" Grid.Column="2" Text="金重" Style="{StaticResource tb_header_cell}" />
                 <TextBox Grid.Row="0" Grid.Column="3" Text="总价" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="4" Text="操作" Style="{StaticResource tb_header_cell}" />
 
-                <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding }" DataContext="{StaticResource getAll}" >
+                <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" ItemsSource="{Binding Path=OCJ}"  >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -54,7 +56,23 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                     <ColumnDefinition />
+                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
+
+                                <Image Grid.Row="0" Grid.Column="0" MaxHeight="50" Source="{Binding Image.Source}" >
+                                    <Image.ToolTip>
+                                        <StackPanel>
+                                            <Image Source="{Binding Image.Source}"></Image>
+                                        </StackPanel>
+                                    </Image.ToolTip>
+                                </Image>
+                                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource tup_cell}" Text="{Binding Path=JadeWeight}" TextWrapping="Wrap"/>
+                                <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource tup_cell}" Text="{Binding Path=GoldWeight}" TextWrapping="Wrap"/>
+                                <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource tup_cell}" Text="{Binding Path=TotalPrice}" TextWrapping="Wrap"/>
+                                <StackPanel Grid.Row="0" Grid.Column="4">
+                                    <Button Content="编辑" />
+                                    <Button Content="删除" />
+                                </StackPanel>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

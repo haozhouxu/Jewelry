@@ -10,7 +10,7 @@ namespace ManagementSystem.Models
     public class Jade : INotifyPropertyChanged
     {
         #region 字段
-        private JadeTypeEnum type;
+        private string type;
         private int? number;
         private double? weight;
         private double? unitPrice;
@@ -19,7 +19,7 @@ namespace ManagementSystem.Models
         #endregion
 
         #region 属性
-        public JadeTypeEnum Type
+        public string Type
         {
             get
             {
@@ -84,13 +84,13 @@ namespace ManagementSystem.Models
         #region 方法
         public Jade()
         {
-            this.Type = JadeTypeEnum.CircleType;
+            this.Type = "";
             this.Number = null;
             this.Weight = null;
             this.UnitPrice = null;
             this.TotalPrice = null;
         }
-        public Jade(JadeTypeEnum ty, int num,double we,double un)
+        public Jade(string ty, int num,double we,double un)
         {
             this.Type = ty;
             this.Number = num;

@@ -27,6 +27,7 @@
 
     <Window.CommandBindings>
         <CommandBinding Command="Open" Executed="Open_Executed" />
+        <CommandBinding Command="Close" Executed="Close_Executed" />
     </Window.CommandBindings>
 
     <DockPanel LastChildFill="True">
@@ -35,7 +36,7 @@
         <Border DockPanel.Dock="Bottom" Style="{StaticResource BorderTool}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
                 <Button Content="保存" Style="{StaticResource BtnNew}" Margin="0,0,5,0" Command="Open" CommandParameter="{Binding Path=DataContext, ElementName=main, Converter={StaticResource con_para},ConverterParameter=type:saveLow:s}" />
-                <Button Content="取消" Style="{StaticResource BtnNot}" Margin="0,0,5,0"/>
+                <Button Content="取消" Style="{StaticResource BtnNot}" Margin="0,0,5,0" Command="Close"/>
             </StackPanel>
         </Border>
 
@@ -166,7 +167,16 @@
                                                 <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
 
-                                            <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{StaticResource AL_玉种类}" ItemTemplate="{StaticResource enumNormalTemplate}"/>
+                                            <ComboBox Grid.Row="0" Grid.Column="0" >
+                                                <ComboBoxItem Name="圆钻" ToolTip="圆钻" >圆钻</ComboBoxItem>
+                                                <ComboBoxItem Name="水滴" ToolTip="水滴" >水滴</ComboBoxItem>
+                                                <ComboBoxItem Name="碧玺" ToolTip="碧玺" />
+                                                <ComboBoxItem Name="黄钻" ToolTip="黄钻" />
+                                                <ComboBoxItem Name="公主方" ToolTip="公主方" />
+                                                <ComboBoxItem Name="宝石" ToolTip="宝石" />
+                                                <ComboBoxItem Name="梯方" ToolTip="梯方" />
+                                                <ComboBoxItem Name="马眼" ToolTip="马眼" />
+                                            </ComboBox>
                                             <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource tup_cell}" Text="{Binding Path=Number}" TextWrapping="Wrap"/>
                                             <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource tup_cell}" Text="{Binding Path=Weight}" TextWrapping="Wrap"/>
                                             <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource tup_cell}" Text="{Binding Path=UnitPrice}" TextWrapping="Wrap"/>

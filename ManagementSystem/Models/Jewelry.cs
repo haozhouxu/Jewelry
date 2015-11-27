@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace ManagementSystem.Models
 {
@@ -151,19 +152,27 @@ namespace ManagementSystem.Models
         #region 方法
         public Jewelry()
         {
-            this.Guid = System.Guid.NewGuid().ToString();
-            this.Image = new Image();
-            this.TotalWeight = 10.9;
-            this.JadeWeight = 10.8;
-            this.GoldWeight = 10.7;
-            this.ProcessFee = 10.6;
-            this.OtherFee = 10.5;
-            this.TotalPrice = 10.4;
-            this.Jade = new ObservableCollection<Jade>();
-            Jade.Add(new Jade(JadeTypeEnum.CircleType,2,3,4));
-            Jade.Add(new Jade());
-            this.Gold = new ObservableCollection<Gold>();
-            Gold.Add(new Gold(5,6));
+            
+        }
+
+        public static Jewelry GetExample()
+        {
+            Jewelry je= new Jewelry();
+            je.Guid = System.Guid.NewGuid().ToString();
+            je.Image = new Image();
+            je.image.Source = new BitmapImage(new Uri(@"C:\xhz\Koala.jpg", UriKind.Absolute));
+            je.TotalWeight = 10.9;
+            je.JadeWeight = 10.8;
+            je.GoldWeight = 10.7;
+            je.ProcessFee = 10.6;
+            je.OtherFee = 10.5;
+            je.TotalPrice = 10.4;
+            je.Jade = new ObservableCollection<Jade>();
+            je.Jade.Add(new Jade("水钻", 2, 3, 4));
+            je.Jade.Add(new Jade());
+            je.Gold = new ObservableCollection<Gold>();
+            je.Gold.Add(new Gold(5, 6));
+            return je;
         }
         public Jewelry(Image im,double tw,ObservableCollection<Gold> go,ObservableCollection<Jade> ja, double pf,double of)
         {
