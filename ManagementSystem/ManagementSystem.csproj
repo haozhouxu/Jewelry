@@ -64,12 +64,16 @@
     <Compile Include="Models\NotifyPropertyBase.cs" />
     <Compile Include="ViewModels\AddViewModel.cs" />
     <Compile Include="ViewModels\CommandCenter.cs" />
+    <Compile Include="ViewModels\Converter\MultiParameterConvertor.cs" />
     <Compile Include="ViewModels\Converter\ParameterConvertor.cs" />
     <Compile Include="ViewModels\helper.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SQLiteService.cs" />
     <Compile Include="Views\Add.xaml.cs">
       <DependentUpon>Add.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -91,6 +95,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Add.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,6 +138,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\System.Data.SQLite.dll" />
+    <Resource Include="Resources\Images\login-bg.png" />
+    <Resource Include="Resources\Images\login-background.jpg" />
+    <Resource Include="Resources\Images\loginbackground.png" />
+    <Resource Include="Resources\Images\login.ico" />
     <Resource Include="Resources\Images\01.jpg" />
   </ItemGroup>
   <ItemGroup />

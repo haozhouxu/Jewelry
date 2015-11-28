@@ -30,5 +30,10 @@ namespace ManagementSystem
         {
             CC.Open_Executed(sender, e);
         }
+
+        private void Delete_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            CC.Delete_Executed(sender, e);
+        }
     }
 }

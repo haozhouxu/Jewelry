@@ -13,6 +13,8 @@ using System.Xml.Linq;
 using System.IO;
 using System.Windows.Controls;
 using System.Data.SQLite;
+using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace ManagementSystem.ViewModels
 {
@@ -48,6 +50,34 @@ namespace ManagementSystem.ViewModels
             {
                 System.Windows.MessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        public static void Delete_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Dictionary<string, object> dic = e.Parameter as Dictionary<string, object>;
+            if (dic == null)//参数是否为空
+                return;
+            Jewelry je = dic["context1"] as Jewelry;
+            ItemsControl ic = dic["context2"] as ItemsControl;
+            ObservableCollection<Jewelry> Oje = ic.ItemsSource as ObservableCollection<Jewelry>;
+
+            if (je == null || Oje == null)
+            {
+                return;
+            }
+
+            if (MessageBox.Show("您确定要删除该记录么？", "系统提示", MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
+                return;
+            
+
+
+            //dg1.Parent.Delete(dg1);
+            //dg1.Parent.S.SearchObjectOfDataTuple_OnValueChanged(null, null);//刷新tuple带搜索类型的元素
+            //if (dic.ContainsKey("save") && bool.Parse(dic["save"].ToString()))//需要保存
+            //{
+            //    Document doc = dg1.Parent.Owner as Document;
+            //    SQLitehelper.SaveBack(doc, doc.DBFile);
+            //}
         }
 
         private static void selectImage(Dictionary<string, object> paraDic)
@@ -115,18 +145,15 @@ namespace ManagementSystem.ViewModels
             }
             finally
             {
-                 
-             }
+
+            }
         }
 
-        public static void AddNew(Dictionary<string ,object > paraDic)
+        public static void AddNew(Dictionary<string, object> paraDic)
         {
             Add an = new Add();
             an.Show();
         }
 
-        
-
-        
     }
 }

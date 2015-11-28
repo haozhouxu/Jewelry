@@ -27,7 +27,7 @@ namespace ManagementSystem.ViewModels
             set { _OCJ = value; NotifyPropertyChanged("OCJ"); }
         }
         
-        public MainViewModel GetAll()
+        public ObservableCollection<Jewelry> GetAll()
         {
             using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=c:/xhz/ms.db;"))
             //using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=DB/ms.db;"))
@@ -48,15 +48,16 @@ namespace ManagementSystem.ViewModels
                         //var insert = dr1.GetValue(2);
                         //var update = dr1.GetValue(3);
 
-                        Jewelry je1 = helper.xmlPras(data.ToString());
-                        _OCJ.Add(je1);
+                    //没有把helper推送到服务器
+                        //Jewelry je1 = helper.xmlPras(data.ToString());
+                        //_OCJ.Add(je1);
                     }
                 }
 
                 conn.Close();
             }
-            _OCJ.Add(Jewelry.GetExample());
-            return this;
+            OCJ.Add(Jewelry.GetExample());
+            return OCJ;
         }
     }
 }

@@ -160,7 +160,7 @@ namespace ManagementSystem.Models
             Jewelry je= new Jewelry();
             je.Guid = System.Guid.NewGuid().ToString();
             je.Image = new Image();
-            je.image.Source = new BitmapImage(new Uri(@"C:\xhz\Koala.jpg", UriKind.Absolute));
+            je.image.Source = new BitmapImage(new Uri(@"C:\xhz\ms.jpg", UriKind.Absolute));
             je.TotalWeight = 10.9;
             je.JadeWeight = 10.8;
             je.GoldWeight = 10.7;

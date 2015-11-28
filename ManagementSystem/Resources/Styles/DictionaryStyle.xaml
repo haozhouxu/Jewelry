@@ -238,4 +238,142 @@
     <DataTemplate x:Key="enumNormalTemplate">
         <TextBlock Text="{Binding Path='Name'}" ToolTip="{Binding Path='ToolTip'}"/>
     </DataTemplate>
+    <Style x:Key="LoginTxt"  BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
+        <Setter Property="Foreground" Value="#FF7E7E7E"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border BorderBrush="#FFD4D4D4" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="5,5,0,0">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                <GradientStop Color="White" Offset="0.235"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <DockPanel Margin="6">
+                            <StackPanel Orientation="Horizontal">
+                                <Grid Height="21" Margin="0,0,6,0" Width="21" VerticalAlignment="Center">
+                                    <Path  Stretch="Fill" Fill="#FF757575" Data="F1 M 245.739,531.11L 374.688,531.11C 374.688,531.11 375.754,521.981 372.355,516.467C 368.324,510.521 355.363,506.687 342.402,501.155C 329.44,495.641 326.257,493.941 326.257,493.941L 322.86,481.613C 322.86,481.613 331.138,477.8 332.621,465.904C 335.603,466.754 338.786,458.258 339.003,455.274C 339.221,452.508 338.567,448.259 334.972,447.213L 334.972,447.213C 335.603,442.114 336.018,437.867 335.822,435.297C 335.387,429.153 331.138,422.771 324.558,418.738L 324.341,418.738C 320.942,417.257 315.627,415.123 309.68,414.906C 304.365,415.123 299.266,415.972 296.086,418.738C 295.454,419.153 294.605,420.438 293.971,420.657C 293.755,420.853 289.289,421.703 287.175,425.102C 284.19,430.199 285.04,443.379 285.673,448.912C 282.057,448.259 281.425,452.508 281.641,455.274C 281.641,458.258 284.824,466.754 288.004,465.904C 289.505,477.8 297.785,481.613 297.785,481.613L 294.169,493.941C 294.169,493.941 291.205,495.641 278.244,501.155C 265.283,506.687 252.122,510.521 248.289,516.467C 244.673,521.981 245.739,531.11 245.739,531.11 Z " HorizontalAlignment="Center" Height="18.795" VerticalAlignment="Center" Width="20.907"/>
+                                </Grid>
+                            </StackPanel>
+                            <ScrollViewer x:Name="PART_ContentHost"  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch"/>
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="LoginPsw" TargetType="{x:Type PasswordBox}">
+        <Setter Property="FontFamily" Value="Times New Roman"/>
+        <Setter Property="PasswordChar" Value="●"/>
+        <Setter Property="Foreground" Value="#FF7E7E7E"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border BorderBrush="#FFD4D4D4" BorderThickness="1,0,1,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="0,0,5,5">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="1"/>
+                                <GradientStop Color="White" Offset="0.765"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <DockPanel Margin="6">
+                            <Grid Width="21" Margin="0,0,6,0" Height="21" VerticalAlignment="Center">
+                                <Path Data="M40.195918,64.136299 C34.494721,64.136299 30.038423,68.818901 30.038423,74.690399 30.038423,78.748497 32.267423,82.412399 35.72252,84.243202 L31.246722,93.778297 C30.643723,95.003998 31.246722,96.212303 32.683421,96.212303 L47.691413,96.212303 C49.126315,96.212303 49.731013,95.003998 49.126315,93.778297 L44.652217,84.243202 C47.900214,82.412399 50.127513,78.748497 50.127513,74.690399 50.127513,68.818901 45.671214,64.136299 40.195918,64.136299 z M5.0599055,47.898502 L75.313102,47.898502 C77.938598,47.898502 80.185401,50.334301 80.185401,53.1861 L80.185401,106.766 C80.185401,109.618 77.938598,112.054 75.313102,112.054 L5.0599055,112.054 C2.2289972,112.054 -9.5367432E-07,109.618 0,106.766 L0,53.1861 C-9.5367432E-07,50.334301 2.2289972,47.898502 5.0599055,47.898502 z M40.195928,0 C56.830623,7.1054274E-15 70.234416,14.1985 70.234416,32.078098 L70.234416,42.632099 55.206325,42.632099 55.206325,32.078098 C55.206325,23.145901 48.503825,15.8204 40.195928,15.820401 31.870933,15.8204 25.168434,23.145901 25.168434,32.078098 L25.168434,42.632099 9.9510177,42.632099 9.9510177,32.078098 C9.9510182,14.1985 23.544234,7.1054274E-15 40.195928,0 z" Fill="#FF7E7E7E" Height="20.076" Stretch="Fill" Canvas.Top="0" Width="14.367" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                            <ScrollViewer x:Name="PART_ContentHost"  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" Margin="0" />
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="LoginChk" TargetType="{x:Type CheckBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <StackPanel Orientation="Horizontal" Background="#00000000">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked"/>
+                                <VisualState x:Name="Unchecked"/>
+                                <VisualState x:Name="Indeterminate"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid HorizontalAlignment="Left" Height="18" Width="18" VerticalAlignment="Center">
+                            <Border>
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF55ADD3" Offset="0"/>
+                                        <GradientStop Color="#FF63C9F9" Offset="0.168"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Path Data="M12.91325,2.9310598 L5.2629312,9.5807691 8.3385868,9.5896577 5.3366449,15.516035 13.271756,8.7039601 10.327586,8.776923 z" HorizontalAlignment="Center" Height="14.351" Stretch="Fill" VerticalAlignment="Center" Width="9.292" StrokeThickness="0" Fill="White">
+                                <Path.Effect>
+                                    <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FF48A6E4"/>
+                                </Path.Effect>
+                            </Path>
+                            <Border x:Name="border" BorderBrush="#FFD4D4D4" BorderThickness="1">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFF6F6F6" Offset="0"/>
+                                        <GradientStop Color="White" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+                        <ContentPresenter Margin="10,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Opacity" TargetName="border" Value="0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="LoginBtn" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="5" BorderBrush="#FF3498E3" BorderThickness="1">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF72C7F9" Offset="0"/>
+                                <GradientStop Color="#FF379AE5" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver"/>
+                                <VisualState x:Name="Pressed"/>
+                                <VisualState x:Name="Disabled"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="border" CornerRadius="4" Margin="1">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF3BB2F6" Offset="0"/>
+                                    <GradientStop Color="#FF379AE5" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Path Data="M37.6875,72.559166 C40,75.934166 41.75,78.277916 42.9375,79.590416 C42.375,79.902916 41.875,80.246666 41.4375,80.621666 L55.3125,80.621666 C54.562496,80.246666 53.874996,79.871666 53.25,79.496666 C55.062496,77.559166 56.624996,75.246666 57.9375,72.559166 z M30.1875,57.746666 L30.1875,63.746666 L66.75,63.746666 L66.75,57.746666 z M19.40625,48.277916 L77.8125,48.277916 C77.5625,55.590416 77.5625,63.777916 77.8125,72.840416 C73.625,72.652916 69.5625,72.559166 65.625,72.559166 C66.6875,73.059166 67.78125,73.684166 68.90625,74.434166 L64.875,80.621666 L91.78125,80.246666 L91.78125,91.121666 C89.40625,90.934166 87.09375,90.840416 84.84375,90.840416 L5.0625,91.121666 L5.0625,80.246666 L14.53125,80.621666 L30.84375,80.621666 C29.781248,78.746666 28.374998,76.840416 26.625,74.902916 C28.249998,74.152916 29.718748,73.371666 31.03125,72.559166 C27.531248,72.559166 23.718748,72.746666 19.59375,73.121666 z M57.84375,4.3091655 C58.781246,7.246666 59.749996,10.059166 60.75,12.746665 C63.374996,9.809166 65.34375,7.215416 66.65625,4.965416 C69.53125,7.590416 72.1875,9.934166 74.625,11.996666 L66,20.902916 C67.25,22.84042 68.625,24.37167 70.125,25.496666 C73.8125,21.62167 76.96875,17.62167 79.59375,13.496666 C82.03125,16.30917 84.75,18.59042 87.75,20.340416 C83.75,24.34042 80.40625,27.93417 77.71875,31.121666 C82.03125,34.121666 87.125,36.215416 93,37.402916 C90.875,40.590416 89.125,44.090416 87.75,47.902916 C83.75,46.277916 80.625,44.871666 78.375,43.684166 L67.875,37.121666 L67.875,44.246666 C57.187496,43.871666 44.062496,43.871666 28.5,44.246666 L28.5,37.590416 C24.0625,41.215416 17.625,45.215416 9.187501,49.590416 C7.1874995,45.340416 5.3437495,42.059166 3.65625,39.746666 C9.03125,38.496666 14.65625,35.809166 20.53125,31.684166 C18.34375,29.43417 15.812499,27.18417 12.9375,24.934166 C15.562499,22.99667 18,20.68417 20.25,17.996666 C21.875,19.55917 24.5625,21.93417 28.3125,25.121666 C30.812498,22.37167 32.8125,19.40292 34.3125,16.215416 L9.75,16.496666 L9.75,6.559166 L43.96875,6.746666 L47.34375,11.434166 C44.53125,19.80917 39.5625,27.55917 32.4375,34.684166 L64.59375,34.684166 C60.343746,30.18417 57.187496,26.24667 55.125,22.871666 C52.937496,19.12167 50.437496,13.59042 47.625,6.2779155 C50.999996,5.777916 54.406246,5.121666 57.84375,4.3091655 z M183.46875,59.434166 C183.71875,61.434166 184.5,65.090416 185.8125,70.402916 C184.3125,71.277916 181.125,73.215416 176.25,76.215416 C169.125,80.777916 162.90625,84.934166 157.59375,88.684166 C155.40625,84.621666 153.09375,80.965416 150.65625,77.715416 C163.15625,72.465416 174.09375,66.371666 183.46875,59.434166 z M166.59375,47.996666 C170.34375,51.309166 174.03125,55.027916 177.65625,59.152916 C175.65625,60.527916 172.875,62.809166 169.3125,65.996666 C166,61.934166 162.28125,57.746666 158.15625,53.434166 C160.90625,51.934166 163.71875,50.121666 166.59375,47.996666 z M158.34375,6.559166 C181.21875,7.121666 203.25,7.121666 224.4375,6.559166 C223.8125,13.68417 223.40625,19.49667 223.21875,23.996666 L222.5625,37.402916 L235.59375,37.121666 L235.40625,47.996666 C230.46875,47.746666 218.125,47.621666 198.375,47.621666 L198.375,50.059166 C199.125,49.809166 199.875,49.590416 200.625,49.402916 C201.4375,53.902916 203.4375,57.746666 206.625,60.934166 C211.4375,56.559166 214.96875,52.777916 217.21875,49.590416 C219.78125,52.090416 222.9375,54.652916 226.6875,57.277916 L213.84375,67.965416 C220.40625,73.090416 227.71875,76.871666 235.78125,79.309166 C232.96875,83.059166 230.8125,86.621666 229.3125,89.996666 C217.125,84.371666 206.8125,76.777916 198.375,67.215416 L198.375,85.215416 C198.3125,88.402916 195.90625,90.496666 191.15625,91.496666 C189.21875,91.871666 186.09375,92.152916 181.78125,92.340416 C180.28125,87.715416 178.75,83.809166 177.1875,80.621666 C179.75,80.934166 181.78125,81.090416 183.28125,81.090416 C185.28125,81.027916 186.46875,80.684166 186.84375,80.059166 C187.09375,79.809166 187.21875,68.996666 187.21875,47.621666 C166.90625,47.684166 154.21875,47.809166 149.15625,47.996666 L149.15625,37.121666 L211.59375,37.402916 C211.65625,35.527916 211.71875,33.652916 211.78125,31.777916 L160.5,32.059166 L160.5,21.840416 L212.34375,22.121666 C212.40625,20.18417 212.46875,18.34042 212.53125,16.590416 C181.34375,16.65292 163.28125,16.77792 158.34375,16.965416 z" Fill="White" HorizontalAlignment="Center" Height="16.796" RenderTransformOrigin="0.5,0.5" Stretch="Fill" VerticalAlignment="Center" Width="44.292" Margin="20,8">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Border>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
