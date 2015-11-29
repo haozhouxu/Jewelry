@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Text.RegularExpressions;
 
-namespace ManagementSystem.ViewModels
+namespace ManagementSystem
 {
     public class MultiParameterConvertor : IMultiValueConverter
     {

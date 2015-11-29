@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 using ManagementSystem.Models;
 
-namespace ManagementSystem.ViewModels
+namespace ManagementSystem
 {
     public class SQLiteService
     {

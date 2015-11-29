@@ -1,0 +1,32 @@
+﻿<Window x:Class="ManagementSystem.Views.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManagementSystem.Views"
+        mc:Ignorable="d"
+        Title="AboutWindow" 
+        Height="350" Width="525" WindowStyle="None" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush
+                       EndPoint="0.5,0.5"
+                       StartPoint="0.5,0"
+                       SpreadMethod="Reflect">
+                <GradientStop Color="#FF0471D8" />
+                <GradientStop Color="#FF7FB2DB"
+                  Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label Name="labelProductName" Content="管理系统" Height="45" HorizontalAlignment="Center" Margin="0,45,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24" />
+        <Label Name="labelVersion" Content="版本号" Height="28" HorizontalAlignment="Left" Margin="370,90,0,0" VerticalAlignment="Top" FontWeight="Bold" />
+
+        <Label  Content="技术支持" Height="28" HorizontalAlignment="Left" Margin="25,180,0,0" VerticalAlignment="Top" FontWeight="Bold" />
+        <Label Name="labelTech" Height="28" HorizontalAlignment="Left" Margin="80,180,0,0" VerticalAlignment="Top" FontWeight="Bold" >
+            
+        </Label>
+        <Label Name="labelCompanyName" Content="版权所有（C）鑫诺隆珠宝有限公司" Height="28" HorizontalAlignment="Left" Margin="25,210,0,0"  VerticalAlignment="Top" Width="450" FontWeight="Bold"/>
+        <Label Name="labelCopyright" Content="警告：本软件受版权法的保护,未经许可不得擅自复制，违者必究" Height="28" HorizontalAlignment="Left" Margin="25,240,0,0" VerticalAlignment="Top" Width="378" VerticalContentAlignment="Center" Foreground="#FFE91313" />
+        <Button Content="确定" Height="28" HorizontalAlignment="Left" Margin="390,285,0,0" Click="Button_Click" VerticalAlignment="Top" Width="75" />
+    </Grid>
+</Window>

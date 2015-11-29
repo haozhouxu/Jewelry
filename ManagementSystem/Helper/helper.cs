@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace ManagementSystem.ViewModels
+namespace ManagementSystem
 {
     public class helper
     {

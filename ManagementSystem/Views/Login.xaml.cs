@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using ManagementSystem;
+using System.Windows.Threading;
 
 namespace ManagementSystem.Views
 {
@@ -34,17 +35,44 @@ namespace ManagementSystem.Views
 
             if (user.Equals("admin")&&pwd.Equals("123"))
             {
-                MessageBox.Show("登陆成功");
+                ThrowMsg("登陆成功,正在加载数据...", false);
+                System.Threading.Thread.Sleep(1000);
                 App app = (App)Application.Current;
-                MainWindow mw = new MainWindow();
-                app.MainWindow = mw;
-                mw.Show();
+                //MainWindow mw = new MainWindow();
+                //app.MainWindow = mw;
+                //mw.Show();
+                MainShell ms = new MainShell();
+                app.MainWindow = ms;
+                ms.Show();
                 login.Close();
             }
             else
             {
-                MessageBox.Show("登陆失败，请检查用户和密码！");
+                ThrowMsg("登陆失败！请检查用户名和密码", true);
             }
+        }
+
+        /// <summary>
+        /// 抛出信息【易神】
+        /// </summary>
+        /// <param name="msg">消息</param>
+        /// <param name="isWarning">是否为警告信息</param>
+        void ThrowMsg(string msg, bool isWarning)
+        {
+            this.tbMsg.Foreground = new SolidColorBrush(isWarning ? Colors.Red : Colors.Gray);
+            this.tbMsg.Text = msg;
+            DoEvents();
+        }
+
+        public void DoEvents()
+        {
+            DispatcherFrame frame = new DispatcherFrame();
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(delegate (object f)
+            {
+                ((DispatcherFrame)f).Continue = false;
+                return null;
+            }), frame);
+            Dispatcher.PushFrame(frame);
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)

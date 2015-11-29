@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ManagementSystem.Views"
+        xmlns:local="clr-namespace:ManagementSystem"
         xmlns:vm="clr-namespace:ManagementSystem.ViewModels"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:og="clr-namespace:System.Collections;assembly=mscorlib"
@@ -11,7 +11,7 @@
         Title="新增" Height="600" Width="800">
 
     <Window.Resources>
-        <vm:ParameterConvertor x:Key="con_para" />
+        <local:ParameterConvertor x:Key="con_para" />
         <ObjectDataProvider x:Key="products" ObjectType="{x:Type vm:AddViewModel}" MethodName="GetNew" ></ObjectDataProvider>
         <og:ArrayList x:Key="AL_玉种类">
             <ComboBoxItem Name="圆钻" ToolTip="圆钻" />

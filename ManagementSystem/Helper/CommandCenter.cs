@@ -16,7 +16,7 @@ using System.Data.SQLite;
 using System.Windows;
 using System.Collections.ObjectModel;
 
-namespace ManagementSystem.ViewModels
+namespace ManagementSystem
 {
     public class CC
     {
