@@ -48,9 +48,9 @@ namespace ManagementSystem.ViewModels
                         //var insert = dr1.GetValue(2);
                         //var update = dr1.GetValue(3);
 
-                    //没有把helper推送到服务器
-                        //Jewelry je1 = helper.xmlPras(data.ToString());
-                        //_OCJ.Add(je1);
+                        //没有把helper推送到服务器
+                        Jewelry je1 = helper.xmlPras(data.ToString());
+                        _OCJ.Add(je1);
                     }
                 }
 
