@@ -40,15 +40,14 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
-                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Row="0" Grid.Column="0" Text="图片" Style="{StaticResource tb_header_cell_left}" />
                 <TextBox Grid.Row="0" Grid.Column="1" Text="玉重" Style="{StaticResource tb_header_cell}" />
                 <TextBox Grid.Row="0" Grid.Column="2" Text="金重" Style="{StaticResource tb_header_cell}" />
                 <TextBox Grid.Row="0" Grid.Column="3" Text="总价" Style="{StaticResource tb_header_cell}" />
-                <TextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Text="操作" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="4" Text="操作" Style="{StaticResource tb_header_cell}" />
 
-                <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding }"  >
+                <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" ItemsSource="{Binding }"  >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -61,31 +60,48 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                     <ColumnDefinition />
-                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
 
                                 <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1,0,1,1">
                                     <Image  MaxHeight="50" Source="{Binding Image.Source}" >
                                         <Image.ToolTip>
                                             <StackPanel>
-                                                <Image Source="{Binding Image.Source}"></Image>
+                                                <Image Source="{Binding Image.Source}" Width="300" Height="300"></Image>
                                             </StackPanel>
                                         </Image.ToolTip>
                                     </Image>
                                 </Border>
-                                
                                 <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource tup_cell}" Text="{Binding Path=JadeWeight}" TextWrapping="Wrap"/>
                                 <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource tup_cell}" Text="{Binding Path=GoldWeight}" TextWrapping="Wrap"/>
                                 <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource tup_cell}" Text="{Binding Path=TotalPrice}" TextWrapping="Wrap"/>
-                                <Button  Grid.Row="0" Grid.Column="4" Content="编辑" HorizontalAlignment="Stretch" Style="{StaticResource ic_Btn_cell}"/>
-                                <Button  Grid.Row="0" Grid.Column="5" Content="删除" HorizontalAlignment="Stretch" Command="Delete" Style="{StaticResource ic_Btn_cell}">
-                                    <Button.CommandParameter>
-                                        <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter='save:true:b'>
-                                            <Binding />
-                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl},Mode=FindAncestor}" />
-                                        </MultiBinding>
-                                    </Button.CommandParameter>
-                                </Button>
+                                <Grid Grid.Row="0" Grid.Column="4" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Button  Grid.Row="0" Grid.Column="0" Content="查看" HorizontalAlignment="Stretch" Style="{StaticResource ic_Btn_cell}" Command="Open">
+                                        <Button.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter='type:detail:s'>
+                                                <Binding />
+                                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl},Mode=FindAncestor}" />
+                                            </MultiBinding>
+                                        </Button.CommandParameter>
+                                    </Button>
+                                    <Button  Grid.Row="0" Grid.Column="1" Content="编辑" HorizontalAlignment="Stretch" Style="{StaticResource ic_Btn_cell}"/>
+                                    <Button  Grid.Row="0" Grid.Column="2" Content="删除" HorizontalAlignment="Stretch" Command="Delete" Style="{StaticResource ic_Btn_cell}">
+                                        <Button.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter='save:true:b'>
+                                                <Binding />
+                                                <Binding RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl},Mode=FindAncestor}" />
+                                            </MultiBinding>
+                                        </Button.CommandParameter>
+                                    </Button>
+                                </Grid>
+                                
                                 <!--<StackPanel Grid.Row="0" Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Center">
                                     <Button Content="编辑" Style="{StaticResource ic_Btn_cell}"/>
                                     <Button Content="删除" Command="Delete" Style="{StaticResource ic_Btn_cell}">

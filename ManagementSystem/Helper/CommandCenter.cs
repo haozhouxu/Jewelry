@@ -41,6 +41,9 @@ namespace ManagementSystem
                     case "selectImage":
                         CC.selectImage(paraDic);
                         break;
+                    case "detail":
+                        CC.Detail(paraDic);
+                        break;
                     default:
                         break;
                 }
@@ -50,6 +53,11 @@ namespace ManagementSystem
             {
                 System.Windows.MessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        private static void Detail(Dictionary<string, object> paraDic)
+        {
+            
         }
 
         public static void Delete_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -78,6 +86,11 @@ namespace ManagementSystem
             //    Document doc = dg1.Parent.Owner as Document;
             //    SQLitehelper.SaveBack(doc, doc.DBFile);
             //}
+        }
+
+        internal static void ShowDetail(object sender, ExecutedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private static void selectImage(Dictionary<string, object> paraDic)

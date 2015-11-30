@@ -99,6 +99,12 @@
     <Compile Include="Views\test1.xaml.cs">
       <DependentUpon>test1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinDetail.xaml.cs">
+      <DependentUpon>WinDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinSecond.xaml.cs">
+      <DependentUpon>WinSecond.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainShell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +145,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\test1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinSecond.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
