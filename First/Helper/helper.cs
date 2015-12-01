@@ -20,14 +20,10 @@ namespace First
 
             var root = XElement.Parse(xml);
 
-            var ss = root.Element("goldweight");
-
-            //je.GoldWeight = Convert.ToDouble(root.Element("goldweight").Value.ToString());
-            //je.JadeWeight = Convert.ToDouble(root.Element("jadeweight").Value.ToString());
-            //je.TotalPrice = Convert.ToDouble(root.Element("totalprice").Value.ToString());
-            je.Image = helper.Base64ToImage(root.Element("image").Value.ToString());
-
-            //je.GoldWeight = Convert.ToDouble(ss.Value);
+            je.Type =   root.Element("Type").Value.ToString();
+            je.State =  root.Element("State").Value.ToString();
+            je.OwnWho = root.Element("OwnWho").Value.ToString();
+            je.Image = helper.Base64ToImage(root.Element("Image").Value.ToString());
 
             return je;
         }

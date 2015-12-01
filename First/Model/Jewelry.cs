@@ -25,6 +25,8 @@ namespace First.Model
         private string _buySource;
         private string _ownWho;
 
+        private string _state;
+
         private string _borrowTime;
         private string _borrowWho;
         private string _borrowPirce;
@@ -349,6 +351,23 @@ namespace First.Model
                 {
                     _saleState = value;
                     NotifyPropertyChanged("SaleState");
+                }
+            }
+        }
+
+        public string State
+        {
+            get
+            {
+                return _state;
+            }
+
+            set
+            {
+                if (_state != value)
+                {
+                    _state = value;
+                    NotifyPropertyChanged("State");
                 }
             }
         }

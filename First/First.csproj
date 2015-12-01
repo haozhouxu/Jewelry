@@ -84,8 +84,12 @@
     <Compile Include="Model\Jewelry.cs" />
     <Compile Include="Model\NotifyPropertyBase.cs" />
     <Compile Include="Model\SectionTitle.cs" />
+    <Compile Include="ViewModel\MainOneViewModel.cs" />
     <Compile Include="View\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainOne.xaml.cs">
+      <DependentUpon>MainOne.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\test1.xaml.cs">
       <DependentUpon>test1.xaml</DependentUpon>
@@ -118,6 +122,10 @@
     <Page Include="View\AboutWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainOne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\test1.xaml">
       <SubType>Designer</SubType>
@@ -159,7 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DB\" />
-    <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\01.jpg" />
