@@ -24,8 +24,6 @@
 
             <ColumnDefinition />
 
-            <ColumnDefinition />
-
         </Grid.ColumnDefinitions>
 
         <Rectangle Grid.Column="0" x:Name="MasterImage"
