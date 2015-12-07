@@ -16,23 +16,13 @@ using System.Windows.Shapes;
 namespace First.View
 {
     /// <summary>
-    /// MainOne.xaml 的交互逻辑
+    /// store.xaml 的交互逻辑
     /// </summary>
-    public partial class MainOne : Page
+    public partial class store : Page
     {
-        public MainOne()
+        public store()
         {
             InitializeComponent();
-        }
-
-        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            CC.Open_Executed(sender, e);
-        }
-
-        private void Delete_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            CC.Delete_Executed(sender, e);
         }
     }
 }

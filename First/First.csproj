@@ -24,7 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,6 +48,7 @@
     <Reference Include="System.Data.SQLite, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -88,8 +89,23 @@
     <Compile Include="View\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\borrow.xaml.cs">
+      <DependentUpon>borrow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\history.xaml.cs">
+      <DependentUpon>history.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainOne.xaml.cs">
       <DependentUpon>MainOne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\sale.xaml.cs">
+      <DependentUpon>sale.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\setting.xaml.cs">
+      <DependentUpon>setting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\store.xaml.cs">
+      <DependentUpon>store.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\test1.xaml.cs">
       <DependentUpon>test1.xaml</DependentUpon>
@@ -123,7 +139,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\borrow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\history.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainOne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\sale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\setting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\store.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -14,20 +14,21 @@
     <Page.Resources>
         <man:ParameterConvertor x:Key="con_para" />
         <man:MultiObjectDataConvertor x:Key="con_multipara" />
-        <ObjectDataProvider x:Key="getAll" ObjectType="{x:Type vm:MainOneViewModel}" MethodName="GetAll" ></ObjectDataProvider>
+        <!--<ObjectDataProvider x:Key="getAll" ObjectType="{x:Type vm:MainOneViewModel}" MethodName="GetAll" ></ObjectDataProvider>-->
+        <ObjectDataProvider x:Key="odp" ObjectType="{x:Type vm:MainOneViewModel}" MethodName="GetExample" />
     </Page.Resources>
 
-    <!--<Page.CommandBindings>
+    <Page.CommandBindings>
         <CommandBinding Command="Open" Executed="Open_Executed" />
         <CommandBinding Command="Delete" Executed="Delete_Executed" />
-    </Page.CommandBindings>-->
+    </Page.CommandBindings>
 
-    <DockPanel LastChildFill="True" DataContext="{StaticResource getAll}" x:Name="dp" Margin="10" Background="#FFEDEEEF">
+    <DockPanel LastChildFill="True" DataContext="{StaticResource odp}" x:Name="dp" Margin="10" Background="#FFEDEEEF">
         <!--菜单栏-->
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
-            <TextBlock Text="入货开始时间:" VerticalAlignment="Center" Margin="5,0" />
+            <TextBlock Text="入货时间:" VerticalAlignment="Center" Margin="5,0" />
             <DatePicker VerticalAlignment="Center"  Margin="5,0"/>
-            <TextBlock Text="入货结束时间:" VerticalAlignment="Center" Margin="5,0" />
+            <TextBlock Text="至" VerticalAlignment="Center" Margin="5,0" />
             <DatePicker VerticalAlignment="Center" Margin="5,0"/>
             <Button Content="查询" Style="{StaticResource BtnNew}" Margin="0,0,5,0" />
             <Button Content="新增" Style="{StaticResource BtnNew}" Margin="0,0,5,0" Command="Open" CommandParameter="{Binding Converter={StaticResource con_para},ConverterParameter=type:addNew:s}" />
@@ -51,14 +52,16 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Row="0" Grid.Column="0" Text="图片" Style="{StaticResource tb_header_cell_left}" />
                 <TextBox Grid.Row="0" Grid.Column="1" Text="类别" Style="{StaticResource tb_header_cell}" />
-                <TextBox Grid.Row="0" Grid.Column="2" Text="状态" Style="{StaticResource tb_header_cell}" />
-                <TextBox Grid.Row="0" Grid.Column="3" Text="归属" Style="{StaticResource tb_header_cell}" />
-                <TextBox Grid.Row="0" Grid.Column="4" Text="操作" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="2" Text="镶金价" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="3" Text="状态" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="4" Text="入货时间" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="5" Text="操作" Style="{StaticResource tb_header_cell}" />
 
-                <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" VerticalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewerStyle}">
+                <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" VerticalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewerStyle}">
                     <ItemsControl ItemsSource="{Binding }"  >
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -67,6 +70,8 @@
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                         <ColumnDefinition />
@@ -83,9 +88,10 @@
                                         </Image>
                                     </Border>
                                     <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource tup_cell}" Text="{Binding Path=Type}" TextWrapping="Wrap"/>
-                                    <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource tup_cell}" Text="{Binding Path=State}" TextWrapping="Wrap"/>
-                                    <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource tup_cell}" Text="{Binding Path=OwnWho}" TextWrapping="Wrap"/>
-                                    <Grid Grid.Row="0" Grid.Column="4" >
+                                    <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource tup_cell}" Text="{Binding Path=GoldPrice}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource tup_cell}" Text="{Binding Path=State}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="4" Style="{StaticResource tup_cell}" Text="{Binding Path=BuyTime}" TextWrapping="Wrap"/>
+                                    <Grid Grid.Row="0" Grid.Column="5" Tag="操作" >
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
                                         </Grid.RowDefinitions>

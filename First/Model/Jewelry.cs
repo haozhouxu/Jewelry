@@ -387,6 +387,10 @@ namespace First.Model
             Jewelry je= new Jewelry();
             je.Image = new Image();
             je.Image.Source = new BitmapImage(new Uri(@"C:\xhz\ms.jpg", UriKind.Absolute));
+            je.Type = "戒指";
+            je.GoldPrice = 999.99;
+            je.State = "未卖";
+            je.BuyTime = System.DateTime.Now;
             //je.TotalWeight = 10.9;
             //je.JadeWeight = 10.8;
             //je.GoldWeight = 10.7;
