@@ -89,6 +89,9 @@
     <Compile Include="View\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Add.xaml.cs">
+      <DependentUpon>Add.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\borrow.xaml.cs">
       <DependentUpon>borrow.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,10 @@
     <Page Include="View\AboutWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Add.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\borrow.xaml">
       <SubType>Designer</SubType>

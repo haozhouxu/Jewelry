@@ -23,7 +23,7 @@
         <CommandBinding Command="Delete" Executed="Delete_Executed" />
     </Page.CommandBindings>
 
-    <DockPanel LastChildFill="True" DataContext="{StaticResource odp}" x:Name="dp" Margin="10" Background="#FFEDEEEF">
+    <DockPanel LastChildFill="True" DataContext="{StaticResource odp}" x:Name="dp" Background="#FFEDEEEF">
         <!--菜单栏-->
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
             <TextBlock Text="入货时间:" VerticalAlignment="Center" Margin="5,0" />
@@ -31,7 +31,15 @@
             <TextBlock Text="至" VerticalAlignment="Center" Margin="5,0" />
             <DatePicker VerticalAlignment="Center" Margin="5,0"/>
             <Button Content="查询" Style="{StaticResource BtnNew}" Margin="0,0,5,0" />
-            <Button Content="新增" Style="{StaticResource BtnNew}" Margin="0,0,5,0" Command="Open" CommandParameter="{Binding Converter={StaticResource con_para},ConverterParameter=type:addNew:s}" />
+            <!--<Button Content="新增" Style="{StaticResource BtnNew}" Margin="0,0,5,0" Command="Open" CommandParameter="{Binding Converter={StaticResource con_para},ConverterParameter=type:addNew:s}" />-->
+            <Button Content="新建" Command="New" Style="{DynamicResource BtnNew}">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:new:s|page:Add:s|isEdit:false:b">
+                        <Binding Path="ItemsSource" ElementName="ic_form" />
+                        <Binding ElementName="ic_form"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
         </StackPanel>
         
         <!--小标题-->
@@ -62,8 +70,8 @@
                 <TextBox Grid.Row="0" Grid.Column="4" Text="入货时间" Style="{StaticResource tb_header_cell}" />
                 <TextBox Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Text="操作" Style="{StaticResource tb_header_cell}" />
 
-                <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" VerticalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewerStyle}">
-                    <ItemsControl ItemsSource="{Binding }"  >
+                <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" VerticalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewerStyle}">
+                    <ItemsControl x:Name="ic_form" ItemsSource="{Binding }"  >
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid>

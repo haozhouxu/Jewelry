@@ -68,5 +68,9 @@ namespace First
             return null;
         }
 
+        public static string PageTool(string page)
+        {
+            return "pack://application:,,,/View/" + page + ".xaml";
+        }
     }
 }

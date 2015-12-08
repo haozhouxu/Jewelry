@@ -15,6 +15,7 @@ using System.Windows;
 using System.Collections.ObjectModel;
 
 using First.Model;
+using System.Windows.Data;
 
 namespace First
 {
@@ -168,5 +169,45 @@ namespace First
             //an.Show();
         }
 
+        internal static void CreateNew(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                Dictionary<string, object> paraDic = e.Parameter as Dictionary<string, object>;
+                if (paraDic == null)
+                    return;
+                string page = (string)paraDic["page"];
+                ObservableCollection<Jewelry> main_ic = paraDic["context1"] as ObservableCollection<Jewelry>;
+                if (main_ic != null)
+                {
+                    Jewelry _je = new Jewelry();
+                    main_ic.Add(_je);
+                    WinDetail wd1 = new WinDetail(_je);
+                    wd1.PageFrame.Navigate(new Uri(Tools.PageTool(page), UriKind.RelativeOrAbsolute));
+                    bool? res = wd1.ShowDialog();
+
+                    if (res.HasValue && res.Value)
+                    {
+
+                    }
+                    CommonReflashData((FrameworkElement)paraDic["context2"]);
+                }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                
+            }
+        }
+
+        //刷新数据
+        private static void CommonReflashData(FrameworkElement frame)
+        {
+            ObjectDataProvider odp = (ObjectDataProvider)frame.DataContext;
+            odp.Refresh();
+        }
     }
 }

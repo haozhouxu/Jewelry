@@ -262,5 +262,10 @@ namespace First
         }
         #endregion
 
+        private void CreateNew(object sender, ExecutedRoutedEventArgs e)
+        {
+            CC.CreateNew(sender, e);
+        }
+
     }
 }
