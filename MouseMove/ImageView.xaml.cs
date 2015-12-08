@@ -24,6 +24,8 @@ namespace MouseMove
     /// </summary>
     public partial class ImageView : Window
     {
+        public Point x;
+
         public ImageView()
         {
             InitializeComponent();
@@ -395,6 +397,11 @@ namespace MouseMove
             }
             result = null;
             return result;
+        }
+
+        private void imageViewer_MouseMove(object sender, MouseEventArgs e)
+        {
+            //x = Mouse.GetPosition();
         }
     }
 

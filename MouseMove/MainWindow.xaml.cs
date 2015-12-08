@@ -136,10 +136,39 @@ namespace MouseMove
 
             ScaleTransform transform = group.Children[0] as ScaleTransform;
 
-            transform.ScaleX += e.Delta * 0.001;
+            transform.CenterX = 300;
+            transform.CenterY = 300;
 
-            transform.ScaleY += e.Delta * 0.001;
+            //transform.ScaleX += e.Delta * 0.001;
+            //transform.ScaleY += e.Delta * 0.001;
 
+            if (e.Delta > 0)
+            {
+                if (transform.ScaleX <= 1.5)
+                {
+                    transform.ScaleX += e.Delta * 0.001;
+                    transform.ScaleY += e.Delta * 0.001;
+                }
+            }
+            else
+            {
+                if (transform.ScaleX >= 0.5)
+                {
+                    transform.ScaleX += e.Delta * 0.001;
+                    transform.ScaleY += e.Delta * 0.001;
+                }
+            }
+
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void OnCloseWindow(object target, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.CloseWindow(this);
         }
     }
 }
