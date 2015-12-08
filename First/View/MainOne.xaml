@@ -53,13 +53,14 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition Width="15"/>
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Row="0" Grid.Column="0" Text="图片" Style="{StaticResource tb_header_cell_left}" />
                 <TextBox Grid.Row="0" Grid.Column="1" Text="类别" Style="{StaticResource tb_header_cell}" />
                 <TextBox Grid.Row="0" Grid.Column="2" Text="镶金价" Style="{StaticResource tb_header_cell}" />
                 <TextBox Grid.Row="0" Grid.Column="3" Text="状态" Style="{StaticResource tb_header_cell}" />
                 <TextBox Grid.Row="0" Grid.Column="4" Text="入货时间" Style="{StaticResource tb_header_cell}" />
-                <TextBox Grid.Row="0" Grid.Column="5" Text="操作" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Text="操作" Style="{StaticResource tb_header_cell}" />
 
                 <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" VerticalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewerStyle}">
                     <ItemsControl ItemsSource="{Binding }"  >
