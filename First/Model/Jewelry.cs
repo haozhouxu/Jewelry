@@ -16,7 +16,7 @@ namespace First.Model
         readonly private string _guid;
         private Image _image;
         private DateTime _buyTime;
-        private string _buyPrice;
+        private Double _buyPrice;
         private string _buyWho;
         private Double _goldPrice;
         private string _type;
@@ -29,12 +29,12 @@ namespace First.Model
 
         private string _borrowTime;
         private string _borrowWho;
-        private string _borrowPirce;
+        private Double _borrowPirce;
         private string _borrowReturnTime;
 
         private string _saleTime;
         private string _saleWho;
-        private string _salePirce;
+        private Double _salePirce;
         private string _saleState;
 
         #endregion
@@ -83,7 +83,7 @@ namespace First.Model
             }
         }
 
-        public string BuyPrice
+        public Double BuyPrice
         {
             get
             {
@@ -253,7 +253,7 @@ namespace First.Model
             }
         }
 
-        public string BorrowPirce
+        public Double BorrowPirce
         {
             get
             {
@@ -321,7 +321,7 @@ namespace First.Model
             }
         }
 
-        public string SalePirce
+        public Double SalePirce
         {
             get
             {
@@ -380,6 +380,7 @@ namespace First.Model
         public Jewelry()
         {
             _guid = System.Guid.NewGuid().ToString();
+            BuyTime = System.DateTime.Now;
         }
 
         public static Jewelry GetExample()

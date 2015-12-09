@@ -241,6 +241,18 @@
     <DataTemplate x:Key="enumNormalTemplate">
         <TextBlock Text="{Binding Path='Name'}" ToolTip="{Binding Path='ToolTip'}"/>
     </DataTemplate>
+    <Style x:Key="dpicker" TargetType="DatePicker">
+        <Setter Property="SelectedDateFormat" Value="Long" />
+        <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource scb_tableBorder}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderThickness" Value="0.5"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="tb_dpicker" TargetType="DatePicker" BasedOn="{StaticResource dpicker}">
+        <Setter Property="BorderThickness" Value="0,0,1,1"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+    </Style>
     <Style x:Key="LoginTxt"  BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
         <Setter Property="Foreground" Value="#FF7E7E7E"/>
         <Setter Property="Template">

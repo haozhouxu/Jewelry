@@ -186,7 +186,7 @@ namespace First
                 if (main_ic != null)
                 {
                     Jewelry _je = new Jewelry();
-                    main_ic.Add(_je);
+                    //main_ic.Add(_je);
                     WinDetail wd1 = new WinDetail(_je, isEdit);
                     wd1.PageFrame.Navigate(new Uri(Tools.PageTool(page), UriKind.RelativeOrAbsolute));
                     bool? res = wd1.ShowDialog();

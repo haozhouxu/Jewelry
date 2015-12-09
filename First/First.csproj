@@ -85,6 +85,7 @@
     <Compile Include="Model\Jewelry.cs" />
     <Compile Include="Model\NotifyPropertyBase.cs" />
     <Compile Include="Model\SectionTitle.cs" />
+    <Compile Include="Model\TypeEntity.cs" />
     <Compile Include="ViewModel\MainOneViewModel.cs" />
     <Compile Include="View\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
@@ -202,15 +203,14 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="DB\first" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DB\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Images\01.jpg" />
   </ItemGroup>
