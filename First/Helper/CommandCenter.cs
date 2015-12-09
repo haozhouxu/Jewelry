@@ -177,12 +177,17 @@ namespace First
                 if (paraDic == null)
                     return;
                 string page = (string)paraDic["page"];
+                bool isEdit = false;
+                if (paraDic.ContainsKey("isEdit"))
+                {
+                    isEdit = (bool)paraDic["isEdit"];
+                }
                 ObservableCollection<Jewelry> main_ic = paraDic["context1"] as ObservableCollection<Jewelry>;
                 if (main_ic != null)
                 {
                     Jewelry _je = new Jewelry();
                     main_ic.Add(_je);
-                    WinDetail wd1 = new WinDetail(_je);
+                    WinDetail wd1 = new WinDetail(_je, isEdit);
                     wd1.PageFrame.Navigate(new Uri(Tools.PageTool(page), UriKind.RelativeOrAbsolute));
                     bool? res = wd1.ShowDialog();
 
