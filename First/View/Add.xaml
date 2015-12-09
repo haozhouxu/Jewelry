@@ -12,6 +12,7 @@
 
     <Page.Resources>
         <man:ParameterConvertor x:Key="con_para" />
+        <man:ValueToVisibility x:Key="con_value" />
         <model:TypeEntity x:Key="myTypeEntitys" />
         <DataTemplate x:Key="myTypeTemplate">
             <TextBlock Text="{Binding }" HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -21,6 +22,10 @@
             <ComboBoxItem Name="公司" ToolTip="公司" />
         </og:ArrayList>
     </Page.Resources>
+
+    <Page.CommandBindings>
+        <CommandBinding Command="Open" Executed="Open_Executed" />
+    </Page.CommandBindings>
 
     <DockPanel LastChildFill="True">
 
@@ -105,10 +110,15 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBox Grid.Row="0" Grid.Column="0" Text="状态：" Style="{StaticResource tb_header_cell_left}"/>
-                            <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=State}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
+                            <!--<TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=State}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
+                            <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" ItemTemplate="{StaticResource enumNormalTemplate}" SelectedValuePath="Value" SelectedValue="{Binding Path='State',Mode=TwoWay}">
+                                <ComboBoxItem Name="未卖" ToolTip="未卖">未卖</ComboBoxItem>
+                                <ComboBoxItem Name="借出" ToolTip="借出">借出</ComboBoxItem>
+                                <ComboBoxItem Name="卖出" ToolTip="卖出">卖出</ComboBoxItem>
+                            </ComboBox>
 
                             <!-- 借出信息 -->
-                            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">
+                            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Visibility="{Binding Source='State',Converter={StaticResource con_value},ConverterParameter='借出'}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />
@@ -121,19 +131,21 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBox Grid.Row="0" Grid.Column="0" Text="借出时间：" Style="{StaticResource tb_header_cell_left}"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=BorrowTime}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
+                                <!--<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=BorrowTime}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
+                                <DatePicker Grid.Row="0" Grid.Column="1" Style="{StaticResource tb_dpicker}" SelectedDate="{Binding Path=BorrowTime}" />
                                 <TextBox Grid.Row="0" Grid.Column="2" Text="借出对象：" Style="{StaticResource tb_header_cell_left}"/>
                                 <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Path=BorrowWho}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
 
                                 <TextBox Grid.Row="1" Grid.Column="0" Text="借出价格：" Style="{StaticResource tb_header_cell_left}"/>
                                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=BorrowPirce}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
                                 <TextBox Grid.Row="1" Grid.Column="2" Text="还货时间：" Style="{StaticResource tb_header_cell_left}"/>
-                                <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Path=BorrowReturnTime}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
+                                <!--<TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Path=BorrowReturnTime}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
+                                <DatePicker Grid.Row="1" Grid.Column="3" Style="{StaticResource tb_dpicker}" SelectedDate="{Binding Path=BorrowReturnTime}" />
                                 
                             </Grid>
 
                             <!-- 卖出信息 -->
-                            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4">
+                            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Visibility="{Binding Source='State',Converter={StaticResource con_value},ConverterParameter='卖出'}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />
@@ -146,7 +158,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBox Grid.Row="0" Grid.Column="0" Text="卖出时间：" Style="{StaticResource tb_header_cell_left}"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=SaleTime}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
+                                <!--<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=SaleTime}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
+                                <DatePicker Grid.Row="0" Grid.Column="1" Style="{StaticResource tb_dpicker}" SelectedDate="{Binding Path=SaleTime}" />
                                 <TextBox Grid.Row="0" Grid.Column="2" Text="卖出对象：" Style="{StaticResource tb_header_cell_left}"/>
                                 <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Path=SaleWho}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
 
@@ -172,10 +185,12 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  Text="图片"    Style="{StaticResource header_cell_top}" />
-                        <Button  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Content="选择图片" Style="{StaticResource BtnNew}" Margin="5" Command="Open" CommandParameter="{Binding Converter={StaticResource con_para},ConverterParameter='type:selectImage:s|target:Image:s'}"/>
+                        <Button  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Content="选择图片" 
+                                 Style="{StaticResource BtnNew}" Margin="5" Command="Open" 
+                                 CommandParameter="{Binding Converter={StaticResource con_para},ConverterParameter='type:selectImage:s|target:Image:s'}"/>
                     </Grid>
 
-                    <Border BorderBrush="LightGray" BorderThickness="1" Height="50">
+                    <Border BorderBrush="LightGray" BorderThickness="1" Height="100">
                         <Image Source="{Binding Image.Source}"/>
                     </Border>
                     

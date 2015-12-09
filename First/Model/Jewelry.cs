@@ -27,12 +27,12 @@ namespace First.Model
 
         private string _state;
 
-        private string _borrowTime;
+        private DateTime _borrowTime;
         private string _borrowWho;
         private Double _borrowPirce;
-        private string _borrowReturnTime;
+        private DateTime _borrowReturnTime;
 
-        private string _saleTime;
+        private DateTime _saleTime;
         private string _saleWho;
         private Double _salePirce;
         private string _saleState;
@@ -219,7 +219,7 @@ namespace First.Model
             }
         }
 
-        public string BorrowTime
+        public DateTime BorrowTime
         {
             get
             {
@@ -270,7 +270,7 @@ namespace First.Model
             }
         }
 
-        public string BorrowReturnTime
+        public DateTime BorrowReturnTime
         {
             get
             {
@@ -287,7 +287,7 @@ namespace First.Model
             }
         }
 
-        public string SaleTime
+        public DateTime SaleTime
         {
             get
             {
@@ -381,6 +381,10 @@ namespace First.Model
         {
             _guid = System.Guid.NewGuid().ToString();
             BuyTime = System.DateTime.Now;
+            BorrowTime = System.DateTime.Now;
+            SaleTime = System.DateTime.Now;
+            BorrowReturnTime = System.DateTime.Now;
+            Image = new Image();
         }
 
         public static Jewelry GetExample()
