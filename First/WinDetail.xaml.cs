@@ -111,6 +111,10 @@ namespace First
                 this.Title = (string)fe1.GetValue(Page.TitleProperty);
             }
         }
+        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            CC.Open_Executed(sender, e);
+        }
         #endregion
     }
 }

@@ -193,7 +193,7 @@
                                 </Path>
                             </StackPanel>
                         </Viewbox>-->
-                        <TextBox Text="鑫诺隆管理系统" BorderThickness="0" FontSize="33.333" Background="Transparent" Foreground="#FF1073CD" />
+                        <TextBox Text="管理系统" BorderThickness="0" FontSize="33.333" Background="Transparent" Foreground="#FF1073CD" />
                         <TextBlock HorizontalAlignment="Center" x:Name="tbMsg" Margin="0,10,0,0"/>
                     </StackPanel>
                 </Grid>

@@ -7,26 +7,32 @@ using System.Collections.ObjectModel;
 
 namespace First.Model
 {
-    class TypeEntity:ObservableCollection<string>
+    //class TypeEntity:ObservableCollection<string>
+    //{
+    //    public TypeEntity()
+    //    {
+    //        this.Add("耳坠");
+    //        this.Add("挂件");
+    //        this.Add("戒指");
+    //        this.Add("手链");
+    //        this.Add("手镯");
+    //    }
+    //}
+
+    public class Type
+    {
+        public string type { set; get; }
+    }
+
+    public class TypeEntity : ObservableCollection<Type>
     {
         public TypeEntity()
         {
-            this.Add("耳坠");
-            this.Add("挂件");
-            this.Add("戒指");
-            this.Add("手链");
-            this.Add("手镯");
+            this.Add(new Type { type = "耳坠" });
+            this.Add(new Type { type = "挂件" });
+            this.Add(new Type { type = "戒指" });
+            this.Add(new Type { type = "手链" });
+            this.Add(new Type { type = "手镯" });
         }
-
-        //public static ObservableCollection<string> GetExample()
-        //{
-        //    ObservableCollection<string> ob = new ObservableCollection<string>();
-        //    ob.Add("耳坠");
-        //    ob.Add("挂件");
-        //    ob.Add("戒指");
-        //    ob.Add("手链");
-        //    ob.Add("手镯");
-        //    return ob;
-        //}
     }
 }

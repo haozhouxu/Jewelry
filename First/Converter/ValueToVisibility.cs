@@ -15,14 +15,17 @@ namespace First
         {
             string type = value as string;
             string target = parameter as string;
-            if (value.Equals(parameter))
-            {
-                return Visibility.Visible;
-            }
-            else
+            if (string.IsNullOrEmpty(type)|| string.IsNullOrEmpty(target))
             {
                 return Visibility.Collapsed;
             }
+
+            if (type.Equals(parameter))
+            {
+                return Visibility.Visible;
+            }
+
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

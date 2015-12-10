@@ -80,6 +80,7 @@
         <CommandBinding Command="Delete" Executed="DeleteCurrent"/>
         <CommandBinding Command="New" Executed="CreateNew"/>
         <CommandBinding Command="CorrectionList" Executed="CorrectionListExecuted" />-->
+        <CommandBinding Command="Open" Executed="Open_Executed"/>
         <CommandBinding Command="Close" Executed="Close_Page"/>
     </Window.CommandBindings>
     <DockPanel LastChildFill="True" Background="White">

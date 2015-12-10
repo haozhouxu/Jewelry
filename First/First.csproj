@@ -83,6 +83,7 @@
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\DataValueChangedEventArgs.cs" />
+    <Compile Include="Model\HistoryEntity.cs" />
     <Compile Include="Model\Jewelry.cs" />
     <Compile Include="Model\NotifyPropertyBase.cs" />
     <Compile Include="Model\SectionTitle.cs" />
@@ -204,7 +205,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="DB\first" />
+    <None Include="DB\first">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

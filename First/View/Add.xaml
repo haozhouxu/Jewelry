@@ -15,7 +15,7 @@
         <man:ValueToVisibility x:Key="con_value" />
         <model:TypeEntity x:Key="myTypeEntitys" />
         <DataTemplate x:Key="myTypeTemplate">
-            <TextBlock Text="{Binding }" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding type}" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </DataTemplate>
         <og:ArrayList x:Key="AL_归属">
             <ComboBoxItem Name="个人" ToolTip="个人" />
@@ -62,7 +62,7 @@
 
                             <TextBox Grid.Row="0" Grid.Column="0" Text="类别：" Style="{StaticResource tb_header_cell_left}"/>
                             <!--<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=Type}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
-                            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{StaticResource myTypeEntitys}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Value" SelectedValue="{Binding Path='Type'}"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{StaticResource myTypeEntitys}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="type"  SelectedValue="{Binding Path='Type'}"/>
                             <TextBox Grid.Row="0" Grid.Column="2" Text="颜色：" Style="{StaticResource tb_header_cell_left}"/>
                             <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Path=Color}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
                             
@@ -81,9 +81,9 @@
                             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=BuyWho}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
                             <TextBox Grid.Row="3" Grid.Column="2" Text="归属：" Style="{StaticResource tb_header_cell_left}"/>
                             <!--<TextBox Grid.Row="3" Grid.Column="3" Text="{Binding Path=OwnWho}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
-                            <ComboBox Grid.Row="3" Grid.Column="3" ItemTemplate="{StaticResource enumNormalTemplate}" SelectedValuePath="Value" SelectedValue="{Binding Path='OwnWho'}">
-                                <ComboBoxItem Name="个人" ToolTip="个人">个人</ComboBoxItem>
-                                <ComboBoxItem Name="公司" ToolTip="公司">公司</ComboBoxItem>
+                            <ComboBox Grid.Row="3" Grid.Column="3" SelectedValuePath="Content" SelectedValue="{Binding Path='OwnWho'}">
+                                <ComboBoxItem Content="个人"/>
+                                <ComboBoxItem Content="公司"/>
                             </ComboBox>
 
                             <TextBox Grid.Row="4" Grid.Column="0" Text="备注：" Style="{StaticResource tb_header_cell_left}"/>
@@ -111,14 +111,14 @@
 
                             <TextBox Grid.Row="0" Grid.Column="0" Text="状态：" Style="{StaticResource tb_header_cell_left}"/>
                             <!--<TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=State}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
-                            <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" ItemTemplate="{StaticResource enumNormalTemplate}" SelectedValuePath="Value" SelectedValue="{Binding Path='State',Mode=TwoWay}">
-                                <ComboBoxItem Name="未卖" ToolTip="未卖">未卖</ComboBoxItem>
-                                <ComboBoxItem Name="借出" ToolTip="借出">借出</ComboBoxItem>
-                                <ComboBoxItem Name="卖出" ToolTip="卖出">卖出</ComboBoxItem>
+                            <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" ItemTemplate="{StaticResource enumNormalTemplate}" SelectedValuePath="Content" SelectedValue="{Binding Path='State'}">
+                                <ComboBoxItem Content="未卖"/>
+                                <ComboBoxItem Content="借出"/>
+                                <ComboBoxItem Content="卖出"/>
                             </ComboBox>
 
                             <!-- 借出信息 -->
-                            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Visibility="{Binding Source='State',Converter={StaticResource con_value},ConverterParameter='借出'}">
+                            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Visibility="{Binding Path=State,Converter={StaticResource con_value},ConverterParameter='借出'}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />
@@ -145,7 +145,7 @@
                             </Grid>
 
                             <!-- 卖出信息 -->
-                            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Visibility="{Binding Source='State',Converter={StaticResource con_value},ConverterParameter='卖出'}">
+                            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Visibility="{Binding Path=State,Converter={StaticResource con_value},ConverterParameter='卖出'}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />

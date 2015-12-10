@@ -45,6 +45,9 @@ namespace First
                     case "detail":
                         CC.Detail(paraDic);
                         break;
+                    case "saveDetails":
+                        CC.saveDetails(paraDic);
+                        break;
                     default:
                         break;
                 }
@@ -56,9 +59,29 @@ namespace First
             }
         }
 
+        private static void saveDetails(Dictionary<string, object> paraDic)
+        {
+            Frame frame = paraDic["context"] as Frame;
+            Jewelry je = (frame.Content as FrameworkElement).DataContext as Jewelry;
+
+            string _guid = je.Guid;
+            if (SQLiteService.Save(je))
+            {
+                MessageBox.Show("保存成功");
+            }
+            else
+            {
+                MessageBox.Show("保存失败");
+            }
+            //if (SQLiteService.IsExitItem())
+            //{
+
+            //}
+        }
+
         private static void Detail(Dictionary<string, object> paraDic)
         {
-            
+
         }
 
         public static void Delete_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -77,7 +100,7 @@ namespace First
 
             if (MessageBox.Show("您确定要删除该记录么？", "系统提示", MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
                 return;
-            
+
 
 
             //dg1.Parent.Delete(dg1);
@@ -204,7 +227,7 @@ namespace First
             }
             finally
             {
-                
+
             }
         }
 
