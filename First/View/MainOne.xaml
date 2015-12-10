@@ -46,9 +46,55 @@
         <StackPanel DockPanel.Dock="Top">
             <TextBox HorizontalAlignment="Left"  Text="全部信息"    Style="{StaticResource header_cell_top}" />
         </StackPanel>
-
+        
+        <!--翻页按钮-->
+        <Grid DockPanel.Dock="Bottom" Background="White">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" >
+            <Button x:Name="bt_pre" Content="上一页" Margin="10,0" IsEnabled="{Binding Path='IsBtnPreEnable'}">
+                <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <man:CallInvokeObjectMethod DestType="{x:Type hpr:CC}" DestMethod="TurnPageSqlite">
+                            <man:CallInvokeObjectMethod.MethodParameters>
+                                <MultiBinding Converter="{StaticResource con_method}">
+                                    <Binding Source="{StaticResource odp_data}" BindsDirectlyToSource="True"/>
+                                    <Binding Source="-1"/>
+                                    <Binding Path="PageSize"/>
+                                    <Binding Path="TotalCount"/>
+                                </MultiBinding>
+                            </man:CallInvokeObjectMethod.MethodParameters>
+                        </man:CallInvokeObjectMethod>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>-->
+            </Button>
+            <TextBlock Style="{StaticResource tb_normal}" Text="共"/>
+            <TextBlock Style="{StaticResource tb_normal}" Text="{Binding TotalCount}"/>
+            <TextBlock Style="{StaticResource tb_normal}" Text="行，每页"/>
+            <TextBlock Style="{StaticResource tb_normal}" Text="{Binding PageSize}"/>
+            <TextBlock Style="{StaticResource tb_normal}" Text="行，第"/>
+            <TextBlock Style="{StaticResource tb_normal}" Text="{Binding PageIndex}"/>
+            <TextBlock Style="{StaticResource tb_normal}" Text="/"/>
+            <TextBlock Style="{StaticResource tb_normal}" Text="{Binding PageCount}"/>
+            <TextBlock Style="{StaticResource tb_normal}" Text="页"/>
+            <Button x:Name="bt_nxt"  Content="下一页" Margin="10,0" IsEnabled="{Binding Path='IsBtnNxtEnable'}">
+                <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <man:CallInvokeObjectMethod DestType="{x:Type hpr:CC}" DestMethod="TurnPageSqlite">
+                            <man:CallInvokeObjectMethod.MethodParameters>
+                                <MultiBinding Converter="{StaticResource con_method}">
+                                    <Binding Source="{StaticResource odp_data}" BindsDirectlyToSource="True"/>
+                                    <Binding Source="1"/>
+                                    <Binding Path="PageSize"/>
+                                    <Binding Path="TotalCount"/>
+                                </MultiBinding>
+                            </man:CallInvokeObjectMethod.MethodParameters>
+                        </man:CallInvokeObjectMethod>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>-->
+            </Button>
+        </StackPanel>
+        </Grid>
         <!--内容-->
-        <Border BorderBrush="#FF5490C4" BorderThickness="0,2,0,0" DockPanel.Dock="Top" Margin="5">
+        <Border BorderBrush="#FF5490C4" BorderThickness="0,2,0,0" Margin="5">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35" />

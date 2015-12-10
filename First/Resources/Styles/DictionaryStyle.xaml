@@ -1032,4 +1032,9 @@
         <Setter Property="BorderThickness" Value="0,0,1,1"/>
         <Setter Property="Background" Value="Transparent"/>
     </Style>
+    <Style x:Key="tb_normal" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+    </Style>
 </ResourceDictionary>
