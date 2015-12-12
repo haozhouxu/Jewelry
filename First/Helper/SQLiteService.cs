@@ -16,12 +16,15 @@ namespace First
     {
         private static int _totalCount;
 
+
+#if DEBUG
+        //测试数据库
+        public static string connectionFormat = @"Data Source=C:\xhz\{0};";
+#else
         //正式数据库
         //public static string connectionFormat = "Data Source="+ System.IO.Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, @"DB\{0};");
         public static string connectionFormat = @"Data Source=DB\{0};Version=3";
-        //测试数据库
-        //public static string connectionFormat = @"Data Source=C:\xhz\{0};";
-
+#endif
         /// <summary>
         /// 查询全部
         /// </summary>
