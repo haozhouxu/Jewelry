@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Interactivity;
 using System.Windows.Data;
 using System.Reflection;
+using System.Collections;
 
 namespace First
 {
@@ -109,5 +110,150 @@ namespace First
             DependencyProperty.Register("Value", typeof(object), typeof(EvalHelper));
     }
 
+    public class CallInvokeObjectMethod : TargetedTriggerAction<object>
+    {
+        public CallInvokeObjectMethod()
+            : base()
+        {
+            this.ParameterTypes = new List<string>();
+            this._paras = new ParameterObjectCollection(new ParameterObjectCollectionChanged(OnParametersChanged));
+        }
+
+        private ParameterObjectCollection _paras = null;
+
+        public Type DestType
+        {
+            get { return (Type)GetValue(DestTypeProperty); }
+            set { SetValue(DestTypeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DestObject.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DestTypeProperty =
+            DependencyProperty.Register("DestType", typeof(Type), typeof(CallInvokeObjectMethod), new UIPropertyMetadata());
+
+
+
+
+        public string DestMethod
+        {
+            get { return (string)GetValue(DestMethodProperty); }
+            set { SetValue(DestMethodProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DestMethod.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DestMethodProperty =
+            DependencyProperty.Register("DestMethod", typeof(string), typeof(CallInvokeObjectMethod), new UIPropertyMetadata(""));
+
+
+
+
+        public object[] MethodParameters
+        {
+            get { return (object[])GetValue(MethodParametersProperty); }
+            set { SetValue(MethodParametersProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MethodParameters.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MethodParametersProperty =
+            DependencyProperty.Register("MethodParameters", typeof(object[]), typeof(CallInvokeObjectMethod), new UIPropertyMetadata());
+
+        public IList Parameters
+        {
+            get { return _paras; }
+        }
+
+        //public ParameterObjectCollection Parameters
+        //{
+        //    get { return (ParameterObjectCollection)GetValue(ParametersProperty); }
+        //    set { SetValue(ParametersProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for Parameters.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty ParametersProperty =
+        //    DependencyProperty.Register("Parameters", typeof(ParameterObjectCollection), typeof(CallInvokeObjectMethod), new UIPropertyMetadata());
+
+
+
+
+        public List<string> ParameterTypes
+        {
+            get { return (List<string>)GetValue(ParameterTypesProperty); }
+            set { SetValue(ParameterTypesProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ParameterTypes.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ParameterTypesProperty =
+            DependencyProperty.Register("ParameterTypes", typeof(List<string>), typeof(CallInvokeObjectMethod), new UIPropertyMetadata());
+
+        private void OnParametersChanged(ParameterObjectCollection sender)
+        {
+
+        }
+
+
+
+
+        protected override void Invoke(object parameter)
+        {
+            if (DestType != null && !string.IsNullOrEmpty(DestMethod))
+            {
+                MethodInfo mInfo = null;
+                if (ParameterTypes.Count > 0)
+                {
+                    var ts = from s1 in this.ParameterTypes
+                             select Type.GetType(s1);
+                    mInfo = DestType.GetMethod(DestMethod, ts.ToArray());
+                    if (mInfo != null && Parameters.Count > 0)
+                    {
+                        mInfo.Invoke(TargetObject, _paras.ToArray());//为了界面绑定，改为list，为了兼容之前的代码，暂时保留MethodParameters的使用
+                        return;
+                    }
+                }
+                else
+                {
+                    if (Parameters.Count > 0)
+                    {
+                        Type[] ts = new Type[Parameters.Count];
+                        object[] vs = new object[Parameters.Count];
+                        for (int i = 0; i < Parameters.Count; i++)
+                        {
+                            ParameterObject po1 = Parameters[i] as ParameterObject;
+                            if (po1 != null)
+                            {
+                                vs[i] = po1.Item;
+                                if (po1.ItemType != null)
+                                    ts[i] = po1.ItemType;
+                                else
+                                {
+                                    if (po1.Item != null)
+                                        ts[i] = po1.Item.GetType();
+                                    else
+                                        ts[i] = typeof(object);
+                                }
+                            }
+                            else
+                            {
+                                vs[i] = Parameters[i];
+                                ts[i] = Parameters[i].GetType();
+                            }
+                        }
+                        mInfo = DestType.GetMethod(DestMethod, ts.ToArray());
+                        if (mInfo != null)
+                        {
+                            mInfo.Invoke(TargetObject, vs);
+                            return;
+                        }
+                    }
+                    else
+                        mInfo = DestType.GetMethod(DestMethod);
+                }
+
+                if (mInfo != null)
+                {
+                    object o1 = mInfo.Invoke(TargetObject, MethodParameters);
+                }
+            }
+        }
+    }
 
 }

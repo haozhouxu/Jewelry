@@ -9,6 +9,8 @@ using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 
 using First.Model;
+using System.Data;
+using System.Data.SQLite;
 
 namespace First
 {
@@ -58,6 +60,62 @@ namespace First
             }
 
             return im;
+        }
+
+        /// <summary>
+        ///使用事例： 
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <param name="cmdType"></param>
+        /// <param name="cmdText"></param>
+        /// <param name="commandParameters"></param>
+        /// <returns></returns>
+        public static int ExecuteNonQuery(string connectionString, CommandType cmdType, string cmdText, params SQLiteParameter[] commandParameters)
+        {
+            SQLiteCommand cmd = new SQLiteCommand();
+
+            using (SQLiteConnection sqlconn = new SQLiteConnection(connectionString))
+            {
+
+                PrepareCommand(cmd, sqlconn, null, cmdType, cmdText, commandParameters);
+                SQLiteTransaction trans = sqlconn.BeginTransaction();
+                try
+                {
+                    cmd.Transaction = trans;
+                    int val = cmd.ExecuteNonQuery();
+                    trans.Commit();
+                    //cmd.Parameters.Clear();
+                    return val;
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    sqlconn.Close();
+                    throw ex;
+                }
+            }
+        }
+
+        private static void PrepareCommand(SQLiteCommand sqlcmd, SQLiteConnection sqlconn, SQLiteTransaction trans, CommandType cmdType, string cmdText, params SQLiteParameter[] commandParameters)
+        {
+            if (sqlconn.State == ConnectionState.Closed)
+                sqlconn.Open();
+
+            sqlcmd.Connection = sqlconn;
+            sqlcmd.CommandText = cmdText;
+
+            if (trans != null)
+                sqlcmd.Transaction = trans;
+
+            sqlcmd.CommandType = cmdType;
+
+            if (commandParameters != null)
+            {
+                foreach (SQLiteParameter item in commandParameters)
+                {
+                    sqlcmd.Parameters.Add(item);
+                }
+            }
         }
     }
 }

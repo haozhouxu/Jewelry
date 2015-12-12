@@ -39,6 +39,14 @@ namespace First
             if (isEdit)
                 sp_edit.Visibility = System.Windows.Visibility.Visible;
         }
+        public WinDetail(object pageContext, bool isEdit,string title)
+            : this(pageContext)
+        {
+            if (isEdit)
+                sp_edit.Visibility = System.Windows.Visibility.Visible;
+            if (!string.IsNullOrEmpty(title))
+                this.Title = title;
+        }
         #endregion
 
         #region 放大缩小
@@ -108,12 +116,14 @@ namespace First
             if (fe1 != null)
             {
                 fe1.DataContext = _pageContext;
-                this.Title = (string)fe1.GetValue(Page.TitleProperty);
+                //this.Title = (string)fe1.GetValue(Page.TitleProperty);
             }
         }
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             CC.Open_Executed(sender, e);
+            //怎么判断新增成功后进行保存
+            this.Close();
         }
         #endregion
     }

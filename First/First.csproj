@@ -71,12 +71,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converter\ImageConverter.cs" />
+    <Compile Include="Converter\MethodParameterConvertor.cs" />
     <Compile Include="Converter\MultiParameterConvertor.cs" />
     <Compile Include="Converter\ParameterConvertor.cs" />
     <Compile Include="Converter\ValueToVisibility.cs" />
     <Compile Include="Helper\ActionCenter.cs" />
     <Compile Include="Helper\CommandCenter.cs" />
     <Compile Include="Helper\helper.cs" />
+    <Compile Include="Helper\ParameterObject.cs" />
     <Compile Include="Helper\SQLiteService.cs" />
     <Compile Include="Helper\Tools.cs" />
     <Compile Include="Login.xaml.cs">

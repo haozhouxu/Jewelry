@@ -48,7 +48,30 @@ namespace First
                     case "saveDetails":
                         CC.saveDetails(paraDic);
                         break;
+                    case "TableCommonDeleteData":
+                        CC.TableCommonDeleteData(paraDic);
+                        break;
                     default:
+                        string pageID = (string)paraDic["pageID"];
+                        bool isEdit = false;
+                        if (paraDic.ContainsKey("isEdit"))
+                        {
+                            isEdit = (bool)paraDic["isEdit"];
+                        }
+                        string title = "";
+                        if (paraDic.ContainsKey("title"))
+                        {
+                            title = (string)paraDic["title"];
+                        }
+                        WinDetail wd1 = new WinDetail(paraDic["context1"], isEdit, title);
+                        wd1.PageFrame.Navigate(new Uri(Tools.PageTool(pageID), UriKind.RelativeOrAbsolute));
+                        bool? res = wd1.ShowDialog();
+                        if (res.HasValue && res.Value)
+                        {
+
+                        }
+                        if (paraDic.ContainsKey("context2"))
+                            CommonReflashData((FrameworkElement)paraDic["context2"]);
                         break;
                 }
 
@@ -199,19 +222,24 @@ namespace First
                 Dictionary<string, object> paraDic = e.Parameter as Dictionary<string, object>;
                 if (paraDic == null)
                     return;
-                string page = (string)paraDic["page"];
+                string pageID = (string)paraDic["pageID"];
                 bool isEdit = false;
                 if (paraDic.ContainsKey("isEdit"))
                 {
                     isEdit = (bool)paraDic["isEdit"];
+                }
+                string title = "";
+                if (paraDic.ContainsKey("title"))
+                {
+                    title = (string)paraDic["title"];
                 }
                 ObservableCollection<Jewelry> main_ic = paraDic["context1"] as ObservableCollection<Jewelry>;
                 if (main_ic != null)
                 {
                     Jewelry _je = new Jewelry(true);
                     //main_ic.Add(_je);
-                    WinDetail wd1 = new WinDetail(_je, isEdit);
-                    wd1.PageFrame.Navigate(new Uri(Tools.PageTool(page), UriKind.RelativeOrAbsolute));
+                    WinDetail wd1 = new WinDetail(_je, isEdit, title);
+                    wd1.PageFrame.Navigate(new Uri(Tools.PageTool(pageID), UriKind.RelativeOrAbsolute));
                     bool? res = wd1.ShowDialog();
 
                     if (res.HasValue && res.Value)
@@ -236,6 +264,61 @@ namespace First
         {
             ObjectDataProvider odp = (ObjectDataProvider)frame.DataContext;
             odp.Refresh();
+        }
+
+        public static void TurnPageSqlite(System.Windows.Data.ObjectDataProvider odp, string str_offset, int pagesize, int totalcount)
+        {
+            if (odp != null)
+            {
+                try
+                {
+                    int offset = int.Parse(str_offset);
+                    int pageNum = (int)(odp.MethodParameters[4]) + offset;
+                    int index = pagesize * (pageNum - 1);
+                    if (index > totalcount)
+                    {
+                        int maxindex = totalcount % pagesize > 0 ? totalcount / pagesize + 1 : totalcount / pagesize;
+                        odp.MethodParameters[4] = maxindex;
+                    }
+                    if (pageNum > 0 && totalcount > index)
+                    {
+                        odp.MethodParameters[4] = pageNum;
+                        odp.Refresh();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
+        //二维表删除数据
+        public static void TableCommonDeleteData(Dictionary<string, object> dic)
+        {
+            if (MessageBox.Show("您确定要删除这条数据么？", "系统提示", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                string keyid = (string)dic["context1"];
+                string sql_main = (string)dic["context3"];
+                string sql_details = (string)dic["context4"];
+
+                string dbfile = (string)dic["dbFile"];
+                string connstr = string.Format(SQLiteService.connectionFormat, dbfile);
+
+                int flag = helper.ExecuteNonQuery(connstr, System.Data.CommandType.Text, string.Format(sql_main, keyid), null);//删除主表的数据
+                helper.ExecuteNonQuery(connstr, System.Data.CommandType.Text, string.Format(sql_details, keyid), null);//删除详细表的数据
+                CommonMessageShow("删除", flag == 1);
+                CommonReflashData((FrameworkElement)dic["context2"]);//刷新数据  
+            }
+        }
+
+        //提示语
+        private static void CommonMessageShow(string title, bool flag)
+        {
+            if (flag)
+                MessageBox.Show(title + "成功！");
+            else
+                MessageBox.Show(title + "失败！");
         }
     }
 }

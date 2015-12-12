@@ -9,7 +9,8 @@
         xmlns:local="clr-namespace:First"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="管理系统" Height="700" Width="1000">
+        WindowStartupLocation="CenterScreen"
+        Title="阿芬管理系统" Height="700" Width="1000">
     <Window.Resources>
         <local:ImageConverter x:Key="imageConverter"/>
         <Storyboard x:Key="slideLeftToRight"  
@@ -239,7 +240,7 @@
         <DockPanel LastChildFill="True">
             <!--主导航-->
             <DockPanel Panel.ZIndex="10">
-                <Border BorderThickness="0,0,0,1" BorderBrush="#FF115490" Width="170" DockPanel.Dock="Top" Height="77">
+                <Border BorderThickness="0,0,0,1" BorderBrush="#FF115490" Width="180" DockPanel.Dock="Top" Height="77">
                     <Border.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Offset="0.5"/>
@@ -260,7 +261,7 @@
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="80,0,0,0">
                             <!--<TextBlock  Text="{Binding Source={x:Static man:GlobalBindingHelper.GSJC}}" Margin="0,0,0,5" Foreground="White" FontSize="14.667"/>
                             <TextBlock  Text="{Binding Source={x:Static man:GlobalBindingHelper.UserID}}" Foreground="#FF88ABC9" />-->
-                            <TextBlock Text="管理系统" Foreground="White" FontSize="14.667" />
+                            <TextBlock Text="阿芬管理系统" Foreground="White" FontSize="14.667" />
                         </StackPanel>
                     </Grid>
                 </Border>
