@@ -1037,4 +1037,5 @@
         <Setter Property="Padding" Value="2"/>
         <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
     </Style>
+
 </ResourceDictionary>

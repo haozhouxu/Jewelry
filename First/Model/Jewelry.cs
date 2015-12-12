@@ -13,7 +13,7 @@ namespace First.Model
     public class Jewelry: NotifyPropertyBase
     {
         #region 字段
-        readonly private string _guid;
+        private string _guid;
         private Image _image;
         private DateTime _buyTime;
         private Double _buyPrice;
@@ -46,6 +46,15 @@ namespace First.Model
             get
             {
                 return _guid;
+            }
+
+            set
+            {
+                if (_guid != value)
+                {
+                    _guid = value;
+                    NotifyPropertyChanged("Guid");
+                }
             }
         }
 
@@ -379,12 +388,25 @@ namespace First.Model
         #region 方法
         public Jewelry()
         {
-            _guid = System.Guid.NewGuid().ToString();
-            BuyTime = System.DateTime.Now;
-            BorrowTime = System.DateTime.Now;
-            SaleTime = System.DateTime.Now;
-            BorrowReturnTime = System.DateTime.Now;
-            Image = new Image();
+            //_guid = System.Guid.NewGuid().ToString();
+            //BuyTime = System.DateTime.Now;
+            //BorrowTime = System.DateTime.Now;
+            //SaleTime = System.DateTime.Now;
+            //BorrowReturnTime = System.DateTime.Now;
+            //Image = new Image();
+        }
+
+        public Jewelry(bool isNew)
+        {
+            if (isNew)
+            {
+                _guid = System.Guid.NewGuid().ToString();
+                BuyTime = System.DateTime.Now;
+                BorrowTime = System.DateTime.Now;
+                SaleTime = System.DateTime.Now;
+                BorrowReturnTime = System.DateTime.Now;
+                Image = new Image();
+            }
         }
 
         public static Jewelry GetExample()

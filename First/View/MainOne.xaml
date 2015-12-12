@@ -6,6 +6,8 @@
       xmlns:local="clr-namespace:First.View"
       xmlns:man="clr-namespace:First"
       xmlns:vm="clr-namespace:First.ViewModel"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+      xmlns:dic="clr-namespace:System.Collections.Specialized;assembly=System"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="700"
       Title="主页">
@@ -16,6 +18,50 @@
         <man:MultiObjectDataConvertor x:Key="con_multipara" />
         <!--<ObjectDataProvider x:Key="getAll" ObjectType="{x:Type vm:MainOneViewModel}" MethodName="GetAll" ></ObjectDataProvider>-->
         <ObjectDataProvider x:Key="odp" ObjectType="{x:Type vm:MainOneViewModel}" MethodName="GetExample" />
+        <ObjectDataProvider x:Key="odp_data" ObjectType="{x:Type man:SQLiteService}" MethodName="LoadDataAsMainOneViewModel_Paging_Sqlite" IsInitialLoadEnabled="False">
+            <ObjectDataProvider.MethodParameters>
+                <sys:String>first</sys:String>
+                <sys:String>结构</sys:String>
+                <sys:String>select * from (select * from Data {0} order by strftime('%Y-%m-%d %H%M',buytime) desc) a
+left join (select count(*) as TotalCount from Data {0} ) c
+on 1=1
+                </sys:String>
+                <sys:Int32>10</sys:Int32>
+                <sys:Int32>1</sys:Int32>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">goldprice &gt;= {0}</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">goldprice &lt;= {0}</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">type='{0}'</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">color='{0}'</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">strftime('%Y-%m-%d',buytime)&gt;=strftime('%Y-%m-%d','{0}')</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">strftime('%Y-%m-%d',buytime)&lt;=strftime('%Y-%m-%d','{0}')</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">ownwho='{0}'</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <!--<dic:ListDictionary>
+                    <sys:String x:Key="format">G000025E='{0}'</sys:String>
+                    <x:Static x:Key="val"  Member="man:GlobalBindingHelper.UserID"/>
+                </dic:ListDictionary>-->
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </Page.Resources>
 
     <Page.CommandBindings>
@@ -23,13 +69,35 @@
         <CommandBinding Command="Delete" Executed="Delete_Executed" />
     </Page.CommandBindings>
 
-    <DockPanel LastChildFill="True" DataContext="{StaticResource odp}" x:Name="dp" Background="#FFEDEEEF">
+    <DockPanel LastChildFill="True" DataContext="{StaticResource odp_data}" x:Name="dp" Background="#FFEDEEEF">
         <!--菜单栏-->
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
+            <TextBlock Text="镶金价:" VerticalAlignment="Center" Margin="5,0,0,0" />
+            <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Padding="3" Width="50" Text="{Binding MethodParameters[5][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+            <TextBlock Text="至" VerticalAlignment="Center" Margin="5,0,0,0" />
+            <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Padding="3" Width="50" Text="{Binding MethodParameters[6][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+
+            <TextBlock Text="类别："  VerticalAlignment="Center" Margin="5,0,0,0" />
+            <ComboBox Margin="5,0,0,0" Width="40" SelectedValuePath="content" SelectedValue="{Binding MethodParameters[7][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}">
+                <ComboBoxItem Content="项链" />
+                <ComboBoxItem Content="戒指" />
+            </ComboBox>
+
+            <TextBlock Text="颜色："  VerticalAlignment="Center" Margin="5,0,0,0" />
+            <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Width="50" Text="{Binding MethodParameters[8][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+
             <TextBlock Text="入货时间:" VerticalAlignment="Center" Margin="5,0" />
-            <DatePicker VerticalAlignment="Center"  Margin="5,0"/>
+            <DatePicker VerticalAlignment="Center" Margin="5,0" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[9][val]}"/>
             <TextBlock Text="至" VerticalAlignment="Center" Margin="5,0" />
-            <DatePicker VerticalAlignment="Center" Margin="5,0"/>
+            <DatePicker VerticalAlignment="Center" Margin="5,0" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[10][val]}"/>
+
+            <TextBlock Text="归属："  VerticalAlignment="Center" Margin="5,0,0,0" />
+            <ComboBox Margin="5,0,0,0" Width="40" SelectedValuePath="content" SelectedValue="{Binding MethodParameters[11][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}">
+                <ComboBoxItem Content="" />
+                <ComboBoxItem Content="个人" />
+                <ComboBoxItem Content="公司" />
+            </ComboBox>
+
             <Button Content="查询" Style="{StaticResource BtnNew}" Margin="0,0,5,0" />
             <!--<Button Content="新增" Style="{StaticResource BtnNew}" Margin="0,0,5,0" Command="Open" CommandParameter="{Binding Converter={StaticResource con_para},ConverterParameter=type:addNew:s}" />-->
             <Button Content="新建" Command="New" Style="{DynamicResource BtnNew}">
@@ -117,7 +185,7 @@
                 <TextBox Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Text="操作" Style="{StaticResource tb_header_cell}" />
 
                 <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" VerticalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewerStyle}">
-                    <ItemsControl x:Name="ic_form" ItemsSource="{Binding }"  >
+                    <ItemsControl x:Name="ic_form" ItemsSource="{Binding Path='OCJ'}"  >
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -145,7 +213,7 @@
                                     <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource tup_cell}" Text="{Binding Path=Type}" TextWrapping="Wrap"/>
                                     <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource tup_cell}" Text="{Binding Path=GoldPrice}" TextWrapping="Wrap"/>
                                     <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource tup_cell}" Text="{Binding Path=State}" TextWrapping="Wrap"/>
-                                    <TextBox Grid.Row="0" Grid.Column="4" Style="{StaticResource tup_cell}" Text="{Binding Path=BuyTime}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="4" Style="{StaticResource tup_cell}" Text="{Binding Path=BuyTime,StringFormat='yyyy-MM-dd'}" TextWrapping="Wrap"/>
                                     <Grid Grid.Row="0" Grid.Column="5" Tag="操作" >
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
