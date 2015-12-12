@@ -235,10 +235,10 @@ on 1=1
                                             </Image.ToolTip>
                                         </Image>
                                     </Border>
-                                    <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource tup_cell}" Text="{Binding Path=Type}" TextWrapping="Wrap"/>
-                                    <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource tup_cell}" Text="{Binding Path=GoldPrice}" TextWrapping="Wrap"/>
-                                    <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource tup_cell}" Text="{Binding Path=State}" TextWrapping="Wrap"/>
-                                    <TextBox Grid.Row="0" Grid.Column="4" Style="{StaticResource tup_cell}" Text="{Binding Path=BuyTime,StringFormat='yyyy-MM-dd'}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ro_cell}" Text="{Binding Path=Type}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource ro_cell}" Text="{Binding Path=GoldPrice}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource ro_cell}" Text="{Binding Path=State}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="4" Style="{StaticResource ro_cell}" Text="{Binding Path=BuyTime,StringFormat='yyyy-MM-dd'}" TextWrapping="Wrap"/>
                                     <Grid Grid.Row="0" Grid.Column="5" Tag="操作" >
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
@@ -252,7 +252,7 @@ on 1=1
                                             <Button.CommandParameter>
                                                 <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:showDetails:s|pageID:Add:s|isEdit:false:b|title:查看:s">
                                                     <Binding />
-                                                    <Binding RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}, Mode=FindAncestor}"/>
+                                                    <!--<Binding RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}, Mode=FindAncestor}"/>-->
                                                 </MultiBinding>
                                             </Button.CommandParameter>
                                             <!--<Button.CommandParameter>

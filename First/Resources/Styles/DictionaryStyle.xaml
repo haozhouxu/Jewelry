@@ -1037,5 +1037,7 @@
         <Setter Property="Padding" Value="2"/>
         <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
     </Style>
-
+    <Style x:Key="ro_cell" TargetType="TextBox" BasedOn="{StaticResource cell}">
+        <Setter Property="IsReadOnly" Value="True"/>
+    </Style>
 </ResourceDictionary>
