@@ -19,8 +19,8 @@
         <man:MultiObjectDataConvertor x:Key="con_multipara" />
         <man:MethodParameterConvertor x:Key="con_method"/>
         <!--<ObjectDataProvider x:Key="getAll" ObjectType="{x:Type vm:MainOneViewModel}" MethodName="GetAll" ></ObjectDataProvider>-->
-        <ObjectDataProvider x:Key="odp" ObjectType="{x:Type vm:MainOneViewModel}" MethodName="GetExample" />
-        <ObjectDataProvider x:Key="odp_data" ObjectType="{x:Type man:SQLiteService}" MethodName="LoadDataAsMainOneViewModel_Paging_Sqlite" IsInitialLoadEnabled="False">
+        <!--<ObjectDataProvider x:Key="odp" ObjectType="{x:Type vm:MainOneViewModel}" MethodName="GetExample" />-->
+        <ObjectDataProvider x:Key="odp_data" ObjectType="{x:Type man:SQLiteService}" MethodName="LoadDataAsMainOneViewModel_Paging_Sqlite">
             <ObjectDataProvider.MethodParameters>
                 <sys:String>first</sys:String>
                 <sys:String>结构</sys:String>

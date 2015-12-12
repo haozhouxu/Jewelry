@@ -17,9 +17,10 @@ namespace First
         private static int _totalCount;
 
         //正式数据库
-        //public static string connectionFormat = "Data Source=./DB/{0};";
+        //public static string connectionFormat = "Data Source="+ System.IO.Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, @"DB\{0};");
+        public static string connectionFormat = @"Data Source=DB\{0};Version=3";
         //测试数据库
-        public static string connectionFormat = @"Data Source=C:\xhz\{0};";
+        //public static string connectionFormat = @"Data Source=C:\xhz\{0};";
 
         /// <summary>
         /// 查询全部
@@ -310,6 +311,7 @@ namespace First
         {
             MainOneViewModel vm = new MainOneViewModel();
             vm.OCJ = new ObservableCollection<Jewelry>();
+            //System.Windows.MessageBox.Show(string.Format(SQLiteService.connectionFormat, dbFile));
             using (SQLiteConnection sc1 = new SQLiteConnection(string.Format(SQLiteService.connectionFormat, dbFile)))
             {
                 SQLiteCommand sCom = new SQLiteCommand(sql, sc1);

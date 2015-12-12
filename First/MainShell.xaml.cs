@@ -42,7 +42,7 @@ namespace First
                 GotoPage(System.Configuration.ConfigurationManager.AppSettings["mainPageID"]);
                 //string path = System.IO.Path.Combine(System.Environment.CurrentDirectory, @"Resources\Nav_catalog.xml");
                 //xhz:2015-12-01 Nav_catalog.xml 需要设置为始终复制，设置为内容
-                string path = System.IO.Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Resources/Nav_catalog.xml");
+                string path = System.IO.Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, @"Resources\Nav_catalog.xml");
                 XElement xe = XElement.Load(path);
                 List<SectionTitleCollection> list_catalog = Tools.LoadCatalog(xe.Element("catalog"));
                 this.ic_nav.ItemsSource = list_catalog;
