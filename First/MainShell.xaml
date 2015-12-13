@@ -149,6 +149,7 @@
         <CommandBinding Command="{x:Static shell:SystemCommands.RestoreWindowCommand}" Executed="OnRestoreWindow" CanExecute="OnCanResizeWindow" />
         <CommandBinding Command="GoToPage" Executed="GotoPage" />
         <CommandBinding Command="New" Executed="CreateNew"/>
+        <CommandBinding Command="Open" Executed="Open_Executed"/>
         <!--<CommandBinding Command="Print" Executed="PrintPage" />
         <CommandBinding Command="Save" Executed="SaveData"/>
         <CommandBinding Command="SaveAs" Executed="SaveAsFile"/>

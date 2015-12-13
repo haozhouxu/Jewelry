@@ -20,10 +20,10 @@
         <man:MethodParameterConvertor x:Key="con_method"/>
         <!--<ObjectDataProvider x:Key="getAll" ObjectType="{x:Type vm:MainOneViewModel}" MethodName="GetAll" ></ObjectDataProvider>-->
         <!--<ObjectDataProvider x:Key="odp" ObjectType="{x:Type vm:MainOneViewModel}" MethodName="GetExample" />-->
-        <ObjectDataProvider x:Key="odp_data" ObjectType="{x:Type man:SQLiteService}" MethodName="LoadDataAsMainOneViewModel_Paging_Sqlite">
+        <ObjectDataProvider x:Key="odp_data" ObjectType="{x:Type man:SQLiteService}" MethodName="LoadDataAsMainOneViewModel_Paging_Sqlite" IsInitialLoadEnabled="False">
             <ObjectDataProvider.MethodParameters>
                 <sys:String>first</sys:String>
-                <sys:String>结构</sys:String>
+                <sys:String>暂时没用</sys:String>
                 <sys:String>select * from (select * from Data {0} order by strftime('%Y-%m-%d %H%M',buytime) desc) a
 left join (select count(*) as TotalCount from Data {0} ) c
 on 1=1
@@ -66,10 +66,10 @@ on 1=1
         </ObjectDataProvider>
     </Page.Resources>
 
-    <Page.CommandBindings>
+    <!--<Page.CommandBindings>
         <CommandBinding Command="Open" Executed="Open_Executed" />
         <CommandBinding Command="Delete" Executed="Delete_Executed" />
-    </Page.CommandBindings>
+    </Page.CommandBindings>-->
 
     <DockPanel LastChildFill="True" DataContext="{StaticResource odp_data}" x:Name="dp" Background="#FFEDEEEF">
         <!--菜单栏-->
@@ -103,10 +103,20 @@ on 1=1
                 <ComboBoxItem Content="公司" />
             </ComboBox>
 
-            <Button Content="查询" Style="{StaticResource BtnNew}" Margin="0,0,5,0" >
+            <!--Style="{StaticResource BtnNew}" -->
+            <Button Content="查询" Margin="0,0,5,0" Style="{StaticResource BtnNew}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <man:CallInvokeObjectMethod TargetObject="{StaticResource odp_data}" DestType="{x:Type ObjectDataProvider}" DestMethod="Refresh" />
+                        <man:CallInvokeObjectMethod DestType="{x:Type man:CC}" DestMethod="TurnPageOriginal">
+                            <man:CallInvokeObjectMethod.MethodParameters>
+                                <MultiBinding Converter="{StaticResource con_method}">
+                                    <Binding Source="{StaticResource odp_data}" BindsDirectlyToSource="True"/>
+                                    <Binding Source="1"/>
+                                    <Binding Source="10"/>
+                                </MultiBinding>
+                            </man:CallInvokeObjectMethod.MethodParameters>
+                        </man:CallInvokeObjectMethod>
+                        <!--<man:CallInvokeObjectMethod TargetObject="{StaticResource odp_data}" DestType="{x:Type ObjectDataProvider}" DestMethod="Refresh" />-->
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>

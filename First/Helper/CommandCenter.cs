@@ -272,6 +272,7 @@ namespace First
             {
                 try
                 {
+                    odp.MethodParameters[1] = "";
                     int offset = int.Parse(str_offset);
                     int pageNum = (int)(odp.MethodParameters[4]) + offset;
                     int index = pagesize * (pageNum - 1);
@@ -285,6 +286,26 @@ namespace First
                         odp.MethodParameters[4] = pageNum;
                         odp.Refresh();
                     }
+                    odp.MethodParameters[1] = "1";
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
+        public static void TurnPageOriginal(System.Windows.Data.ObjectDataProvider odp, string str_offset, string pagesize)
+        {
+            if (odp != null)
+            {
+                try
+                {
+                    odp.MethodParameters[1] = "";
+                    odp.MethodParameters[3] = int.Parse(pagesize);
+                    odp.MethodParameters[4] = int.Parse(str_offset);
+                    odp.Refresh();
+                    odp.MethodParameters[1] = "1";
                 }
                 catch (Exception e)
                 {

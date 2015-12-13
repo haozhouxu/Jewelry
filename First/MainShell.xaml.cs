@@ -267,5 +267,10 @@ namespace First
             CC.CreateNew(sender, e);
         }
 
+        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            CC.Open_Executed(sender, e);
+        }
+
     }
 }

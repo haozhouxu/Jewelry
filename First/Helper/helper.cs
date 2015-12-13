@@ -32,6 +32,8 @@ namespace First
 
         public static string ImageToBase64(Image im)
         {
+            if (im.Source == null)
+                return "";
             BitmapImage bi = im.Source as BitmapImage;
             MemoryStream ms = new MemoryStream();
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
@@ -45,9 +47,11 @@ namespace First
         public static Image Base64ToImage(string base64String)
         {
             Image im = new Image();
-
+            if (string.IsNullOrEmpty(base64String))
+            {
+                return im;
+            }
             byte[] fileBytes = Convert.FromBase64String(base64String);
-
             using (MemoryStream ms = new MemoryStream(fileBytes, 0, fileBytes.Length))
             {
                 BitmapImage bitmapImage = new BitmapImage();

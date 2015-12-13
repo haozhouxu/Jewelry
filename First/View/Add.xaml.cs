@@ -25,9 +25,9 @@ namespace First.View
             InitializeComponent();
         }
 
-        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            CC.Open_Executed(sender, e);
-        }
+        //private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    CC.Open_Executed(sender, e);
+        //}
     }
 }

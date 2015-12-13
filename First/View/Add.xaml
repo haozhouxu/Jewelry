@@ -23,9 +23,9 @@
         </og:ArrayList>
     </Page.Resources>
 
-    <Page.CommandBindings>
+    <!--<Page.CommandBindings>
         <CommandBinding Command="Open" Executed="Open_Executed" />
-    </Page.CommandBindings>
+    </Page.CommandBindings>-->
 
     <DockPanel LastChildFill="True">
 

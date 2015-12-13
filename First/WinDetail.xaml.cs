@@ -123,7 +123,7 @@ namespace First
         {
             CC.Open_Executed(sender, e);
             //怎么判断新增成功后进行保存
-            this.Close();
+            //this.Close();
         }
         #endregion
     }

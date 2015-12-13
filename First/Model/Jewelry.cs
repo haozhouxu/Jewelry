@@ -406,6 +406,7 @@ namespace First.Model
                 SaleTime = System.DateTime.Now;
                 BorrowReturnTime = System.DateTime.Now;
                 Image = new Image();
+                State = "未卖";
             }
         }
 
