@@ -158,6 +158,58 @@ namespace First
             }
         }
 
+        public static Jewelry selectOne(string guid)
+        {
+            try
+            {
+                string sql = "select * from Data where guid = '" + guid +"'";
+                string dbFile = "first";
+                Jewelry je = new Jewelry();
+
+                using (SQLiteConnection sc1 = new SQLiteConnection(string.Format(SQLiteService.connectionFormat, dbFile)))
+                {
+                    SQLiteCommand sCom = new SQLiteCommand(sql, sc1);
+                    sc1.Open();
+                    using (SQLiteDataReader dr1 = sCom.ExecuteReader())
+                    {
+                        if (dr1.Read())
+                        {
+                            je.Guid = dr1["guid"].ToString();
+                            je.Image = helper.Base64ToImage(dr1["image"].ToString());
+                            je.BuyTime = (DateTime)dr1["buytime"];
+                            je.BuyPrice = (double)dr1["buyprice"];
+                            je.BuyWho = dr1["buywho"].ToString();
+                            je.GoldPrice = (double)dr1["goldprice"];
+                            je.Type = dr1["type"].ToString();
+                            je.Color = dr1["color"].ToString();
+                            je.Mark = dr1["mark"].ToString();
+                            je.BuySource = dr1["buySource"].ToString();
+                            je.OwnWho = dr1["ownwho"].ToString();
+                            je.State = dr1["state"].ToString();
+                            je.BorrowTime = (DateTime)dr1["borrowtime"];
+                            je.BorrowWho = dr1["borrowwho"].ToString();
+                            je.BorrowPirce = (double)dr1["borrowprice"];
+                            je.BorrowReturnTime = (DateTime)dr1["borrowreturntime"];
+                            je.SaleTime = (DateTime)dr1["saletime"];
+                            je.SaleWho = dr1["salewho"].ToString();
+                            je.SalePirce = (double)dr1["saleprice"];
+                            je.SaleState = dr1["salestate"].ToString();
+                            
+                        }
+                        dr1.Close();
+                    }
+                    sc1.Close();
+                }
+
+                return je;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public static bool Save(Jewelry je)
         {
             try
@@ -166,11 +218,38 @@ namespace First
                 int temp = 0;
 
                 //先进行判断是否是状态改变，如果是的话，往History表插入一条数据
-                string _state = IsExitItem(je.Guid);
-                if (!string.IsNullOrEmpty(_state) && !(_state.Equals(je.State)))
-                {
-                    //往历史表插入一条记录（未完成）
+                //string _state = IsExitItem(je.Guid);
+                //if (!string.IsNullOrEmpty(_state) && !(_state.Equals(je.State)))
+                //{
+                //    //往历史表插入一条记录（未完成）
 
+                //}
+                Jewelry tempJe = selectOne(je.Guid);
+                if (!string.IsNullOrEmpty(tempJe.Guid))
+                {
+                    switch (je.State)
+                    {
+                        case "未卖":
+                            if (!je.State.Equals(tempJe.State))
+                            {
+                                //InsertIntoHistory(je.Guid,je.State);
+                            }
+                            break;
+                        case "已卖":
+                            if (!je.State.Equals(tempJe.State))
+                            {
+                                //InsertIntoHistory(je.Guid,je.State);
+                            }
+                            break;
+                        case "借出":
+                            if (!je.State.Equals(tempJe.State))
+                            {
+                                //InsertIntoHistory(je.Guid,je.State);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 }
 
                 //更新数据，不管是编辑，还是新增
@@ -206,6 +285,11 @@ namespace First
             {
                 throw ex;
             }
+        }
+
+        private static void InsertIntoHistory(string guid, string state, DateTime time,string who,double price,DateTime returntime)
+        {
+            throw new NotImplementedException();
         }
 
         //带分页的查询语句
