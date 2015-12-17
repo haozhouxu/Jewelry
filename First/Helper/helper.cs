@@ -121,5 +121,17 @@ namespace First
                 }
             }
         }
+
+        public static string DateToString(DateTime dt)
+        {
+            if (dt.DayOfYear == 1)
+            {
+                return null;
+            }
+            else
+            {
+                return dt.ToString("yyyy-MM-dd");
+            }
+        }
     }
 }

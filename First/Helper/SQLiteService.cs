@@ -176,7 +176,7 @@ namespace First
                         {
                             je.Guid = dr1["guid"].ToString();
                             je.Image = helper.Base64ToImage(dr1["image"].ToString());
-                            je.BuyTime = (DateTime)dr1["buytime"];
+                            je.BuyTime = dr1["buytime"].ToString();
                             je.BuyPrice = (double)dr1["buyprice"];
                             je.BuyWho = dr1["buywho"].ToString();
                             je.GoldPrice = (double)dr1["goldprice"];
@@ -186,11 +186,11 @@ namespace First
                             je.BuySource = dr1["buySource"].ToString();
                             je.OwnWho = dr1["ownwho"].ToString();
                             je.State = dr1["state"].ToString();
-                            je.BorrowTime = (DateTime)dr1["borrowtime"];
+                            je.BorrowTime = dr1["borrowtime"].ToString();
                             je.BorrowWho = dr1["borrowwho"].ToString();
                             je.BorrowPirce = (double)dr1["borrowprice"];
-                            je.BorrowReturnTime = (DateTime)dr1["borrowreturntime"];
-                            je.SaleTime = (DateTime)dr1["saletime"];
+                            je.BorrowReturnTime = dr1["borrowreturntime"].ToString();
+                            je.SaleTime = dr1["saletime"].ToString();
                             je.SaleWho = dr1["salewho"].ToString();
                             je.SalePirce = (double)dr1["saleprice"];
                             je.SaleState = dr1["salestate"].ToString();
@@ -254,10 +254,10 @@ namespace First
 
                 //更新数据，不管是编辑，还是新增
                 string connectString = string.Format(connectionFormat, "first");
-                string sqlAll = "replace into Data (guid,image,buytime,buyprice,buywho,goldprice,type,color,mark,buySource,ownwho,state,borrowtime,borrowwho,borrowprice,borrowreturntime,saletime,salewho,saleprice,salestate) Values('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}',{14},'{15}','{16}','{17}',{18},'{19}')";
+                string sqlAll = "replace into Data (guid,image,buytime,buyprice,buywho,goldprice,type,color,mark,buySource,ownwho,state,borrowtime,borrowwho,borrowprice,borrowreturntime,saletime,salewho,saleprice,salestate,createtime,updatetime) Values('{0}','{1}','{2}',{3},'{4}',{5},'{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}',{14},'{15}','{16}','{17}',{18},'{19}','{20}','{21}')";
                 //把图片转换成base64编码（未完成）
                 string imageString = helper.ImageToBase64(je.Image);
-                string sql = string.Format(sqlAll,je.Guid, imageString,je.BuyTime.ToString("s"),je.BuyPrice, je.BuyWho, je.GoldPrice, je.Type, je.Color, je.Mark, je.BuySource, je.OwnWho, je.State, je.BorrowTime.ToString("s"), je.BorrowWho, je.BorrowPirce, je.BorrowReturnTime.ToString("s"), je.SaleTime.ToString("s"), je.SaleWho, je.SalePirce, je.SaleState);
+                string sql = string.Format(sqlAll,je.Guid, imageString, string.IsNullOrEmpty(je.BuyTime)? je.BuyTime : Convert.ToDateTime(je.BuyTime).ToString("s"),je.BuyPrice, je.BuyWho, je.GoldPrice, je.Type, je.Color, je.Mark, je.BuySource, je.OwnWho, je.State, Convert.ToDateTime(je.BorrowTime).ToString("s"), je.BorrowWho, je.BorrowPirce, Convert.ToDateTime(je.BorrowReturnTime).ToString("s"), Convert.ToDateTime(je.SaleTime).ToString("s"), je.SaleWho, je.SalePirce, je.SaleState,System.DateTime.Now.ToString("s"), System.DateTime.Now.ToString("s"));
                 using (SQLiteConnection sqlcon = new SQLiteConnection(connectString))
                 {
                     SQLiteCommand cmd = new SQLiteCommand(sql, sqlcon);
@@ -428,7 +428,7 @@ namespace First
                             je.Guid = dr1["guid"].ToString();
                             je.Image = helper.Base64ToImage(dr1["image"].ToString());
                             //je.SaleWho = dr1["buytime"].ToString();
-                            je.BuyTime = (DateTime)dr1["buytime"];
+                            je.BuyTime = helper.DateToString((DateTime)dr1["buytime"]);
                             je.BuyPrice = (double)dr1["buyprice"];
                             je.BuyWho = dr1["buywho"].ToString();
                             je.GoldPrice = (double)dr1["goldprice"];
@@ -438,11 +438,11 @@ namespace First
                             je.BuySource = dr1["buySource"].ToString();
                             je.OwnWho = dr1["ownwho"].ToString();
                             je.State = dr1["state"].ToString();
-                            je.BorrowTime = (DateTime)dr1["borrowtime"];
+                            je.BorrowTime = helper.DateToString((DateTime)dr1["borrowtime"]);
                             je.BorrowWho = dr1["borrowwho"].ToString();
                             je.BorrowPirce = (double)dr1["borrowprice"];
-                            je.BorrowReturnTime = (DateTime)dr1["borrowreturntime"];
-                            je.SaleTime = (DateTime)dr1["saletime"];
+                            je.BorrowReturnTime = helper.DateToString((DateTime)dr1["borrowreturntime"]);
+                            je.SaleTime = helper.DateToString((DateTime)dr1["saletime"]);
                             je.SaleWho = dr1["salewho"].ToString();
                             je.SalePirce = (double)dr1["saleprice"];
                             je.SaleState = dr1["salestate"].ToString();

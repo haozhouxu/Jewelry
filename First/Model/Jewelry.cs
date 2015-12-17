@@ -15,7 +15,7 @@ namespace First.Model
         #region 字段
         private string _guid;
         private Image _image;
-        private DateTime _buyTime;
+        private string _buyTime;
         private Double _buyPrice;
         private string _buyWho;
         private Double _goldPrice;
@@ -27,12 +27,12 @@ namespace First.Model
 
         private string _state;
 
-        private DateTime _borrowTime;
+        private string _borrowTime;
         private string _borrowWho;
         private Double _borrowPirce;
-        private DateTime _borrowReturnTime;
+        private string _borrowReturnTime;
 
-        private DateTime _saleTime;
+        private string _saleTime;
         private string _saleWho;
         private Double _salePirce;
         private string _saleState;
@@ -75,7 +75,7 @@ namespace First.Model
             }
         }
 
-        public DateTime BuyTime
+        public string BuyTime
         {
             get
             {
@@ -228,7 +228,7 @@ namespace First.Model
             }
         }
 
-        public DateTime BorrowTime
+        public string BorrowTime
         {
             get
             {
@@ -279,7 +279,7 @@ namespace First.Model
             }
         }
 
-        public DateTime BorrowReturnTime
+        public string BorrowReturnTime
         {
             get
             {
@@ -296,7 +296,7 @@ namespace First.Model
             }
         }
 
-        public DateTime SaleTime
+        public string SaleTime
         {
             get
             {
@@ -401,10 +401,6 @@ namespace First.Model
             if (isNew)
             {
                 _guid = System.Guid.NewGuid().ToString();
-                BuyTime = System.DateTime.Now;
-                BorrowTime = System.DateTime.Now;
-                SaleTime = System.DateTime.Now;
-                BorrowReturnTime = System.DateTime.Now;
                 Image = new Image();
                 State = "未卖";
             }
@@ -418,7 +414,6 @@ namespace First.Model
             je.Type = "戒指";
             je.GoldPrice = 999.99;
             je.State = "未卖";
-            je.BuyTime = System.DateTime.Now;
             //je.TotalWeight = 10.9;
             //je.JadeWeight = 10.8;
             //je.GoldWeight = 10.7;
