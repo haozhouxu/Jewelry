@@ -24,7 +24,7 @@
             <ObjectDataProvider.MethodParameters>
                 <sys:String>first</sys:String>
                 <sys:String>暂时没用</sys:String>
-                <sys:String>select * from (select * from Data {0} order by strftime('%Y-%m-%d %H%M',buytime) desc) a
+                <sys:String>select * from (select * from Data {0} order by strftime('%Y-%m-%d %H%M%S',createtime) desc) a
 left join (select count(*) as TotalCount from Data {0} ) c
 on 1=1
                 </sys:String>

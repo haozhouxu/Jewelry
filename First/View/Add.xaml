@@ -195,6 +195,35 @@
                     </Border>
                     
                 </StackPanel>
+                
+                <!--来往纪录-->
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBox HorizontalAlignment="Left"  Text="来往纪录" Style="{StaticResource header_cell_top}" />
+                    <Border BorderBrush="#FF5490C4" BorderThickness="0,2,0,0" DockPanel.Dock="Top" Margin="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Row="0" Grid.Column="0" Text="状态" Style="{StaticResource tb_header_cell_left}" />
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="时间" Style="{StaticResource tb_header_cell}" />
+                            <TextBox Grid.Row="0" Grid.Column="2" Text="经手人" Style="{StaticResource tb_header_cell}" />
+                            <TextBox Grid.Row="0" Grid.Column="3" Text="价钱" Style="{StaticResource tb_header_cell}" />
+                            <TextBox Grid.Row="0" Grid.Column="4" Text="归还时间" Style="{StaticResource tb_header_cell}" />
+
+                            <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" />
+
+                        </Grid>
+                    </Border>
+                </StackPanel>
 
             </DockPanel>
         </ScrollViewer>
