@@ -272,21 +272,25 @@ namespace First
             {
                 try
                 {
-                    odp.MethodParameters[1] = "";
-                    int offset = int.Parse(str_offset);
-                    int pageNum = (int)(odp.MethodParameters[4]) + offset;
-                    int index = pagesize * (pageNum - 1);
-                    if (index > totalcount)
+                    //2015.12.20 发现DeferRefresh可以在改变参数的时候，延迟刷行，利用using。注释掉下面三行
+                    using (odp.DeferRefresh())
                     {
-                        int maxindex = totalcount % pagesize > 0 ? totalcount / pagesize + 1 : totalcount / pagesize;
-                        odp.MethodParameters[4] = maxindex;
+                        //odp.MethodParameters[1] = "";
+                        int offset = int.Parse(str_offset);
+                        int pageNum = (int)(odp.MethodParameters[4]) + offset;
+                        int index = pagesize * (pageNum - 1);
+                        if (index > totalcount)
+                        {
+                            int maxindex = totalcount % pagesize > 0 ? totalcount / pagesize + 1 : totalcount / pagesize;
+                            odp.MethodParameters[4] = maxindex;
+                        }
+                        if (pageNum > 0 && totalcount > index)
+                        {
+                            odp.MethodParameters[4] = pageNum;
+                            //odp.Refresh();
+                        }
+                        //odp.MethodParameters[1] = "1";
                     }
-                    if (pageNum > 0 && totalcount > index)
-                    {
-                        odp.MethodParameters[4] = pageNum;
-                        odp.Refresh();
-                    }
-                    odp.MethodParameters[1] = "1";
                 }
                 catch (Exception e)
                 {

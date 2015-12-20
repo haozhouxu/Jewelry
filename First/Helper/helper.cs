@@ -133,5 +133,10 @@ namespace First
                 return dt.ToString("yyyy-MM-dd");
             }
         }
+
+        //public static double StringToDouble(string temp)
+        //{
+        //    return null;
+        //}
     }
 }

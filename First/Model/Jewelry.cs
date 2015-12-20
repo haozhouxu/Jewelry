@@ -37,6 +37,8 @@ namespace First.Model
         private Double _salePirce;
         private string _saleState;
 
+        private ObservableCollection<HistoryEntity> _ohe;
+
         #endregion
 
         #region 属性
@@ -377,6 +379,23 @@ namespace First.Model
                 {
                     _state = value;
                     NotifyPropertyChanged("State");
+                }
+            }
+        }
+
+        public ObservableCollection<HistoryEntity> Ohe
+        {
+            get
+            {
+                return _ohe;
+            }
+
+            set
+            {
+                if (_ohe != value)
+                {
+                    _ohe = value;
+                    NotifyPropertyChanged("Ohe");
                 }
             }
         }

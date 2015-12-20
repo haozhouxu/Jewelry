@@ -233,10 +233,16 @@
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="0,0,1,1" />
     </Style>
+    <Style x:Key="tup_cell_ro" TargetType="TextBox" BasedOn="{StaticResource tup_cell}">
+        <Setter Property="IsReadOnly" Value="True"/>
+    </Style>
     <Style x:Key="tup_cell_left" TargetType="TextBox" BasedOn="{StaticResource cell}">
         <!--<Setter Property="ContextMenu" Value="{StaticResource tupleMenu}"/>-->
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="1,0,1,1" />
+    </Style>
+    <Style x:Key="tup_cell_left_ro" TargetType="TextBox" BasedOn="{StaticResource tup_cell_left}">
+        <Setter Property="IsReadOnly" Value="True"/>
     </Style>
     <DataTemplate x:Key="enumNormalTemplate">
         <TextBlock Text="{Binding Path='Name'}" ToolTip="{Binding Path='ToolTip'}"/>

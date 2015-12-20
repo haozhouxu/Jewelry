@@ -325,11 +325,12 @@ namespace First
         {
             try
             {
+                //2015.12.20 利用DeferRefresh可以延迟更新，所以注释下面内容
                 //因为每次改变数据源的参数的时候，就会自动刷新数据源，设置了一个参数，来判断是否是参数已经设置完了
-                if (modelGroupString.Equals(""))
-                {
-                    return null;
-                }
+                //if (modelGroupString.Equals(""))
+                //{
+                //    return null;
+                //}
                 string sqlpara = string.Empty;
                 List<string> list = GetCommonCondition(conditions);
                 if (list.Count > 0)
@@ -474,6 +475,7 @@ namespace First
                             je.SaleWho = dr1["salewho"].ToString();
                             je.SalePirce = (double)dr1["saleprice"];
                             je.SaleState = dr1["salestate"].ToString();
+                            je.Ohe = LoadHistory(je.Guid);
 
                             _totalCount = int.Parse(dr1["TotalCount"].ToString());
 
@@ -503,6 +505,43 @@ namespace First
 
                 throw ex;
             }
+        }
+
+        //加载对应的guid的来往纪录
+        public static ObservableCollection<HistoryEntity> LoadHistory(string guid)
+        {
+            if (string.IsNullOrEmpty(guid))
+            {
+                return null;
+            }
+
+            ObservableCollection<HistoryEntity> ohe = new ObservableCollection<HistoryEntity>();
+
+            string dbFile = "first";
+            string sql = "select * from History where guid = '" + guid + "' order by strftime('%Y-%m-%d %H%M%S',createtime) desc";
+            using (SQLiteConnection sc1 = new SQLiteConnection(string.Format(SQLiteService.connectionFormat, dbFile)))
+            {
+                SQLiteCommand sCom = new SQLiteCommand(sql, sc1);
+                sc1.Open();
+                using (SQLiteDataReader dr1 = sCom.ExecuteReader())
+                {
+                    while (dr1.Read())
+                    {
+                        HistoryEntity he = new HistoryEntity();
+                        he.Guid = dr1["guid"].ToString();
+                        he.State = dr1["state"].ToString();
+                        he.Time = helper.DateToString((DateTime)dr1["time"]);
+                        he.Who = dr1["who"].ToString();
+                        he.Returntime = helper.DateToString((DateTime)dr1["returntime"]);
+                        he.Price = (double)dr1["price"];
+                        ohe.Add(he);
+                    }
+                    dr1.Close();
+                }
+                sc1.Close();
+            }
+
+            return ohe;
         }
     }
 }

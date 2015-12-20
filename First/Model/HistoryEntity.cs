@@ -11,10 +11,10 @@ namespace First.Model
         #region 字段
         private string _guid;
         private string _state;
-        private DateTime _time;
+        private string _time;
         private string _who;
         private double _price;
-        private DateTime _returntime;
+        private string _returntime;
 
         #endregion
 
@@ -52,7 +52,7 @@ namespace First.Model
             }
         }
 
-        public DateTime Time
+        public string Time
         {
             get
             {
@@ -102,7 +102,7 @@ namespace First.Model
             }
         }
 
-        public DateTime Returntime
+        public string Returntime
         {
             get
             {

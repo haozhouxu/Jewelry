@@ -7,6 +7,7 @@
       xmlns:man="clr-namespace:First"
       xmlns:model="clr-namespace:First.Model"
       xmlns:og="clr-namespace:System.Collections;assembly=mscorlib"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib" 
       mc:Ignorable="d" 
       Title="Add">
 
@@ -21,6 +22,12 @@
             <ComboBoxItem Name="个人" ToolTip="个人" />
             <ComboBoxItem Name="公司" ToolTip="公司" />
         </og:ArrayList>
+        <!--<ObjectDataProvider x:Key="odp_hostorydata" ObjectType="{x:Type man:SQLiteService}" MethodName="LoadHistory" >
+            <ObjectDataProvider.MethodParameters>
+                <sys:String>first</sys:String>
+                <sys:String  Member="{Binding Path=Guid}" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>-->
     </Page.Resources>
 
     <!--<Page.CommandBindings>
@@ -219,7 +226,31 @@
                             <TextBox Grid.Row="0" Grid.Column="3" Text="价钱" Style="{StaticResource tb_header_cell}" />
                             <TextBox Grid.Row="0" Grid.Column="4" Text="归还时间" Style="{StaticResource tb_header_cell}" />
 
-                            <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" />
+                            <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" ItemsSource="{Binding Path='Ohe'}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Path='State'}" Style="{StaticResource tup_cell_left_ro}" />
+                                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path='Time'}" Style="{StaticResource tup_cell_ro}" />
+                                            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Path='Who'}" Style="{StaticResource tup_cell_ro}" />
+                                            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Path='Price'}" Style="{StaticResource tup_cell_ro}" />
+                                            <TextBox Grid.Row="0" Grid.Column="4" Text="{Binding Path='Returntime'}" Style="{StaticResource tup_cell_ro}" />
+                                            
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
 
                         </Grid>
                     </Border>
