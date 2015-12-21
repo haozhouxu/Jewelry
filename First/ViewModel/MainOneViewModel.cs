@@ -13,7 +13,26 @@ namespace First.ViewModel
     {
         private ObservableCollection<Jewelry> _OCJ; /*= new ObservableCollection<Jewelry>();*/
         private int _totalCount, _pageCount, _pageIndex, _pageSize;
-        
+        public bool IsBtnPreEnable
+        {
+            get
+            {
+                if (PageIndex <= 1)
+                    return false;
+                return true;
+            }
+        }
+
+        public bool IsBtnNxtEnable
+        {
+            get
+            {
+                if (PageIndex >= PageCount)
+                    return false;
+                return true;
+            }
+        }
+
         public ObservableCollection<Jewelry> OCJ
         {
             get { return _OCJ; }

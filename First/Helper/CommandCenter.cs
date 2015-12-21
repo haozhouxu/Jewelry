@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 
 using First.Model;
 using System.Windows.Data;
+using First.View;
 
 namespace First
 {
@@ -51,6 +52,9 @@ namespace First
                     case "TableCommonDeleteData":
                         CC.TableCommonDeleteData(paraDic);
                         break;
+                    case "ImageView":
+                        CC.ImageView(paraDic);
+                        break;
                     default:
                         string pageID = (string)paraDic["pageID"];
                         bool isEdit = false;
@@ -80,6 +84,18 @@ namespace First
             {
                 System.Windows.MessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        private static void ImageView(Dictionary<string, object> paraDic)
+        {
+            if (paraDic == null)
+            {
+                return;
+            }
+
+            Image im = paraDic["context1"] as Image;
+            ImageView iv = new ImageView(im);
+            iv.Show();
         }
 
         private static void saveDetails(Dictionary<string, object> paraDic)
