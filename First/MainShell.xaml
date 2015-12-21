@@ -184,6 +184,12 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" shell:WindowChrome.IsHitTestVisibleInChrome="True" Margin="0,-1,0,0">
                                 <ComboBox Width="Auto" Style="{DynamicResource Menu}" SelectionChanged="ComboBox_SelectionChanged">
+                                    <ComboBoxItem x:Name="backdb" Content="备份数据库" Style="{StaticResource ComboBoxItemStyle1}" />
+                                    <ComboBoxItem x:Name="backModuleDb" Content="备份当前模块数据库" Style="{StaticResource ComboBoxItemStyle1}" />
+                                    <ComboBoxItem x:Name="restoreDB" Content="还原数据库" Style="{StaticResource ComboBoxItemStyle1}" />
+                                    <ComboBoxItem x:Name="modifypwd" Content="修改密码" Style="{DynamicResource ComboBoxItemStyle1}" />
+                                    <ComboBoxItem x:Name="helper" Content="操作指南" Style="{DynamicResource ComboBoxItemStyle1}" />
+                                    <ComboBoxItem x:Name="updateLog" Content="升级说明" Style="{DynamicResource ComboBoxItemStyle1}"/>
                                     <ComboBoxItem Content="关于" Style="{DynamicResource ComboBoxItemStyle1}"  Selected="about_Selected" />
                                     <!--<ComboBoxItem x:Name="backdb" Content="备份数据库" Style="{StaticResource ComboBoxItemStyle1}" Selected="backdb_Selected"/>
                                     <ComboBoxItem x:Name="backModuleDb" Content="备份当前模块数据库" Style="{StaticResource ComboBoxItemStyle1}" Selected="backModuleDb_Selected"/>

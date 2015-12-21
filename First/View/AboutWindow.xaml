@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:First.View"
         mc:Ignorable="d"
         Title="AboutWindow" 
-        Height="350" Width="525" WindowStyle="None" WindowStartupLocation="CenterOwner">
+        Height="350" Width="525" WindowStyle="None" 
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush
