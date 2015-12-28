@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 
 using First;
 using System.Windows.Threading;
+using System.Threading;
+using System.Reflection;
 
 namespace First
 {
@@ -22,10 +24,38 @@ namespace First
     /// </summary>
     public partial class Login : Window
     {
+        /// <summary>
+        /// 确保兼容“记住密码”【易神】
+        /// </summary>
+        public string MD5Password { get; set; }
+        readonly static object _lock = new object();
+        private static Semaphore singleInstanceWatcher;
+        private static bool createdNew;
+
         public Login()
         {
-            InitializeComponent();
+            //InitializeComponent();
+            // 确保不存在程序的其他实例
+            singleInstanceWatcher = new Semaphore(
+                0, // Initial count.
+                1, // Maximum count.
+                Assembly.GetExecutingAssembly().GetName().Name, out createdNew);
+            if (createdNew)
+            {
+                //Common.ExistsInternt();
+                InitializeComponent();
+            }
+            else
+            {
+                MessageBox.Show("程序已在运行中");
+                Environment.Exit(-2);
+            }
         }
+
+        //~Login()
+        //{
+        //    Dispose(false);
+        //}
 
         void login_Click(object sender, RoutedEventArgs e)
         {
