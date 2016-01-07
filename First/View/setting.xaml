@@ -8,7 +8,24 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="setting">
 
-    <Grid>
-        
-    </Grid>
+    <DockPanel LastChildFill="False">
+        <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="旧密码：" />
+                <TextBox x:Name="Oldpw" MaxLength="20" MinWidth="150"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="新密码：" />
+                <TextBox x:Name="Newpw1" MaxLength="20" MinWidth="150"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="确   认：" />
+                <TextBox x:Name="Newpw2" MaxLength="20" MinWidth="150"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Button x:Name="Ok" Content="确认" Margin="55,0,5,0" />
+                <Button x:Name="Cancel" Content="取消" Margin="20,0,0,0" />
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
 </Page>
