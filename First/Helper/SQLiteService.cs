@@ -543,5 +543,112 @@ namespace First
 
             return ohe;
         }
+
+        public static TypeViewModel LoadDataAsTypeViewModel_Paging_Sqlite(string dbFile, string modelGroupString, string sql, Int32 pageSize, Int32 offset, params IDictionary[] conditions)
+        {
+            try
+            {
+                //2015.12.20 利用DeferRefresh可以延迟更新，所以注释下面内容
+                //因为每次改变数据源的参数的时候，就会自动刷新数据源，设置了一个参数，来判断是否是参数已经设置完了
+                //if (modelGroupString.Equals(""))
+                //{
+                //    return null;
+                //}
+                string sqlpara = string.Empty;
+                List<string> list = GetCommonCondition(conditions);
+                if (list.Count > 0)
+                    sqlpara = sqlpara + " where " + string.Join(" and ", list);
+                sql = string.Format(sql, sqlpara) + string.Format(" limit {0} offset {1}", pageSize, pageSize * (offset - 1));
+
+                _totalCount = 0;
+                TypeViewModel vmNew = LoadDataAsTypeViewModel(dbFile, sql);
+
+                if (vmNew != null)
+                {
+                    if (vmNew.OcTypeEntities.Count > 0)
+                        vmNew.TotalCount = _totalCount;
+                    else
+                        vmNew.TotalCount = 0;
+                    vmNew.PageCount = vmNew.TotalCount % pageSize > 0 ? (vmNew.TotalCount / pageSize + 1) : (vmNew.TotalCount / pageSize);
+                    vmNew.PageIndex = offset;
+                    vmNew.PageSize = pageSize;
+                    //vmNew.ModelGroupString = modelGroupString;
+                }
+                return vmNew;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public static TypeViewModel LoadDataAsTypeViewModel(string dbFile, string sql)
+        {
+            try
+            {
+                TypeViewModel vm = new TypeViewModel();
+                vm.OcTypeEntities = new ObservableCollection<TypeEntity>();
+                //System.Windows.MessageBox.Show(string.Format(SQLiteService.connectionFormat, dbFile));
+                using (SQLiteConnection sc1 = new SQLiteConnection(string.Format(SQLiteService.connectionFormat, dbFile)))
+                {
+                    SQLiteCommand sCom = new SQLiteCommand(sql, sc1);
+                    sc1.Open();
+                    using (SQLiteDataReader dr1 = sCom.ExecuteReader())
+                    {
+                        while (dr1.Read())
+                        {
+                            //Jewelry je = new Jewelry();
+                            //je.Guid = dr1["guid"].ToString();
+                            //je.Image = helper.Base64ToImage(dr1["image"].ToString());
+                            ////je.SaleWho = dr1["buytime"].ToString();
+                            //je.BuyTime = helper.DateToString((DateTime)dr1["buytime"]);
+                            //je.BuyPrice = (double)dr1["buyprice"];
+                            //je.BuyWho = dr1["buywho"].ToString();
+                            //je.GoldPrice = (double)dr1["goldprice"];
+                            //je.Type = dr1["type"].ToString();
+                            //je.Color = dr1["color"].ToString();
+                            //je.Mark = dr1["mark"].ToString();
+                            //je.BuySource = dr1["buySource"].ToString();
+                            //je.OwnWho = dr1["ownwho"].ToString();
+                            //je.State = dr1["state"].ToString();
+                            //je.BorrowTime = helper.DateToString((DateTime)dr1["borrowtime"]);
+                            //je.BorrowWho = dr1["borrowwho"].ToString();
+                            //je.BorrowPirce = (double)dr1["borrowprice"];
+                            //je.BorrowReturnTime = helper.DateToString((DateTime)dr1["borrowreturntime"]);
+                            //je.SaleTime = helper.DateToString((DateTime)dr1["saletime"]);
+                            //je.SaleWho = dr1["salewho"].ToString();
+                            //je.SalePirce = (double)dr1["saleprice"];
+                            //je.SaleState = dr1["salestate"].ToString();
+                            //je.Ohe = LoadHistory(je.Guid);
+
+                            TypeEntity te = new TypeEntity();
+                            te.Type = dr1["name"].ToString();
+                            _totalCount = int.Parse(dr1["TotalCount"].ToString());
+                            vm.OcTypeEntities.Add(te);
+                        }
+                        dr1.Close();
+                    }
+                    sc1.Close();
+                }
+                return vm;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        //public static ObservableCollection<TypeEntity> LoadDataAsTypes()
+        //{
+        //    ObservableCollection<TypeEntity> ocTypeEntities = new ObservableCollection<TypeEntity>();
+        //    ocTypeEntities.Add(new TypeEntity { Type = "耳坠" });
+        //    ocTypeEntities.Add(new TypeEntity { Type = "挂件" });
+        //    ocTypeEntities.Add(new TypeEntity { Type = "戒指" });
+        //    ocTypeEntities.Add(new TypeEntity { Type = "手链" });
+        //    ocTypeEntities.Add(new TypeEntity { Type = "手镯" });
+        //    return ocTypeEntities;
+        //}
     }
 }

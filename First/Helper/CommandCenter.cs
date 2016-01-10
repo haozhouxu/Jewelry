@@ -102,16 +102,22 @@ namespace First
         {
             Frame frame = paraDic["context"] as Frame;
             Jewelry je = (frame.Content as FrameworkElement).DataContext as Jewelry;
-
-            string _guid = je.Guid;
-            if (SQLiteService.Save(je))
+            if (je != null)
             {
-                MessageBox.Show("保存成功");
+                if (SQLiteService.Save(je))
+                {
+                    MessageBox.Show("保存成功");
+                }
+                else
+                {
+                    MessageBox.Show("保存失败");
+                }
             }
             else
             {
-                MessageBox.Show("保存失败");
+
             }
+            //string _guid = je.Guid;
             //if (SQLiteService.IsExitItem())
             //{
 

@@ -14,9 +14,10 @@
     <Page.Resources>
         <man:ParameterConvertor x:Key="con_para" />
         <man:ValueToVisibility x:Key="con_value" />
-        <model:TypeEntity x:Key="myTypeEntitys" />
+        <model:Types x:Key="myTypeEntitys" />
+        <!--<ObjectDataProvider x:Key="myTypeEntitys" ObjectType="{x:Type man:SQLiteService}" MethodName="LoadDataAsTypes" />-->
         <DataTemplate x:Key="myTypeTemplate">
-            <TextBlock Text="{Binding type}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding Type}" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </DataTemplate>
         <og:ArrayList x:Key="AL_归属">
             <ComboBoxItem Name="个人" ToolTip="个人" />
@@ -69,7 +70,7 @@
 
                             <TextBox Grid.Row="0" Grid.Column="0" Text="类别：" Style="{StaticResource tb_header_cell_left}"/>
                             <!--<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=Type}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
-                            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{StaticResource myTypeEntitys}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="type"  SelectedValue="{Binding Path='Type'}"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{StaticResource myTypeEntitys}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type"  SelectedValue="{Binding Path='Type'}"/>
                             <TextBox Grid.Row="0" Grid.Column="2" Text="颜色：" Style="{StaticResource tb_header_cell_left}"/>
                             <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Path=Color}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
                             

@@ -91,7 +91,9 @@
     <Compile Include="Model\NotifyPropertyBase.cs" />
     <Compile Include="Model\SectionTitle.cs" />
     <Compile Include="Model\TypeEntity.cs" />
+    <Compile Include="Model\Types.cs" />
     <Compile Include="ViewModel\MainOneViewModel.cs" />
+    <Compile Include="ViewModel\TypeViewModel.cs" />
     <Compile Include="View\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
@@ -121,6 +123,12 @@
     </Compile>
     <Compile Include="View\test1.xaml.cs">
       <DependentUpon>test1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TypeAddPage.xaml.cs">
+      <DependentUpon>TypeAddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TypePage.xaml.cs">
+      <DependentUpon>TypePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="WinDetail.xaml.cs">
       <DependentUpon>WinDetail.xaml</DependentUpon>
@@ -184,6 +192,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\test1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TypeAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TypePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
