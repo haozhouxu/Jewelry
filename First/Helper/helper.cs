@@ -11,6 +11,7 @@ using System.Xml.Linq;
 using First.Model;
 using System.Data;
 using System.Data.SQLite;
+using System.Security.Cryptography;
 
 namespace First
 {
@@ -138,5 +139,18 @@ namespace First
         //{
         //    return null;
         //}
+
+        public static string StringToMd5(string str)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] result = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(str));
+
+            StringBuilder sb = new StringBuilder(16);
+            for (int i = 0; i < result.Length; i++)
+            {
+                sb.Append(result[i].ToString("x"));
+            }
+            return sb.ToString().ToUpper();
+        }
     }
 }

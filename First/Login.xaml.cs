@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,12 @@ namespace First
         readonly static object _lock = new object();
         private static Semaphore singleInstanceWatcher;
         private static bool createdNew;
+        string TempPwd;
+        int TempLength = 0;
+
+        //xhz:增加判断是否自动登录和是否记住密码
+        private bool isRemember = false;
+        private bool isAuth = false;
 
         public Login()
         {
@@ -59,18 +66,69 @@ namespace First
 
         void login_Click(object sender, RoutedEventArgs e)
         {
-            //UserLogin();
-            string user = tb_UseName.Text;
-            string pwd = pb_Password.Password.Trim();
+            UserLogin();
+            //string user = tb_UseName.Text.Trim();
+            //string pwd = pb_Password.Password.Trim();
 
-            if (user.Equals("admin")&&pwd.Equals("123"))
+            //if (user.Equals("admin") && pwd.Equals("123"))
+            //{
+            //    ThrowMsg("登陆成功,正在加载数据...", false);
+            //    System.Threading.Thread.Sleep(1000);
+            //    App app = (App)Application.Current;
+            //    //MainWindow mw = new MainWindow();
+            //    //app.MainWindow = mw;
+            //    //mw.Show();
+            //    MainShell ms = new MainShell();
+            //    app.MainWindow = ms;
+            //    ms.Show();
+            //    login.Close();
+            //}
+            //else
+            //{
+            //    ThrowMsg("登陆失败！请检查用户名和密码", true);
+            //}
+        }
+
+
+        private bool hasclick = false;//用户是否已经请求
+        private void UserLogin()
+        {
+            string UserName = login.tb_UseName.Text.Trim();
+            string UserPassword = login.pb_Password.Password.Trim();
+            //var sb = login.FindResource("loginClick") as Storyboard;
+            if (!CheckStatue() || hasclick)
+                return;
+            hasclick = true;//用户是否已经请求
+            //if (TempPwd != UserPassword)
+            //{
+            //    TempLength = UserPassword.Length;
+            //    this.MD5Password = helper.StringToMd5(UserPassword);
+            //}
+            TempPwd = UserPassword;
+            TempLength = UserPassword.Length;
+            this.MD5Password = helper.StringToMd5(UserPassword);
+
+            //SQLiteService server = new SQLiteService();
+            //if (!server.CheckUser(UserName))
+            //{ ThrowMsg("您本机登陆的账户不能为该账户", true); hasclick = false; return; }
+
+            ThrowMsg("正在登录...", false);
+            this.btn_login.IsEnabled = false;
+            //InfoPlatformServiceSoapClient client = new InfoPlatformServiceSoapClient();
+            //try
+            //{
+            //    UserEntity entity = client.UserLogin(UserName, this.MD5Password, SQLiteService.GetLocalIP());
+            //    // int flag = client.UserLogin(UserName,UsingMD5(UserPassword));
+            //    DealWithLogin(entity);
+            //}
+            //catch (Exception ex) { client.Abort(); }
+            if (CheckLogin(UserName,MD5Password,"first"))
             {
-                ThrowMsg("登陆成功,正在加载数据...", false);
-                System.Threading.Thread.Sleep(1000);
+                ThrowMsg("登录成功，正在加载数据...", false);
+                //加载数据，暂时无用
+
+                //加载数据结束，打开主窗口
                 App app = (App)Application.Current;
-                //MainWindow mw = new MainWindow();
-                //app.MainWindow = mw;
-                //mw.Show();
                 MainShell ms = new MainShell();
                 app.MainWindow = ms;
                 ms.Show();
@@ -78,7 +136,40 @@ namespace First
             }
             else
             {
-                ThrowMsg("登陆失败！请检查用户名和密码", true);
+                ThrowMsg("用户名或者密码错误！", true);
+                login.tb_UseName.Focus();
+                hasclick = false;//用户是否已经请求
+                this.btn_login.IsEnabled = true;
+                return;
+            }
+        }
+
+        private bool CheckLogin(string userName,string password,string dbFile)
+        {
+            try
+            {
+                bool isSuccess = false;
+                string sql = "select * from User where name='" + userName + "' and password = '" + password + "'";
+                using (SQLiteConnection sc1 = new SQLiteConnection(string.Format(SQLiteService.connectionFormat, dbFile)))
+                {
+                    SQLiteCommand sCom = new SQLiteCommand(sql, sc1);
+                    sc1.Open();
+                    using (SQLiteDataReader dr1 = sCom.ExecuteReader())
+                    {
+                        if (dr1.Read())
+                        {
+                            isSuccess = true;
+                        }
+                        dr1.Close();
+                    }
+                    sc1.Close();
+                }
+                return isSuccess;
+            }
+            catch (Exception ex)
+            {
+                    
+                throw ex;
             }
         }
 
@@ -110,6 +201,56 @@ namespace First
             if (MessageBox.Show("您确定要退出程序吗？", "系统提示", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 App.Current.Shutdown();
             //this.Close();
+        }
+
+        /// <summary>
+        /// 状态检测【易神】
+        /// </summary>
+        /// <param name="_currentName"></param>
+        /// <param name="_currentPwd"></param>
+        bool CheckStatue()
+        {
+            string _currentPwd = this.pb_Password.Password;
+            string _currentName = this.tb_UseName.Text.Trim();
+            if (string.IsNullOrEmpty(_currentName) && string.IsNullOrEmpty(_currentPwd))
+            {
+                ThrowMsg("请先输入用户名和密码！", true);
+                this.tb_UseName.Focus();
+                return false;
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(_currentPwd))
+                {
+                    ThrowMsg("请先输入密码！", true);
+                    this.pb_Password.Focus();
+                    return false;
+                }
+                if (string.IsNullOrEmpty(_currentName))
+                {
+                    ThrowMsg("请先输入用户名！", true);
+                    this.tb_UseName.Focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        void pb_Password_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.Key == Key.Enter)
+                {
+                    //CheckExist();
+                    if (btn_login.IsEnabled)
+                        UserLogin();
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }

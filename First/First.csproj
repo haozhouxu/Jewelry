@@ -217,7 +217,9 @@
     <Content Include="DB\first">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="DB\first%28包含有登陆账号%29" />
     <None Include="DB\first1" />
+    <None Include="DB\first2" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -247,6 +249,7 @@
   <ItemGroup>
     <Content Include="Resources\Nav_catalog.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
