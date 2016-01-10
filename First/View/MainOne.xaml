@@ -71,65 +71,68 @@ on 1=1
         <CommandBinding Command="Delete" Executed="Delete_Executed" />
     </Page.CommandBindings>-->
 
-    <DockPanel LastChildFill="True" DataContext="{StaticResource odp_data}" x:Name="dp" Background="#FFEDEEEF">
+    <DockPanel LastChildFill="True" DataContext="{StaticResource odp_data}" x:Name="dp">
         <!--菜单栏-->
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
-            <TextBlock Text="镶金价:" VerticalAlignment="Center" Margin="5,0,0,0" />
-            <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Padding="3" Width="50" Text="{Binding MethodParameters[5][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
-            <TextBlock Text="至" VerticalAlignment="Center" Margin="5,0,0,0" />
-            <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Padding="3" Width="50" Text="{Binding MethodParameters[6][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+        <Border  Background="#FFEDEEEF" BorderBrush="LightGray" BorderThickness="1" CornerRadius="8" DockPanel.Dock="Top" Margin="5">
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
+                <TextBlock Text="镶金价:" VerticalAlignment="Center" Margin="5,0,0,0" />
+                <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Padding="3" Width="50" Text="{Binding MethodParameters[5][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+                <TextBlock Text="至" VerticalAlignment="Center" Margin="5,0,0,0" />
+                <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Padding="3" Width="50" Text="{Binding MethodParameters[6][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
 
-            <TextBlock Text="类别："  VerticalAlignment="Center" Margin="5,0,0,0" />
-            <ComboBox Margin="5,0,0,0" Width="40" SelectedValuePath="Content" SelectedValue="{Binding MethodParameters[7][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}">
-                <ComboBoxItem Content="" />
-                <ComboBoxItem Content="项链" />
-                <ComboBoxItem Content="戒指" />
-                <ComboBoxItem Content="挂件" />
-                <ComboBoxItem Content="耳坠" /> 
-            </ComboBox>
+                <TextBlock Text="类别："  VerticalAlignment="Center" Margin="5,0,0,0" />
+                <ComboBox Margin="5,0,0,0" Width="40" SelectedValuePath="Content" SelectedValue="{Binding MethodParameters[7][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}">
+                    <ComboBoxItem Content="" />
+                    <ComboBoxItem Content="项链" />
+                    <ComboBoxItem Content="戒指" />
+                    <ComboBoxItem Content="挂件" />
+                    <ComboBoxItem Content="耳坠" />
+                </ComboBox>
 
-            <TextBlock Text="颜色："  VerticalAlignment="Center" Margin="5,0,0,0" />
-            <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Width="50" Text="{Binding MethodParameters[8][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+                <TextBlock Text="颜色："  VerticalAlignment="Center" Margin="5,0,0,0" />
+                <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Width="50" Text="{Binding MethodParameters[8][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
 
-            <TextBlock Text="入货时间:" VerticalAlignment="Center" Margin="5,0" />
-            <DatePicker VerticalAlignment="Center" Margin="5,0" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[9][val]}"/>
-            <TextBlock Text="至" VerticalAlignment="Center" Margin="5,0" />
-            <DatePicker VerticalAlignment="Center" Margin="5,0" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[10][val]}"/>
+                <TextBlock Text="入货时间:" VerticalAlignment="Center" Margin="5,0" />
+                <DatePicker VerticalAlignment="Center" Margin="5,0" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[9][val]}"/>
+                <TextBlock Text="至" VerticalAlignment="Center" Margin="5,0" />
+                <DatePicker VerticalAlignment="Center" Margin="5,0" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[10][val]}"/>
 
-            <TextBlock Text="归属："  VerticalAlignment="Center" Margin="5,0,0,0" />
-            <ComboBox Margin="5,0,0,0" Width="40" SelectedValuePath="Content" SelectedValue="{Binding MethodParameters[11][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}">
-                <ComboBoxItem Content="" />
-                <ComboBoxItem Content="个人" />
-                <ComboBoxItem Content="公司" />
-            </ComboBox>
+                <TextBlock Text="归属："  VerticalAlignment="Center" Margin="5,0,0,0" />
+                <ComboBox Margin="5,0,0,0" Width="40" SelectedValuePath="Content" SelectedValue="{Binding MethodParameters[11][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}">
+                    <ComboBoxItem Content="" />
+                    <ComboBoxItem Content="个人" />
+                    <ComboBoxItem Content="公司" />
+                </ComboBox>
 
-            <!--Style="{StaticResource BtnNew}" -->
-            <Button Content="查询" Margin="0,0,5,0" Style="{StaticResource BtnNew}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <man:CallInvokeObjectMethod DestType="{x:Type man:CC}" DestMethod="TurnPageOriginal">
-                            <man:CallInvokeObjectMethod.MethodParameters>
-                                <MultiBinding Converter="{StaticResource con_method}">
-                                    <Binding Source="{StaticResource odp_data}" BindsDirectlyToSource="True"/>
-                                    <Binding Source="1"/>
-                                    <Binding Source="10"/>
-                                </MultiBinding>
-                            </man:CallInvokeObjectMethod.MethodParameters>
-                        </man:CallInvokeObjectMethod>
-                        <!--<man:CallInvokeObjectMethod TargetObject="{StaticResource odp_data}" DestType="{x:Type ObjectDataProvider}" DestMethod="Refresh" />-->
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
-            <!--<Button Content="新增" Style="{StaticResource BtnNew}" Margin="0,0,5,0" Command="Open" CommandParameter="{Binding Converter={StaticResource con_para},ConverterParameter=type:addNew:s}" />-->
-            <Button Content="新建" Command="New" Style="{DynamicResource BtnNew}">
-                <Button.CommandParameter>
-                    <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:new:s|pageID:Add:s|isEdit:true:b|title:新建:s">
-                        <Binding Path="ItemsSource" ElementName="ic_form" />
-                        <Binding ElementName="ic_form"/>
-                    </MultiBinding>
-                </Button.CommandParameter>
-            </Button>
-        </StackPanel>
+                <!--Style="{StaticResource BtnNew}" -->
+                <Button Content="查询" Margin="0,0,5,0" Style="{StaticResource BtnNew}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <man:CallInvokeObjectMethod DestType="{x:Type man:CC}" DestMethod="TurnPageOriginal">
+                                <man:CallInvokeObjectMethod.MethodParameters>
+                                    <MultiBinding Converter="{StaticResource con_method}">
+                                        <Binding Source="{StaticResource odp_data}" BindsDirectlyToSource="True"/>
+                                        <Binding Source="1"/>
+                                        <Binding Source="10"/>
+                                    </MultiBinding>
+                                </man:CallInvokeObjectMethod.MethodParameters>
+                            </man:CallInvokeObjectMethod>
+                            <!--<man:CallInvokeObjectMethod TargetObject="{StaticResource odp_data}" DestType="{x:Type ObjectDataProvider}" DestMethod="Refresh" />-->
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <!--<Button Content="新增" Style="{StaticResource BtnNew}" Margin="0,0,5,0" Command="Open" CommandParameter="{Binding Converter={StaticResource con_para},ConverterParameter=type:addNew:s}" />-->
+                <Button Content="新建" Command="New" Style="{DynamicResource BtnNew}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:new:s|pageID:Add:s|isEdit:true:b|title:新建:s">
+                            <Binding Path="ItemsSource" ElementName="ic_form" />
+                            <Binding ElementName="ic_form"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+            </StackPanel>
+        </Border>
+        
 
         <!--小标题-->
         <StackPanel DockPanel.Dock="Top">
