@@ -77,6 +77,7 @@
     <Compile Include="Converter\ValueToVisibility.cs" />
     <Compile Include="Helper\ActionCenter.cs" />
     <Compile Include="Helper\CommandCenter.cs" />
+    <Compile Include="Helper\GlobalBindingHelper.cs" />
     <Compile Include="Helper\helper.cs" />
     <Compile Include="Helper\ParameterObject.cs" />
     <Compile Include="Helper\SQLiteService.cs" />

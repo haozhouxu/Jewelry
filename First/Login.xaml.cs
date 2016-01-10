@@ -17,6 +17,7 @@ using First;
 using System.Windows.Threading;
 using System.Threading;
 using System.Reflection;
+using First.Helper;
 
 namespace First
 {
@@ -57,6 +58,7 @@ namespace First
                 MessageBox.Show("程序已在运行中");
                 Environment.Exit(-2);
             }
+            this.tb_UseName.Focus();
         }
 
         //~Login()
@@ -126,6 +128,7 @@ namespace First
             {
                 ThrowMsg("登录成功，正在加载数据...", false);
                 //加载数据，暂时无用
+                GlobalBindingHelper.Name = UserName;
 
                 //加载数据结束，打开主窗口
                 App app = (App)Application.Current;
