@@ -125,6 +125,10 @@ namespace First
             //怎么判断新增成功后进行保存
             //this.Close();
         }
+        private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            CC.Save_Executed(sender, e);
+        }
         #endregion
     }
 }

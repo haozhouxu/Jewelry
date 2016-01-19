@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using First.Model;
 using First.ViewModel;
 using System.Collections;
+using System.Windows;
+using First.Helper;
 
 namespace First
 {
@@ -244,7 +246,7 @@ namespace First
                             }
                             break;
                         case "借出":
-                            if (!je.State.Equals(tempJe.State) || je.BorrowTime != tempJe.BorrowTime || je.BorrowWho != tempJe.BorrowWho||je.BorrowPirce != tempJe.BorrowPirce || je.BorrowReturnTime != tempJe.BorrowReturnTime)
+                            if (!je.State.Equals(tempJe.State) || je.BorrowTime != tempJe.BorrowTime || je.BorrowWho != tempJe.BorrowWho || je.BorrowPirce != tempJe.BorrowPirce || je.BorrowReturnTime != tempJe.BorrowReturnTime)
                             {
                                 InsertIntoHistory(je.Guid, je.State, Convert.ToDateTime(je.BorrowTime), je.BorrowWho, je.BorrowPirce, Convert.ToDateTime(je.BorrowReturnTime));
                             }
@@ -273,7 +275,7 @@ namespace First
                 else
                 {
                     sqlAll = "update Data set image = '{0}',buytime = '{1}',buyprice = '{2}',buywho = '{3}',goldprice = {4},type = '{5}',color = '{6}',mark = '{7}',buySource = '{8}',ownwho = '{9}',state = '{10}',borrowtime = '{11}',borrowwho = '{12}',borrowprice = {13},borrowreturntime = '{14}',saletime = '{15}',salewho = '{16}',saleprice = {17},salestate = '{18}',updatetime = '{19}' where guid='{20}'";
-                    sql = string.Format(sqlAll, imageString, Convert.ToDateTime(je.BuyTime).ToString("s"), je.BuyPrice, je.BuyWho, je.GoldPrice, je.Type, je.Color, je.Mark, je.BuySource, je.OwnWho, je.State, Convert.ToDateTime(je.BorrowTime).ToString("s"), je.BorrowWho, je.BorrowPirce, Convert.ToDateTime(je.BorrowReturnTime).ToString("s"), Convert.ToDateTime(je.SaleTime).ToString("s"), je.SaleWho, je.SalePirce, je.SaleState,  System.DateTime.Now.ToString("s"),je.Guid);
+                    sql = string.Format(sqlAll, imageString, Convert.ToDateTime(je.BuyTime).ToString("s"), je.BuyPrice, je.BuyWho, je.GoldPrice, je.Type, je.Color, je.Mark, je.BuySource, je.OwnWho, je.State, Convert.ToDateTime(je.BorrowTime).ToString("s"), je.BorrowWho, je.BorrowPirce, Convert.ToDateTime(je.BorrowReturnTime).ToString("s"), Convert.ToDateTime(je.SaleTime).ToString("s"), je.SaleWho, je.SalePirce, je.SaleState, System.DateTime.Now.ToString("s"), je.Guid);
                 }
 
                 using (SQLiteConnection sqlcon = new SQLiteConnection(connectString))
@@ -293,6 +295,88 @@ namespace First
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+        }
+
+        public static bool SaveType(TypeEntity te, string type)
+        {
+            try
+            {
+                //定义temp存储影响行数
+                int temp = 0;
+                //判断是否是新增，如果是新增的话，选择不同的语句，为了createtime的插入或者不插入
+                bool isnew = false;
+
+                //判断数据库中是否存在一条记录
+                if (!SelectOneFromType(te))
+                {
+                    isnew = true;
+                }
+
+                string connectString = string.Format(connectionFormat, "first");
+                string sqlAll, sql;
+                //判断是编辑false，还是新增true
+                if (isnew)
+                {
+                    sqlAll = "insert into Type (name,category,createtime,updatetime,guid) Values('{0}','{1}','{2}','{3}','{4}')";
+                    sql = string.Format(sqlAll, te.Type, GlobalBindingHelper.JewelryType, System.DateTime.Now.ToString("s"), System.DateTime.Now.ToString("s"),te.Guid);
+                }
+                else
+                {
+                    sqlAll = "update Type set name = '{0}',updatetime = '{1}' where guid='{2}'";
+                    sql = string.Format(sqlAll, te.Type, System.DateTime.Now.ToString("s"), te.Guid);
+                }
+
+                using (SQLiteConnection sqlcon = new SQLiteConnection(connectString))
+                {
+                    SQLiteCommand cmd = new SQLiteCommand(sql, sqlcon);
+                    sqlcon.Open();
+                    temp = cmd.ExecuteNonQuery();
+                    sqlcon.Close();
+                }
+
+                //返回更新成功或者失败的标志
+                if (temp > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw ex;
+            }
+        }
+
+        public static bool SelectOneFromType(TypeEntity te)
+        {
+            try
+            {
+                string sql = "select * from Type where guid = '" + te.Guid + "'";
+                string dbFile = "first";
+                int temp = 0;
+                TypeEntity je = new TypeEntity();
+
+                using (SQLiteConnection sc1 = new SQLiteConnection(string.Format(SQLiteService.connectionFormat, dbFile)))
+                {
+                    SQLiteCommand sCom = new SQLiteCommand(sql, sc1);
+                    sc1.Open();
+                    temp = sCom.ExecuteNonQuery();
+                    sc1.Close();
+                }
+
+                //返回更新成功或者失败的标志
+                if (temp > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+
                 throw ex;
             }
         }
@@ -544,7 +628,7 @@ namespace First
             return ohe;
         }
 
-        public static TypeViewModel LoadDataAsTypeViewModel_Paging_Sqlite(string dbFile, string modelGroupString, string sql, Int32 pageSize, Int32 offset, params IDictionary[] conditions)
+        public static TypeViewModel LoadDataAsTypeViewModel_Paging_Sqlite(string dbFile, string type, string sql, Int32 pageSize, Int32 offset, params IDictionary[] conditions)
         {
             try
             {
@@ -562,7 +646,6 @@ namespace First
 
                 _totalCount = 0;
                 TypeViewModel vmNew = LoadDataAsTypeViewModel(dbFile, sql);
-
                 if (vmNew != null)
                 {
                     if (vmNew.OcTypeEntities.Count > 0)
@@ -575,10 +658,11 @@ namespace First
                     //vmNew.ModelGroupString = modelGroupString;
                 }
                 return vmNew;
+
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
                 throw ex;
             }
         }
@@ -623,6 +707,7 @@ namespace First
                             //je.Ohe = LoadHistory(je.Guid);
 
                             TypeEntity te = new TypeEntity();
+                            te.Guid = dr1["guid"].ToString();
                             te.Type = dr1["name"].ToString();
                             _totalCount = int.Parse(dr1["TotalCount"].ToString());
                             vm.OcTypeEntities.Add(te);

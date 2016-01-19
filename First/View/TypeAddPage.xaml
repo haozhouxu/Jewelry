@@ -4,9 +4,25 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:First.View"
+      xmlns:man="clr-namespace:First"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
+      x:Name="page"
       Title="类别">
+    <Page.Resources>
+        <man:ParameterConvertor x:Key="con_para" />
+    </Page.Resources>
 
-    <DockPanel></DockPanel>
+    <DockPanel LastChildFill="True" Background="White">
+        <StackPanel x:Name="sp_edit" DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Visible" Background="White">
+            <Button Content="保存" x:Name="bt_ok" Command="Save"  CommandParameter="{Binding ElementName=page, Converter={StaticResource con_para}, ConverterParameter='type:JeweleyCategoryType:s'}" Margin="10,10,10,20"  Width="80" Style="{StaticResource BtnNew}"/>
+            <Button Content="退出" x:Name="bt_cancel" Command="Close" Width="80" Margin="10,10,30,20" Style="{StaticResource BtnNot}"/>
+        </StackPanel>
+        <StackPanel x:Name="fra_content">
+            <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="名称：" Margin="5" />
+                <TextBox MinWidth="100" Text="{Binding Path='Type'}" />
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
 </Page>

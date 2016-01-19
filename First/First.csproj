@@ -103,6 +103,12 @@
     <Compile Include="View\borrow.xaml.cs">
       <DependentUpon>borrow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ColorType.xaml.cs">
+      <DependentUpon>ColorType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ColorTypeAddPage.xaml.cs">
+      <DependentUpon>ColorTypeAddPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\history.xaml.cs">
       <DependentUpon>history.xaml</DependentUpon>
     </Compile>
@@ -111,6 +117,12 @@
     </Compile>
     <Compile Include="View\MainOne.xaml.cs">
       <DependentUpon>MainOne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OwnType.xaml.cs">
+      <DependentUpon>OwnType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OwnTypeAddPage.xaml.cs">
+      <DependentUpon>OwnTypeAddPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\sale.xaml.cs">
       <DependentUpon>sale.xaml</DependentUpon>
@@ -167,6 +179,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ColorType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ColorTypeAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\history.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +196,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainOne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OwnType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OwnTypeAddPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,6 +265,8 @@
     <None Include="DB\first%28包含有登陆账号%29" />
     <None Include="DB\first1" />
     <None Include="DB\first2" />
+    <None Include="DB\first3" />
+    <None Include="DB\first4" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

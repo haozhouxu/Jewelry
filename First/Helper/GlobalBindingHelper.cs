@@ -10,6 +10,10 @@ namespace First.Helper
     {
         //用户名
         public static string Name { get; set; }
-        
+        //类别
+        public static string JewelryType = "珠宝";
+        public static string OwnType = "归属人";
+        public static string ColorType = "颜色";
+
     }
 }

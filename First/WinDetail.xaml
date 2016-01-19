@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Microsoft.Windows.Shell"
-        xmlns:local="clr-namespace:First"
+        xmlns:man="clr-namespace:First"
         Icon="Resources/Images/Login.ico" 
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
@@ -66,7 +66,7 @@
         </ControlTemplate>
     </Window.Template>
     <Window.Resources>
-        <local:ParameterConvertor x:Key="con_para" />
+        <man:ParameterConvertor x:Key="con_para" />
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static shell:SystemCommands.CloseWindowCommand}" Executed="OnCloseWindow" />
@@ -81,6 +81,7 @@
         <CommandBinding Command="New" Executed="CreateNew"/>
         <CommandBinding Command="CorrectionList" Executed="CorrectionListExecuted" />-->
         <CommandBinding Command="Open" Executed="Open_Executed"/>
+        <CommandBinding Command="Save" Executed="Save_Executed" />
         <CommandBinding Command="Close" Executed="Close_Page"/>
     </Window.CommandBindings>
     <DockPanel LastChildFill="True" Background="White">

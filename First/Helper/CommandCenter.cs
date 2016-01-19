@@ -86,6 +86,62 @@ namespace First
             }
         }
 
+        public static void Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+
+                Dictionary<string, object> paraDic = e.Parameter as Dictionary<string, object>;
+                if (paraDic == null)
+                {
+                    return;
+                }
+                string type = "";
+                if (paraDic.ContainsKey("type"))
+                {
+                    type = (string)paraDic["type"];
+                }
+                switch (type)
+                {
+                    //珠宝类别保存
+                    case "JeweleyCategoryType":
+                        Page page = paraDic["context"] as Page;
+                        if (page == null)
+                        {
+                            return;
+                        }
+                        TypeEntity te = page.DataContext as TypeEntity;
+                        if (te != null)
+                        {
+                            if (SQLiteService.SaveType(te, "JeweleyCategoryType"))
+                            {
+                                MessageBox.Show("保存成功");
+                            }
+                            else
+                            {
+                                MessageBox.Show("保存失败");
+                            }
+                        }
+                        break;
+                    //珠宝归属人保存
+                    case "JeweleyOwnType":
+                        break;
+                    //珠宝颜色保存
+                    case "JeweleyColorType":
+                        break;
+                    case "":
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+        }
+
         private static void ImageView(Dictionary<string, object> paraDic)
         {
             if (paraDic == null)
@@ -241,38 +297,85 @@ namespace First
         {
             try
             {
+                //获取参数，如果为空，就返回
                 Dictionary<string, object> paraDic = e.Parameter as Dictionary<string, object>;
                 if (paraDic == null)
                     return;
-                string pageID = (string)paraDic["pageID"];
-                bool isEdit = false;
+                //定义参数
+                string type = ""; //新增哪个页面
+                string pageID = ""; //导航页面
+                bool isEdit = false; //是否可以编辑，就是是否出现保存和取消按钮
+                string title = ""; //页面的标题
+                //获取对应的参数
+                if (paraDic.ContainsKey("type"))
+                {
+                    type = (string)paraDic["type"];
+                }
+                if (paraDic.ContainsKey("pageID"))
+                {
+                    pageID = (string)paraDic["pageID"];
+                }
                 if (paraDic.ContainsKey("isEdit"))
                 {
                     isEdit = (bool)paraDic["isEdit"];
                 }
-                string title = "";
                 if (paraDic.ContainsKey("title"))
                 {
                     title = (string)paraDic["title"];
                 }
-                ObservableCollection<Jewelry> main_ic = paraDic["context1"] as ObservableCollection<Jewelry>;
-                if (main_ic != null)
+                switch (type)
                 {
-                    Jewelry _je = new Jewelry(true);
-                    //main_ic.Add(_je);
-                    WinDetail wd1 = new WinDetail(_je, isEdit, title);
-                    wd1.PageFrame.Navigate(new Uri(Tools.PageTool(pageID), UriKind.RelativeOrAbsolute));
-                    bool? res = wd1.ShowDialog();
+                    //珠宝增加
+                    case "GoodsType":
+                        ObservableCollection<Jewelry> main_ic = paraDic["context1"] as ObservableCollection<Jewelry>;
+                        if (main_ic != null)
+                        {
+                            Jewelry _je = new Jewelry(true);
+                            //main_ic.Add(_je);
+                            WinDetail wd1 = new WinDetail(_je, isEdit, title);
+                            wd1.PageFrame.Navigate(new Uri(Tools.PageTool(pageID), UriKind.RelativeOrAbsolute));
+                            bool? res = wd1.ShowDialog();
 
-                    if (res.HasValue && res.Value)
-                    {
+                            if (res.HasValue && res.Value)
+                            {
 
-                    }
-                    CommonReflashData((FrameworkElement)paraDic["context2"]);
+                            }
+                            CommonReflashData((FrameworkElement)paraDic["context2"]);
+                        }
+                        break;
+                    //珠宝类别增加
+                    case "JeweleyCategoryType":
+                    //珠宝归属人增加
+                    case "JeweleyOwnType":
+                    //珠宝颜色增加
+                    case "JeweleyColorType":
+                        //上面三个类别都用同一个操作
+                        ObservableCollection<TypeEntity> ObTE = paraDic["context1"] as ObservableCollection<TypeEntity>;
+                        if (ObTE != null)
+                        {
+                            TypeEntity _te = new TypeEntity(true);
+                            //main_ic.Add(_je);
+                            WinDetail wd1 = new WinDetail(_te, isEdit, title);
+                            wd1.PageFrame.Navigate(new Uri(Tools.PageTool(pageID), UriKind.RelativeOrAbsolute));
+                            bool? res = wd1.ShowDialog();
+
+                            if (res.HasValue && res.Value)
+                            {
+
+                            }
+                            CommonReflashData((FrameworkElement)paraDic["context2"]);
+                        }
+                        break;
+                    case "":
+                        break;
+                    default:
+                        break;
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
+                //记录日志，暂未添加
 
             }
             finally

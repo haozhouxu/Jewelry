@@ -7,20 +7,55 @@ using System.Collections.ObjectModel;
 
 namespace First.Model
 {
-    public class TypeEntity
+    public class TypeEntity : NotifyPropertyBase
     {
-        public string Type { set; get; }
-    }
+        private string _guid;
+        private string _type;
 
-    //public class TypeEntity : ObservableCollection<Type>
-    //{
-    //    public TypeEntity()
-    //    {
-    //        this.Add(new Type { type = "耳坠" });
-    //        this.Add(new Type { type = "挂件" });
-    //        this.Add(new Type { type = "戒指" });
-    //        this.Add(new Type { type = "手链" });
-    //        this.Add(new Type { type = "手镯" });
-    //    }
-    //}
+        public string Guid
+        {
+            get
+            {
+                return _guid;
+            }
+
+            set
+            {
+                if (_guid != value)
+                {
+                    _guid = value;
+                    NotifyPropertyChanged("Guid");
+                }
+            }
+        }
+        public string Type
+        {
+            get
+            {
+                return _type;
+            }
+
+            set
+            {
+                if (_type != value)
+                {
+                    _type = value;
+                    NotifyPropertyChanged("Type");
+                }
+            }
+        }
+
+        public TypeEntity()
+        {
+
+        }
+
+        public TypeEntity(bool isNew)
+        {
+            if (isNew)
+            {
+                Guid = System.Guid.NewGuid().ToString();
+            }
+        }
+    }
 }

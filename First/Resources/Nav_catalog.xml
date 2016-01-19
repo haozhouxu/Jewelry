@@ -13,8 +13,10 @@
     
     <sect id="6" nav="pack://application:,,,/View/setting.xaml" aid="M27.013366,9.4088901 C27.013366,9.4088902 28.890966,18.074291 24.196964,20.950491 24.196964,20.950491 18.746465,26.236992 9.7015615,20.812592 L8.7432618,23.981791 2.4052499,14.455791 12.264663,13.04689 C12.264663,13.04689 11.403362,14.846391 11.090162,16.05989 11.090162,16.05989 26.133066,26.427092 27.013366,9.4088901 z M18.640916,0 L24.978101,9.5260964 15.120124,10.934997 C15.120124,10.934997 15.980723,9.1354961 16.293422,7.9218953 16.293422,7.9218951 1.2510086,-2.4453125 0.37082076,14.5729 0.37082076,14.5729 -1.5067346,5.9076638 3.1877737,3.0311918 3.1877738,3.0311918 8.6370406,-2.255187 17.682518,3.1691918 z" order="6" porder="0" expand="true">设置</sect>
     <sect id="7" nav="pack://application:,,,/View/setting.xaml" order="1" porder="1" isSelected="true">密码设置</sect>
-    <sect id="8" nav="pack://application:,,,/View/TypePage.xaml" order="2" porder="1">类别管理</sect>
-    <sect id="9" nav="pack://application:,,,/View/test1.xaml" order="3" porder="1">其他管理</sect>
+    <sect id="8" nav="pack://application:,,,/View/TypePage.xaml" order="2" porder="1">珠宝类别</sect>
+    <sect id="9" nav="pack://application:,,,/View/OwnType.xaml" order="3" porder="1">归属类别</sect>
+    <sect id="10" nav="pack://application:,,,/View/ColorType.xaml" order="4" porder="1">颜色类别</sect>
+    <sect id="11" nav="pack://application:,,,/View/test1.xaml" order="5" porder="1">其他管理</sect>
     <!--<sect id="14" nav="M0003001" order="1" porder="1" isSelected="true">股东概况</sect>
     <sect id="15" nav="M0003002" order="2" porder="1">类别股东</sect>
     <sect id="16" nav="M0003004" order="3" porder="1">基金股东分析</sect>
