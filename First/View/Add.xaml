@@ -15,6 +15,8 @@
         <man:ParameterConvertor x:Key="con_para" />
         <man:ValueToVisibility x:Key="con_value" />
         <model:Types x:Key="myTypeEntitys" />
+        <model:OwnTypes x:Key="myOwnTypes" />
+        <model:ColorTypes x:Key="myColorTypes" />
         <!--<ObjectDataProvider x:Key="myTypeEntitys" ObjectType="{x:Type man:SQLiteService}" MethodName="LoadDataAsTypes" />-->
         <DataTemplate x:Key="myTypeTemplate">
             <TextBlock Text="{Binding Type}" HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -89,12 +91,9 @@
                             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=BuyWho}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
                             <TextBox Grid.Row="3" Grid.Column="2" Text="归属：" Style="{StaticResource tb_header_cell_left}"/>
                             <!--<TextBox Grid.Row="3" Grid.Column="3" Text="{Binding Path=OwnWho}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
-                            <ComboBox Grid.Row="3" Grid.Column="3" SelectedValuePath="Content" SelectedValue="{Binding Path='OwnWho'}">
-                                <ComboBoxItem Content="个人"/>
-                                <ComboBoxItem Content="公司"/>
-                            </ComboBox>
+                            <ComboBox Grid.Row="3" Grid.Column="3" ItemsSource="{StaticResource myOwnTypes}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding Path='OwnWho'}"/>
 
-                            <TextBox Grid.Row="4" Grid.Column="0" Text="备注：" Style="{StaticResource tb_header_cell_left}"/>
+                                <TextBox Grid.Row="4" Grid.Column="0" Text="备注：" Style="{StaticResource tb_header_cell_left}"/>
                             <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=Mark}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
                         </Grid>
                     </Border>
