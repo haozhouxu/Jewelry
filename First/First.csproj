@@ -145,6 +145,9 @@
     <Compile Include="WinDetail.xaml.cs">
       <DependentUpon>WinDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinDetail2.xaml.cs">
+      <DependentUpon>WinDetail2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinSecond.xaml.cs">
       <DependentUpon>WinSecond.xaml</DependentUpon>
     </Compile>
@@ -234,6 +237,10 @@
     <Page Include="WinDetail.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WinDetail2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WinSecond.xaml">
       <Generator>MSBuild:Compile</Generator>

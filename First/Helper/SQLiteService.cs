@@ -307,6 +307,22 @@ namespace First
                 int temp = 0;
                 //判断是否是新增，如果是新增的话，选择不同的语句，为了createtime的插入或者不插入
                 bool isnew = false;
+                //插入数据库的类别
+                string insertType = "";
+                switch (type)
+                {
+                    case "JeweleyCategoryType":
+                        insertType = GlobalBindingHelper.JewelryType;
+                        break;
+                    case "JeweleyOwnType":
+                        insertType = GlobalBindingHelper.OwnType;
+                        break;
+                    case "JeweleyColorType":
+                        insertType = GlobalBindingHelper.ColorType;
+                        break;
+                    default:
+                        break;
+                }
 
                 //判断数据库中是否存在一条记录
                 if (!SelectOneFromType(te))
@@ -320,7 +336,7 @@ namespace First
                 if (isnew)
                 {
                     sqlAll = "insert into Type (name,category,createtime,updatetime,guid) Values('{0}','{1}','{2}','{3}','{4}')";
-                    sql = string.Format(sqlAll, te.Type, GlobalBindingHelper.JewelryType, System.DateTime.Now.ToString("s"), System.DateTime.Now.ToString("s"),te.Guid);
+                    sql = string.Format(sqlAll, te.Type, insertType, System.DateTime.Now.ToString("s"), System.DateTime.Now.ToString("s"),te.Guid);
                 }
                 else
                 {
@@ -363,7 +379,14 @@ namespace First
                 {
                     SQLiteCommand sCom = new SQLiteCommand(sql, sc1);
                     sc1.Open();
-                    temp = sCom.ExecuteNonQuery();
+                    using (SQLiteDataReader dr1 = sCom.ExecuteReader())
+                    {
+                        if (dr1.Read())
+                        {
+                            temp = 1;
+                        }
+                        dr1.Close();
+                    }
                     sc1.Close();
                 }
 

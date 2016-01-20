@@ -55,6 +55,9 @@ namespace First
                     case "ImageView":
                         CC.ImageView(paraDic);
                         break;
+                    case "TypeDetail":
+                        CC.TypeDetail(paraDic);
+                        break;
                     default:
                         string pageID = (string)paraDic["pageID"];
                         bool isEdit = false;
@@ -86,6 +89,30 @@ namespace First
             }
         }
 
+        private static void TypeDetail(Dictionary<string, object> paraDic)
+        {
+            string pageID = (string)paraDic["pageID"];
+            bool isEdit = false;
+            if (paraDic.ContainsKey("isEdit"))
+            {
+                isEdit = (bool)paraDic["isEdit"];
+            }
+            string title = "";
+            if (paraDic.ContainsKey("title"))
+            {
+                title = (string)paraDic["title"];
+            }
+            WinDetail2 wd1 = new WinDetail2(paraDic["context1"], isEdit, title);
+            wd1.PageFrame.Navigate(new Uri(Tools.PageTool(pageID), UriKind.RelativeOrAbsolute));
+            bool? res = wd1.ShowDialog();
+            if (res.HasValue && res.Value)
+            {
+
+            }
+            if (paraDic.ContainsKey("context2"))
+                CommonReflashData((FrameworkElement)paraDic["context2"]);
+        }
+
         public static void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             try
@@ -105,6 +132,10 @@ namespace First
                 {
                     //珠宝类别保存
                     case "JeweleyCategoryType":
+                    //珠宝归属人保存
+                    case "JeweleyOwnType":
+                    //珠宝颜色保存
+                    case "JeweleyColorType":
                         Page page = paraDic["context"] as Page;
                         if (page == null)
                         {
@@ -113,7 +144,7 @@ namespace First
                         TypeEntity te = page.DataContext as TypeEntity;
                         if (te != null)
                         {
-                            if (SQLiteService.SaveType(te, "JeweleyCategoryType"))
+                            if (SQLiteService.SaveType(te, type))
                             {
                                 MessageBox.Show("保存成功");
                             }
@@ -122,12 +153,6 @@ namespace First
                                 MessageBox.Show("保存失败");
                             }
                         }
-                        break;
-                    //珠宝归属人保存
-                    case "JeweleyOwnType":
-                        break;
-                    //珠宝颜色保存
-                    case "JeweleyColorType":
                         break;
                     case "":
                         break;
@@ -355,7 +380,7 @@ namespace First
                         {
                             TypeEntity _te = new TypeEntity(true);
                             //main_ic.Add(_je);
-                            WinDetail wd1 = new WinDetail(_te, isEdit, title);
+                            WinDetail2 wd1 = new WinDetail2(_te, isEdit, title);
                             wd1.PageFrame.Navigate(new Uri(Tools.PageTool(pageID), UriKind.RelativeOrAbsolute));
                             bool? res = wd1.ShowDialog();
 
@@ -450,13 +475,20 @@ namespace First
             {
                 string keyid = (string)dic["context1"];
                 string sql_main = (string)dic["context3"];
-                string sql_details = (string)dic["context4"];
+                string sql_details = "";
+                if (dic.Keys.Contains("context4"))
+                {
+                    sql_details = (string)dic["context4"];
+                } 
 
                 string dbfile = (string)dic["dbFile"];
                 string connstr = string.Format(SQLiteService.connectionFormat, dbfile);
 
                 int flag = helper.ExecuteNonQuery(connstr, System.Data.CommandType.Text, string.Format(sql_main, keyid), null);//删除主表的数据
-                helper.ExecuteNonQuery(connstr, System.Data.CommandType.Text, string.Format(sql_details, keyid), null);//删除详细表的数据
+                if (dic.Keys.Contains("context4"))
+                {
+                    helper.ExecuteNonQuery(connstr, System.Data.CommandType.Text, string.Format(sql_details, keyid), null);//删除详细表的数据
+                }
                 CommonMessageShow("删除", flag == 1);
                 CommonReflashData((FrameworkElement)dic["context2"]);//刷新数据  
             }

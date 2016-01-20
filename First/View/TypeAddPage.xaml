@@ -18,8 +18,8 @@
             <Button Content="保存" x:Name="bt_ok" Command="Save"  CommandParameter="{Binding ElementName=page, Converter={StaticResource con_para}, ConverterParameter='type:JeweleyCategoryType:s'}" Margin="10,10,10,20"  Width="80" Style="{StaticResource BtnNew}"/>
             <Button Content="退出" x:Name="bt_cancel" Command="Close" Width="80" Margin="10,10,30,20" Style="{StaticResource BtnNot}"/>
         </StackPanel>
-        <StackPanel x:Name="fra_content">
-            <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel x:Name="fra_content" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Margin="5" Orientation="Horizontal" >
                 <TextBlock Text="名称：" Margin="5" />
                 <TextBox MinWidth="100" Text="{Binding Path='Type'}" />
             </StackPanel>

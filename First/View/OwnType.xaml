@@ -44,7 +44,7 @@ on 1=1
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
                 <Button  Content="新建" Command="New" Style="{DynamicResource BtnNew}">
                     <Button.CommandParameter>
-                        <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:JeweleyCategoryType:s|pageID:Add:s|isEdit:true:b|title:新建:s">
+                        <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:JeweleyOwnType:s|pageID:OwnTypeAddPage:s|isEdit:false:b|title:新建:s">
                             <Binding Path="ItemsSource" ElementName="ic_form" />
                             <Binding ElementName="ic_form"/>
                         </MultiBinding>
@@ -145,7 +145,7 @@ on 1=1
                                         </Grid.ColumnDefinitions>
                                         <Button  Grid.Row="0" Grid.Column="0" Content="编辑" HorizontalAlignment="Stretch" Style="{StaticResource ic_Btn_cell}"  Command="Open">
                                             <Button.CommandParameter>
-                                                <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:showDetails:s|pageID:Add:s|isEdit:true:b|title:编辑:s">
+                                                <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:TypeDetail:s|pageID:OwnTypeAddPage:s|isEdit:false:b|title:编辑:s">
                                                     <Binding />
                                                     <Binding RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}, Mode=FindAncestor}"/>
                                                 </MultiBinding>
@@ -156,8 +156,7 @@ on 1=1
                                                 <MultiBinding Converter="{StaticResource con_multipara}"  ConverterParameter='type:TableCommonDeleteData:s|dbFile:first:s'>
                                                     <Binding Path='Guid'/>
                                                     <Binding RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl},Mode=FindAncestor}"/>
-                                                    <Binding Source="Delete from Data where guid='{0}'"/>
-                                                    <Binding Source="Delete from History where guid='{0}'"/>
+                                                    <Binding Source="Delete from Type where guid='{0}'"/>
                                                 </MultiBinding>
                                             </Button.CommandParameter>
                                         </Button>
