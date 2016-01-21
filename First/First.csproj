@@ -278,6 +278,7 @@
     <None Include="DB\first2" />
     <None Include="DB\first3" />
     <None Include="DB\first4" />
+    <None Include="DB\first5%28包含账户和类别%29" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

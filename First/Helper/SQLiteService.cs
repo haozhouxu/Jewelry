@@ -239,10 +239,10 @@ namespace First
                                 InsertIntoHistory(je.Guid, je.State, Convert.ToDateTime(null), "", 0, Convert.ToDateTime(null));
                             }
                             break;
-                        case "已卖":
+                        case "卖出":
                             if (!je.State.Equals(tempJe.State) || je.SaleTime != tempJe.SaleTime || je.SaleWho != tempJe.SaleWho || je.SalePirce != tempJe.SalePirce)
                             {
-                                InsertIntoHistory(je.Guid, je.State, Convert.ToDateTime(je.SaleTime), je.SaleWho, je.SalePirce, Convert.ToDateTime(""));
+                                InsertIntoHistory(je.Guid, je.State, Convert.ToDateTime(je.SaleTime), je.SaleWho, je.SalePirce, Convert.ToDateTime(null));
                             }
                             break;
                         case "借出":
