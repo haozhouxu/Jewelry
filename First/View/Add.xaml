@@ -74,26 +74,27 @@
                             <!--<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=Type}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
                             <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{StaticResource myTypeEntitys}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type"  SelectedValue="{Binding Path='Type'}"/>
                             <TextBox Grid.Row="0" Grid.Column="2" Text="颜色：" Style="{StaticResource tb_header_cell_left}"/>
-                            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Path=Color}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
-                            
+                            <ComboBox Grid.Row="0" Grid.Column="3" ItemsSource="{StaticResource myColorTypes}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type"  SelectedValue="{Binding Path='Color'}"/>
+                            <!--<TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Path=Color}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
+
                             <TextBox Grid.Row="1" Grid.Column="0" Text="镶金价：" Style="{StaticResource tb_header_cell_left}"/>
                             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=GoldPrice}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
                             <TextBox Grid.Row="1" Grid.Column="2" Text="货源地：" Style="{StaticResource tb_header_cell_left}"/>
                             <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Path=BuySource}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
-                            
+
                             <TextBox Grid.Row="2" Grid.Column="0" Text="入货时间：" Style="{StaticResource tb_header_cell_left}"/>
                             <!--<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=BuyTime}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
                             <DatePicker Grid.Row="2" Grid.Column="1" Style="{StaticResource tb_dpicker}" SelectedDate="{Binding Path=BuyTime}" />
                             <TextBox Grid.Row="2" Grid.Column="2" Text="入货价格：" Style="{StaticResource tb_header_cell_left}"/>
                             <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Path=BuyPrice}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
-                            
+
                             <TextBox Grid.Row="3" Grid.Column="0" Text="入货人：" Style="{StaticResource tb_header_cell_left}"/>
                             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=BuyWho}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
                             <TextBox Grid.Row="3" Grid.Column="2" Text="归属：" Style="{StaticResource tb_header_cell_left}"/>
                             <!--<TextBox Grid.Row="3" Grid.Column="3" Text="{Binding Path=OwnWho}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
                             <ComboBox Grid.Row="3" Grid.Column="3" ItemsSource="{StaticResource myOwnTypes}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding Path='OwnWho'}"/>
 
-                                <TextBox Grid.Row="4" Grid.Column="0" Text="备注：" Style="{StaticResource tb_header_cell_left}"/>
+                            <TextBox Grid.Row="4" Grid.Column="0" Text="备注：" Style="{StaticResource tb_header_cell_left}"/>
                             <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=Mark}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
                         </Grid>
                     </Border>
@@ -148,7 +149,7 @@
                                 <TextBox Grid.Row="1" Grid.Column="2" Text="还货时间：" Style="{StaticResource tb_header_cell_left}"/>
                                 <!--<TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Path=BorrowReturnTime}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>-->
                                 <DatePicker Grid.Row="1" Grid.Column="3" Style="{StaticResource tb_dpicker}" SelectedDate="{Binding Path=BorrowReturnTime}" />
-                                
+
                             </Grid>
 
                             <!-- 卖出信息 -->
@@ -200,9 +201,9 @@
                     <Border BorderBrush="LightGray" BorderThickness="1" Height="100">
                         <Image Source="{Binding Image.Source}"/>
                     </Border>
-                    
+
                 </StackPanel>
-                
+
                 <!--来往纪录-->
                 <StackPanel DockPanel.Dock="Top">
                     <TextBox HorizontalAlignment="Left"  Text="来往纪录" Style="{StaticResource header_cell_top}" />
@@ -246,7 +247,7 @@
                                             <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Path='Who'}" Style="{StaticResource tup_cell_ro}" />
                                             <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Path='Price'}" Style="{StaticResource tup_cell_ro}" />
                                             <TextBox Grid.Row="0" Grid.Column="4" Text="{Binding Path='Returntime'}" Style="{StaticResource tup_cell_ro}" />
-                                            
+
                                         </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>

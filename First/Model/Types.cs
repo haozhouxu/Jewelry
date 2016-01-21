@@ -13,11 +13,11 @@ namespace First.Model
     {
         public Types()
         {
-            this.Add(new TypeEntity { Type = "耳坠" });
-            this.Add(new TypeEntity { Type = "挂件" });
-            this.Add(new TypeEntity { Type = "戒指" });
-            this.Add(new TypeEntity { Type = "手链" });
-            this.Add(new TypeEntity { Type = "手镯" });
+            //this.Add(new TypeEntity { Type = "耳坠" });
+            //this.Add(new TypeEntity { Type = "挂件" });
+            //this.Add(new TypeEntity { Type = "戒指" });
+            //this.Add(new TypeEntity { Type = "手链" });
+            //this.Add(new TypeEntity { Type = "手镯" });
             string sql = "select * from Type where category='"+ GlobalBindingHelper.JewelryType +"' order by strftime('%Y-%m-%d %H%M%S',createtime) desc";
             string dbFile = "first";
             using (SQLiteConnection sc1 = new SQLiteConnection(string.Format(SQLiteService.connectionFormat, dbFile)))

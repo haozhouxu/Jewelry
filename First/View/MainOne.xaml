@@ -66,6 +66,8 @@ on 1=1
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
         <model:Types x:Key="myTypeEntitys" />
+        <model:OwnTypes x:Key="myOwnTypes" />
+        <model:ColorTypes x:Key="myColorTypes" />
         <DataTemplate x:Key="myTypeTemplate">
             <TextBlock Text="{Binding Type}" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </DataTemplate>
@@ -95,7 +97,8 @@ on 1=1
                 </ComboBox>-->
 
                 <TextBlock Text="颜色："  VerticalAlignment="Center" Margin="5,0,0,0" />
-                <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Width="50" Text="{Binding MethodParameters[8][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+                <ComboBox Margin="5,0,0,0" Width="40" ItemsSource="{StaticResource myColorTypes}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding MethodParameters[8][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" />
+                <!--<TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Width="50" Text="{Binding MethodParameters[8][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />-->
 
                 <TextBlock Text="入货时间:" VerticalAlignment="Center" Margin="5,0" />
                 <DatePicker VerticalAlignment="Center" Margin="5,0" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[9][val]}"/>
@@ -103,11 +106,11 @@ on 1=1
                 <DatePicker VerticalAlignment="Center" Margin="5,0" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[10][val]}"/>
 
                 <TextBlock Text="归属："  VerticalAlignment="Center" Margin="5,0,0,0" />
-                <ComboBox Margin="5,0,0,0" Width="40" SelectedValuePath="Content" SelectedValue="{Binding MethodParameters[11][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}">
-                    <ComboBoxItem Content="" />
+                <ComboBox Margin="5,0,0,0" Width="40" ItemsSource="{StaticResource myOwnTypes}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding MethodParameters[11][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" />
+                    <!--<ComboBoxItem Content="" />
                     <ComboBoxItem Content="个人" />
                     <ComboBoxItem Content="公司" />
-                </ComboBox>
+                </ComboBox>-->
 
                 <!--Style="{StaticResource BtnNew}" -->
                 <Button Content="查询" Margin="0,0,5,0" Style="{StaticResource BtnNew}">
