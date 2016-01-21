@@ -748,6 +748,84 @@ namespace First
             }
         }
 
+        //带分页-查询历史记录
+        public static HistoryViewModel LoadDataAsHistoryViewModel_Paging_Sqlite(string dbFile, string modelGroupString, string sql, Int32 pageSize, Int32 offset, params IDictionary[] conditions)
+        {
+            try
+            {
+                //2015.12.20 利用DeferRefresh可以延迟更新，所以注释下面内容
+                //因为每次改变数据源的参数的时候，就会自动刷新数据源，设置了一个参数，来判断是否是参数已经设置完了
+                //if (modelGroupString.Equals(""))
+                //{
+                //    return null;
+                //}
+                string sqlpara = string.Empty;
+                List<string> list = GetCommonCondition(conditions);
+                if (list.Count > 0)
+                    sqlpara = sqlpara + " where " + string.Join(" and ", list);
+                sql = string.Format(sql, sqlpara) + string.Format(" limit {0} offset {1}", pageSize, pageSize * (offset - 1));
+
+                _totalCount = 0;
+                HistoryViewModel vmNew = LoadDataAsHistoryViewModel(dbFile, sql);
+
+                if (vmNew != null)
+                {
+                    if (vmNew.OCH.Count > 0)
+                        vmNew.TotalCount = _totalCount;
+                    else
+                        vmNew.TotalCount = 0;
+                    vmNew.PageCount = vmNew.TotalCount % pageSize > 0 ? (vmNew.TotalCount / pageSize + 1) : (vmNew.TotalCount / pageSize);
+                    vmNew.PageIndex = offset;
+                    vmNew.PageSize = pageSize;
+                    //vmNew.ModelGroupString = modelGroupString;
+                }
+                return vmNew;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public static HistoryViewModel LoadDataAsHistoryViewModel(string dbFile, string sql)
+        {
+            try
+            {
+                HistoryViewModel vm = new HistoryViewModel();
+                vm.OCH = new ObservableCollection<Historys>();
+                using (SQLiteConnection sc1 = new SQLiteConnection(string.Format(SQLiteService.connectionFormat, dbFile)))
+                {
+                    SQLiteCommand sCom = new SQLiteCommand(sql, sc1);
+                    sc1.Open();
+                    using (SQLiteDataReader dr1 = sCom.ExecuteReader())
+                    {
+                        while (dr1.Read())
+                        {
+                            Historys he = new Historys();
+                            he.Guid = dr1["guid"].ToString();
+                            he.Image = helper.Base64ToImage(dr1["image"].ToString());
+                            he.State = dr1["state"].ToString();
+                            he.Who = dr1["who"].ToString();
+                            he.Price = (double)dr1["price"];
+
+                            _totalCount = int.Parse(dr1["TotalCount"].ToString());
+
+                            vm.OCH.Add(he);
+                        }
+                        dr1.Close();
+                    }
+                    sc1.Close();
+                }
+                return vm;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         //public static ObservableCollection<TypeEntity> LoadDataAsTypes()
         //{
         //    ObservableCollection<TypeEntity> ocTypeEntities = new ObservableCollection<TypeEntity>();

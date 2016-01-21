@@ -88,12 +88,14 @@
     <Compile Include="Model\ColorTypes.cs" />
     <Compile Include="Model\DataValueChangedEventArgs.cs" />
     <Compile Include="Model\HistoryEntity.cs" />
+    <Compile Include="Model\Historys.cs" />
     <Compile Include="Model\Jewelry.cs" />
     <Compile Include="Model\NotifyPropertyBase.cs" />
     <Compile Include="Model\OwnTypes.cs" />
     <Compile Include="Model\SectionTitle.cs" />
     <Compile Include="Model\TypeEntity.cs" />
     <Compile Include="Model\Types.cs" />
+    <Compile Include="ViewModel\HistoryViewModel.cs" />
     <Compile Include="ViewModel\MainOneViewModel.cs" />
     <Compile Include="ViewModel\TypeViewModel.cs" />
     <Compile Include="View\AboutWindow.xaml.cs">

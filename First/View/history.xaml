@@ -4,11 +4,300 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:First.View"
+      xmlns:man="clr-namespace:First"
+      xmlns:vm="clr-namespace:First.ViewModel"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+      xmlns:dic="clr-namespace:System.Collections.Specialized;assembly=System"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:model="clr-namespace:First.Model"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="history">
 
-    <Grid>
-        
-    </Grid>
+
+    <Page.Resources>
+        <man:ParameterConvertor x:Key="con_para" />
+        <man:MultiObjectDataConvertor x:Key="con_multipara" />
+        <man:MethodParameterConvertor x:Key="con_method"/>
+        <!--<ObjectDataProvider x:Key="getAll" ObjectType="{x:Type vm:MainOneViewModel}" MethodName="GetAll" ></ObjectDataProvider>-->
+        <!--<ObjectDataProvider x:Key="odp" ObjectType="{x:Type vm:MainOneViewModel}" MethodName="GetExample" />-->
+        <ObjectDataProvider x:Key="odp_data" ObjectType="{x:Type man:SQLiteService}" MethodName="LoadDataAsHistoryViewModel_Paging_Sqlite" IsInitialLoadEnabled="False">
+            <ObjectDataProvider.MethodParameters>
+                <sys:String>first</sys:String>
+                <sys:String>暂时没用</sys:String>
+                <!--<sys:String>select * from (select * from History {0} order by strftime('%Y-%m-%d %H%M%S',createtime) desc) a
+left join (select count(*) as TotalCount from History {0} ) c
+on 1=1
+                </sys:String>-->
+                <sys:String>
+                select * from (select * from History  order by strftime('%Y-%m-%d %H%M%S',createtime) desc) a
+left join (select guid as guid1,image from Data ) b
+on a.guid = b.guid1
+left join (select count(*) as TotalCount from History ) c
+on 1=1
+                </sys:String>
+                <sys:Int32>10</sys:Int32>
+                <sys:Int32>1</sys:Int32>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">goldprice &gt;= {0}</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">goldprice &lt;= {0}</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">type='{0}'</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">color='{0}'</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">strftime('%Y-%m-%d',buytime)&gt;=strftime('%Y-%m-%d','{0}')</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">strftime('%Y-%m-%d',buytime)&lt;=strftime('%Y-%m-%d','{0}')</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">ownwho='{0}'</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <!--<dic:ListDictionary>
+                    <sys:String x:Key="format">G000025E='{0}'</sys:String>
+                    <x:Static x:Key="val"  Member="man:GlobalBindingHelper.UserID"/>
+                </dic:ListDictionary>-->
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <model:Types x:Key="myTypeEntitys" />
+        <model:OwnTypes x:Key="myOwnTypes" />
+        <model:ColorTypes x:Key="myColorTypes" />
+        <DataTemplate x:Key="myTypeTemplate">
+            <TextBlock Text="{Binding Type}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </DataTemplate>
+    </Page.Resources>
+
+    <!--<Page.CommandBindings>
+        <CommandBinding Command="Open" Executed="Open_Executed" />
+        <CommandBinding Command="Delete" Executed="Delete_Executed" />
+    </Page.CommandBindings>-->
+
+    <DockPanel LastChildFill="True" DataContext="{StaticResource odp_data}" x:Name="dp">
+        <!--菜单栏-->
+        <!--<Border  Background="#FFEDEEEF" BorderBrush="LightGray" BorderThickness="1" CornerRadius="8" DockPanel.Dock="Top" Margin="5">
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
+                <TextBlock Text="镶金价:" VerticalAlignment="Center" Margin="5,0,0,0" />
+                <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Padding="3" Width="50" Text="{Binding MethodParameters[5][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+                <TextBlock Text="至" VerticalAlignment="Center" Margin="5,0,0,0" />
+                <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Padding="3" Width="50" Text="{Binding MethodParameters[6][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+
+                <TextBlock Text="类别："  VerticalAlignment="Center" Margin="5,0,0,0" />
+                <ComboBox Margin="5,0,0,0" Width="40" ItemsSource="{StaticResource myTypeEntitys}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding MethodParameters[7][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" />
+
+                <TextBlock Text="颜色："  VerticalAlignment="Center" Margin="5,0,0,0" />
+                <ComboBox Margin="5,0,0,0" Width="40" ItemsSource="{StaticResource myColorTypes}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding MethodParameters[8][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" />
+
+                <TextBlock Text="入货时间:" VerticalAlignment="Center" Margin="5,0" />
+                <DatePicker VerticalAlignment="Center" Margin="5,0" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[9][val]}"/>
+                <TextBlock Text="至" VerticalAlignment="Center" Margin="5,0" />
+                <DatePicker VerticalAlignment="Center" Margin="5,0" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[10][val]}"/>
+
+                <TextBlock Text="归属："  VerticalAlignment="Center" Margin="5,0,0,0" />
+                <ComboBox Margin="5,0,0,0" Width="40" ItemsSource="{StaticResource myOwnTypes}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding MethodParameters[11][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" />
+                <Button Content="查询" Margin="0,0,5,0" Style="{StaticResource BtnNew}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <man:CallInvokeObjectMethod DestType="{x:Type man:CC}" DestMethod="TurnPageOriginal">
+                                <man:CallInvokeObjectMethod.MethodParameters>
+                                    <MultiBinding Converter="{StaticResource con_method}">
+                                        <Binding Source="{StaticResource odp_data}" BindsDirectlyToSource="True"/>
+                                        <Binding Source="1"/>
+                                        <Binding Source="10"/>
+                                    </MultiBinding>
+                                </man:CallInvokeObjectMethod.MethodParameters>
+                            </man:CallInvokeObjectMethod>
+                            
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                
+                <Button Content="新建" Command="New" Style="{DynamicResource BtnNew}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:GoodsType:s|pageID:Add:s|isEdit:true:b|title:新建:s">
+                            <Binding Path="ItemsSource" ElementName="ic_form" />
+                            <Binding ElementName="ic_form"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+            </StackPanel>
+        </Border>-->
+
+
+        <!--小标题-->
+        <StackPanel DockPanel.Dock="Top">
+            <TextBox HorizontalAlignment="Left"  Text="全部信息"    Style="{StaticResource header_cell_top}" />
+        </StackPanel>
+
+        <!--翻页按钮-->
+        <Grid DockPanel.Dock="Bottom" Background="White">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" >
+                <Button x:Name="bt_pre" Content="上一页" Margin="10,0" IsEnabled="{Binding Path='IsBtnPreEnable'}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <man:CallInvokeObjectMethod DestType="{x:Type man:CC}" DestMethod="TurnPageSqlite">
+                                <man:CallInvokeObjectMethod.MethodParameters>
+                                    <MultiBinding Converter="{StaticResource con_method}">
+                                        <Binding Source="{StaticResource odp_data}" BindsDirectlyToSource="True"/>
+                                        <Binding Source="-1"/>
+                                        <Binding Path="PageSize"/>
+                                        <Binding Path="TotalCount"/>
+                                    </MultiBinding>
+                                </man:CallInvokeObjectMethod.MethodParameters>
+                            </man:CallInvokeObjectMethod>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="Open">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource con_method}">
+                                        <Binding Source="{StaticResource odp_data}" BindsDirectlyToSource="True"/>
+                                        <Binding Source="-1"/>
+                                        <Binding Path="PageSize"/>
+                                        <Binding Path="TotalCount"/>
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+                </Button>
+                <TextBlock Style="{StaticResource tb_normal}" Text="共"/>
+                <TextBlock Style="{StaticResource tb_normal}" Text="{Binding TotalCount}"/>
+                <TextBlock Style="{StaticResource tb_normal}" Text="行，每页"/>
+                <TextBlock Style="{StaticResource tb_normal}" Text="{Binding PageSize}"/>
+                <TextBlock Style="{StaticResource tb_normal}" Text="行，第"/>
+                <TextBlock Style="{StaticResource tb_normal}" Text="{Binding PageIndex}"/>
+                <TextBlock Style="{StaticResource tb_normal}" Text="/"/>
+                <TextBlock Style="{StaticResource tb_normal}" Text="{Binding PageCount}"/>
+                <TextBlock Style="{StaticResource tb_normal}" Text="页"/>
+                <Button x:Name="bt_nxt"  Content="下一页" Margin="10,0" IsEnabled="{Binding Path='IsBtnNxtEnable'}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <man:CallInvokeObjectMethod DestType="{x:Type man:CC}" DestMethod="TurnPageSqlite">
+                                <man:CallInvokeObjectMethod.MethodParameters>
+                                    <MultiBinding Converter="{StaticResource con_method}">
+                                        <Binding Source="{StaticResource odp_data}" BindsDirectlyToSource="True"/>
+                                        <Binding Source="1"/>
+                                        <Binding Path="PageSize"/>
+                                        <Binding Path="TotalCount"/>
+                                    </MultiBinding>
+                                </man:CallInvokeObjectMethod.MethodParameters>
+                            </man:CallInvokeObjectMethod>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <!--内容-->
+        <Border BorderBrush="#FF5490C4" BorderThickness="0,2,0,0" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="15"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Row="0" Grid.Column="0" Text="图片" Style="{StaticResource tb_header_cell_left}" />
+                <TextBox Grid.Row="0" Grid.Column="1" Text="状态" Style="{StaticResource tb_header_cell_left}" />
+                <TextBox Grid.Row="0" Grid.Column="2" Text="时间" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="3" Text="经手人" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="4" Text="价钱" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="5" Text="归还时间" Style="{StaticResource tb_header_cell}" />
+
+                <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" VerticalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewerStyle}">
+                    <ItemsControl x:Name="ic_form" ItemsSource="{Binding Path='OCH'}"  >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <Button Grid.Row="0" Grid.Column="0" Cursor="Hand" Background="White" BorderThickness="1,0,1,1" BorderBrush="LightGray" Command="Open">
+                                        <Button.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:ImageView:s">
+                                                <Binding ElementName="image" />
+                                            </MultiBinding>
+                                        </Button.CommandParameter>
+                                        <Image x:Name="image" MaxHeight="50" Source="{Binding Path=Image.Source}"/>
+                                    </Button>
+
+                                    <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ro_cell}" Text="{Binding Path=State}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource ro_cell}" Text="{Binding Path=Time,StringFormat='yyyy-MM-dd'}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource ro_cell}" Text="{Binding Path=Who}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="4" Style="{StaticResource ro_cell}" Text="{Binding Path=Price}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="5" Style="{StaticResource ro_cell}" Text="{Binding Path=Returntime}" TextWrapping="Wrap"/>
+                                    <!--<Grid Grid.Row="0" Grid.Column="5" Tag="操作" >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Button  Grid.Row="0" Grid.Column="0" Content="查看" HorizontalAlignment="Stretch" Style="{StaticResource ic_Btn_cell}" Command="Open">
+                                            <Button.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:showDetails:s|pageID:Add:s|isEdit:false:b|title:查看:s">
+                                                    <Binding />
+
+                                                </MultiBinding>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Button  Grid.Row="0" Grid.Column="1" Content="编辑" HorizontalAlignment="Stretch" Style="{StaticResource ic_Btn_cell}"  Command="Open">
+                                            <Button.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:showDetails:s|pageID:Add:s|isEdit:true:b|title:编辑:s">
+                                                    <Binding />
+                                                    <Binding RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl}, Mode=FindAncestor}"/>
+                                                </MultiBinding>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Button  Grid.Row="0" Grid.Column="2" Content="删除" HorizontalAlignment="Stretch" Command="Open" Style="{StaticResource ic_Btn_cell}">
+                                            <Button.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource con_multipara}"  ConverterParameter='type:TableCommonDeleteData:s|dbFile:first:s'>
+                                                    <Binding Path='Guid'/>
+                                                    <Binding RelativeSource="{RelativeSource AncestorType={x:Type ItemsControl},Mode=FindAncestor}"/>
+                                                    <Binding Source="Delete from Data where guid='{0}'"/>
+                                                    <Binding Source="Delete from History where guid='{0}'"/>
+                                                </MultiBinding>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                    </Grid>-->
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </DockPanel>
 </Page>
