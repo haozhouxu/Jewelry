@@ -125,7 +125,7 @@ namespace First
 
         public static string DateToString(DateTime dt)
         {
-            if (dt.DayOfYear == 1)
+            if (dt.Year == 1)
             {
                 return null;
             }
