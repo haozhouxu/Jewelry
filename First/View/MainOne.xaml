@@ -29,7 +29,7 @@
 left join (select count(*) as TotalCount from Data {0} ) c
 on 1=1
                 </sys:String>
-                <sys:Int32>10</sys:Int32>
+                <sys:Int32>100</sys:Int32>
                 <sys:Int32>1</sys:Int32>
                 <dic:ListDictionary>
                     <sys:String x:Key="format">goldprice &gt;= {0}</sys:String>
@@ -59,6 +59,14 @@ on 1=1
                     <sys:String x:Key="format">ownwho='{0}'</sys:String>
                     <x:Static x:Key="val" Member="sys:String.Empty" />
                 </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">goldprice = {0}</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">buysource = {0}</sys:String>
+                    <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
                 <!--<dic:ListDictionary>
                     <sys:String x:Key="format">G000025E='{0}'</sys:String>
                     <x:Static x:Key="val"  Member="man:GlobalBindingHelper.UserID"/>
@@ -81,14 +89,21 @@ on 1=1
     <DockPanel LastChildFill="True" DataContext="{StaticResource odp_data}" x:Name="dp">
         <!--菜单栏-->
         <Border  Background="#FFEDEEEF" BorderBrush="LightGray" BorderThickness="1" CornerRadius="8" DockPanel.Dock="Top" Margin="5">
-            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
-                <TextBlock Text="镶金价:" VerticalAlignment="Center" Margin="5,0,0,0" />
-                <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Padding="3" Width="50" Text="{Binding MethodParameters[5][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
-                <TextBlock Text="至" VerticalAlignment="Center" Margin="5,0,0,0" />
-                <TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Padding="3" Width="50" Text="{Binding MethodParameters[6][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
+                <!--<StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">-->
+                    <TextBlock Text="镶金价:" VerticalAlignment="Center" Margin="5" />
+                    <TextBox Margin="5" Style="{StaticResource cell}" Padding="3" Width="100" Text="{Binding MethodParameters[5][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+                    <TextBlock Text="至" VerticalAlignment="Center" Margin="5" />
+                    <TextBox Margin="5" Style="{StaticResource cell}" Padding="3" Width="100" Text="{Binding MethodParameters[6][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
 
-                <TextBlock Text="类别："  VerticalAlignment="Center" Margin="5,0,0,0" />
-                <ComboBox Margin="5,0,0,0" Width="40" ItemsSource="{StaticResource myTypeEntitys}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding MethodParameters[7][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" />
+                    <TextBlock Text="精准镶金价:" VerticalAlignment="Center" Margin="5" />
+                    <TextBox Margin="5" Style="{StaticResource cell}" Padding="3" Width="100" Text="{Binding MethodParameters[12][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+
+                <TextBlock Text="货存地:" VerticalAlignment="Center" Margin="5" />
+                    <TextBox Margin="5" Style="{StaticResource cell}" Padding="3" Width="100" Text="{Binding MethodParameters[13][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />
+
+                <TextBlock Text="类别："  VerticalAlignment="Center" Margin="5" />
+                    <ComboBox Margin="5" Width="60" ItemsSource="{StaticResource myTypeEntitys}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding MethodParameters[7][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" />
                     <!--<ComboBoxItem Content="" />
                     <ComboBoxItem Content="项链" />
                     <ComboBoxItem Content="戒指" />
@@ -96,49 +111,50 @@ on 1=1
                     <ComboBoxItem Content="耳坠" />
                 </ComboBox>-->
 
-                <TextBlock Text="颜色："  VerticalAlignment="Center" Margin="5,0,0,0" />
-                <ComboBox Margin="5,0,0,0" Width="40" ItemsSource="{StaticResource myColorTypes}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding MethodParameters[8][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" />
-                <!--<TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Width="50" Text="{Binding MethodParameters[8][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />-->
+                    <TextBlock Text="颜色："  VerticalAlignment="Center" Margin="5" />
+                    <ComboBox Margin="5" Width="60" ItemsSource="{StaticResource myColorTypes}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding MethodParameters[8][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" />
+                    <!--<TextBox Margin="5,0,0,0" Style="{StaticResource cell}" Width="50" Text="{Binding MethodParameters[8][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" VerticalAlignment="Center" />-->
 
-                <TextBlock Text="入货时间:" VerticalAlignment="Center" Margin="5,0" />
-                <DatePicker VerticalAlignment="Center" Margin="5,0" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[9][val]}"/>
-                <TextBlock Text="至" VerticalAlignment="Center" Margin="5,0" />
-                <DatePicker VerticalAlignment="Center" Margin="5,0" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[10][val]}"/>
+                    <TextBlock Text="入货时间:" VerticalAlignment="Center" Margin="5" />
+                    <DatePicker VerticalAlignment="Center" Margin="5" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[9][val]}"/>
+                    <TextBlock Text="至" VerticalAlignment="Center" Margin="5" />
+                    <DatePicker VerticalAlignment="Center" Margin="5" SelectedDate="{Binding Source={StaticResource odp_data}, BindsDirectlyToSource=True, Path=MethodParameters[10][val]}"/>
 
-                <TextBlock Text="归属："  VerticalAlignment="Center" Margin="5,0,0,0" />
-                <ComboBox Margin="5,0,0,0" Width="40" ItemsSource="{StaticResource myOwnTypes}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding MethodParameters[11][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" />
+                    <TextBlock Text="归属："  VerticalAlignment="Center" Margin="5" />
+                    <ComboBox Margin="5" Width="60" ItemsSource="{StaticResource myOwnTypes}" ItemTemplate="{StaticResource myTypeTemplate}" SelectedValuePath="Type" SelectedValue="{Binding MethodParameters[11][val], BindsDirectlyToSource=True, Source={StaticResource odp_data}}" />
                     <!--<ComboBoxItem Content="" />
                     <ComboBoxItem Content="个人" />
                     <ComboBoxItem Content="公司" />
                 </ComboBox>-->
 
-                <!--Style="{StaticResource BtnNew}" -->
-                <Button Content="查询" Margin="0,0,5,0" Style="{StaticResource BtnNew}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <man:CallInvokeObjectMethod DestType="{x:Type man:CC}" DestMethod="TurnPageOriginal">
-                                <man:CallInvokeObjectMethod.MethodParameters>
-                                    <MultiBinding Converter="{StaticResource con_method}">
-                                        <Binding Source="{StaticResource odp_data}" BindsDirectlyToSource="True"/>
-                                        <Binding Source="1"/>
-                                        <Binding Source="10"/>
-                                    </MultiBinding>
-                                </man:CallInvokeObjectMethod.MethodParameters>
-                            </man:CallInvokeObjectMethod>
-                            <!--<man:CallInvokeObjectMethod TargetObject="{StaticResource odp_data}" DestType="{x:Type ObjectDataProvider}" DestMethod="Refresh" />-->
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
-                <!--<Button Content="新增" Style="{StaticResource BtnNew}" Margin="0,0,5,0" Command="Open" CommandParameter="{Binding Converter={StaticResource con_para},ConverterParameter=type:addNew:s}" />-->
-                <Button Content="新建" Command="New" Style="{DynamicResource BtnNew}">
-                    <Button.CommandParameter>
-                        <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:GoodsType:s|pageID:Add:s|isEdit:true:b|title:新建:s">
-                            <Binding Path="ItemsSource" ElementName="ic_form" />
-                            <Binding ElementName="ic_form"/>
-                        </MultiBinding>
-                    </Button.CommandParameter>
-                </Button>
-            </StackPanel>
+                    <!--Style="{StaticResource BtnNew}" -->
+                    <Button Content="查询" Margin="5" Style="{StaticResource BtnNew}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <man:CallInvokeObjectMethod DestType="{x:Type man:CC}" DestMethod="TurnPageOriginal">
+                                    <man:CallInvokeObjectMethod.MethodParameters>
+                                        <MultiBinding Converter="{StaticResource con_method}">
+                                            <Binding Source="{StaticResource odp_data}" BindsDirectlyToSource="True"/>
+                                            <Binding Source="1"/>
+                                            <Binding Source="10"/>
+                                        </MultiBinding>
+                                    </man:CallInvokeObjectMethod.MethodParameters>
+                                </man:CallInvokeObjectMethod>
+                                <!--<man:CallInvokeObjectMethod TargetObject="{StaticResource odp_data}" DestType="{x:Type ObjectDataProvider}" DestMethod="Refresh" />-->
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <!--<Button Content="新增" Style="{StaticResource BtnNew}" Margin="0,0,5,0" Command="Open" CommandParameter="{Binding Converter={StaticResource con_para},ConverterParameter=type:addNew:s}" />-->
+                <Button Content="新建"  Margin="5" Command="New" Style="{DynamicResource BtnNew}">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource con_multipara}" ConverterParameter="type:GoodsType:s|pageID:Add:s|isEdit:true:b|title:新建:s">
+                                <Binding Path="ItemsSource" ElementName="ic_form" />
+                                <Binding ElementName="ic_form"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                <!--</StackPanel>-->
+            </WrapPanel>
         </Border>
         
 
@@ -221,16 +237,20 @@ on 1=1
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                     <ColumnDefinition Width="15"/>
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Row="0" Grid.Column="0" Text="图片" Style="{StaticResource tb_header_cell_left}" />
                 <TextBox Grid.Row="0" Grid.Column="1" Text="类别" Style="{StaticResource tb_header_cell}" />
                 <TextBox Grid.Row="0" Grid.Column="2" Text="镶金价" Style="{StaticResource tb_header_cell}" />
-                <TextBox Grid.Row="0" Grid.Column="3" Text="状态" Style="{StaticResource tb_header_cell}" />
-                <TextBox Grid.Row="0" Grid.Column="4" Text="入货时间" Style="{StaticResource tb_header_cell}" />
-                <TextBox Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Text="操作" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="3" Text="颜色" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="4" Text="货存地" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="5" Text="状态" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="6" Text="入货时间" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="2" Text="操作" Style="{StaticResource tb_header_cell}" />
 
-                <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" VerticalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewerStyle}">
+                <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9" VerticalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewerStyle}">
                     <ItemsControl x:Name="ic_form" ItemsSource="{Binding Path='OCJ'}"  >
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -239,6 +259,8 @@ on 1=1
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                         <ColumnDefinition />
@@ -259,9 +281,11 @@ on 1=1
                                     
                                     <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ro_cell}" Text="{Binding Path=Type}" TextWrapping="Wrap"/>
                                     <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource ro_cell}" Text="{Binding Path=GoldPrice}" TextWrapping="Wrap"/>
-                                    <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource ro_cell}" Text="{Binding Path=State}" TextWrapping="Wrap"/>
-                                    <TextBox Grid.Row="0" Grid.Column="4" Style="{StaticResource ro_cell}" Text="{Binding Path=BuyTime,StringFormat='yyyy-MM-dd'}" TextWrapping="Wrap"/>
-                                    <Grid Grid.Row="0" Grid.Column="5" Tag="操作" >
+                                    <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource ro_cell}" Text="{Binding Path=Color}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="4" Style="{StaticResource ro_cell}" Text="{Binding Path=BuySource}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="5" Style="{StaticResource ro_cell}" Text="{Binding Path=State}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="6" Style="{StaticResource ro_cell}" Text="{Binding Path=BuyTime,StringFormat='yyyy-MM-dd'}" TextWrapping="Wrap"/>
+                                    <Grid Grid.Row="0" Grid.Column="7" Tag="操作" >
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
                                         </Grid.RowDefinitions>

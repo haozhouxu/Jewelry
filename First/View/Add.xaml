@@ -79,7 +79,7 @@
 
                             <TextBox Grid.Row="1" Grid.Column="0" Text="镶金价：" Style="{StaticResource tb_header_cell_left}"/>
                             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=GoldPrice}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
-                            <TextBox Grid.Row="1" Grid.Column="2" Text="货源地：" Style="{StaticResource tb_header_cell_left}"/>
+                            <TextBox Grid.Row="1" Grid.Column="2" Text="货存地：" Style="{StaticResource tb_header_cell_left}"/>
                             <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Path=BuySource}" TextWrapping="Wrap" Style="{StaticResource tup_cell}"/>
 
                             <TextBox Grid.Row="2" Grid.Column="0" Text="入货时间：" Style="{StaticResource tb_header_cell_left}"/>
