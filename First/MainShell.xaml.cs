@@ -113,7 +113,7 @@ namespace First
         private void GotoPage(string id)
         {
             fra_view.Navigate(new Uri(id, UriKind.Absolute));
-            fra_view.Refresh();
+            //fra_view.Refresh();
             //string mod = SQLiteService.getModule(id);
             //if (!string.IsNullOrEmpty(mod))
             //{
@@ -166,23 +166,23 @@ namespace First
         private void InitalSelected(SectionTitle sc)
         {
             //主导航的时候，改变全局变量GotoPage
-            switch (sc.Title)
-            {
-                case "全部货物":
-                    GlobalBindingHelper.GotoPage = "全部";
-                    break;
-                case "借出货物":
-                    GlobalBindingHelper.GotoPage = "借出";
-                    break;
-                case "卖出货物":
-                    GlobalBindingHelper.GotoPage = "卖出";
-                    break;
-                case "现存货物":
-                    GlobalBindingHelper.GotoPage = "未卖";
-                    break;
-                default:
-                    break;
-            }
+            //switch (sc.Title)
+            //{
+            //    case "全部货物":
+            //        GlobalBindingHelper.GotoPage = "全部";
+            //        break;
+            //    case "借出货物":
+            //        GlobalBindingHelper.GotoPage = "借出";
+            //        break;
+            //    case "卖出货物":
+            //        GlobalBindingHelper.GotoPage = "卖出";
+            //        break;
+            //    case "现存货物":
+            //        GlobalBindingHelper.GotoPage = "未卖";
+            //        break;
+            //    default:
+            //        break;
+            //}
 
             sc.Selected = true;
             if (sc.Children.Count == 0)

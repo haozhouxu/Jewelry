@@ -68,11 +68,6 @@ on 1=1
                     <sys:String x:Key="format">buySource like '%{0}%'</sys:String>
                     <x:Static x:Key="val" Member="sys:String.Empty" />
                 </dic:ListDictionary>
-                <!--条件-->
-                <dic:ListDictionary>
-                    <sys:String x:Key="format">State='{0}'</sys:String>
-                    <x:Static x:Key="val"  Member="hpr:GlobalBindingHelper.GotoPage"/>
-                </dic:ListDictionary>
                 <!--<dic:ListDictionary>
                     <sys:String x:Key="format">G000025E='{0}'</sys:String>
                     <x:Static x:Key="val"  Member="man:GlobalBindingHelper.UserID"/>
