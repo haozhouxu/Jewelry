@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen"
-        Title="阿芬管理系统" Height="700" Width="1000">
+        Title="珠宝管理系统" Height="700" Width="1000">
     <Window.Resources>
         <local:ImageConverter x:Key="imageConverter"/>
         <Storyboard x:Key="slideLeftToRight"  
@@ -268,7 +268,7 @@
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="80,0,0,0">
                             <!--<TextBlock  Text="{Binding Source={x:Static man:GlobalBindingHelper.GSJC}}" Margin="0,0,0,5" Foreground="White" FontSize="14.667"/>
                             <TextBlock  Text="{Binding Source={x:Static man:GlobalBindingHelper.UserID}}" Foreground="#FF88ABC9" />-->
-                            <TextBlock Text="阿芬管理系统" Foreground="White" FontSize="14.667" />
+                            <TextBlock Text="珠宝管理系统" Foreground="White" FontSize="14.667" />
                         </StackPanel>
                     </Grid>
                 </Border>
