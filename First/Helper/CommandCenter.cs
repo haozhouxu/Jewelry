@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using First.Model;
 using System.Windows.Data;
 using First.View;
+using First.Helper;
 
 namespace First
 {
@@ -455,11 +456,19 @@ namespace First
             {
                 try
                 {
-                    odp.MethodParameters[1] = "";
-                    odp.MethodParameters[3] = int.Parse(pagesize);
-                    odp.MethodParameters[4] = int.Parse(str_offset);
-                    odp.Refresh();
-                    odp.MethodParameters[1] = "1";
+                    //odp.MethodParameters[1] = "";
+                    //odp.MethodParameters[3] = int.Parse(pagesize);
+                    //odp.MethodParameters[4] = int.Parse(str_offset);
+                    //odp.Refresh();
+                    //odp.MethodParameters[1] = "1";
+                    //2015.12.20 发现DeferRefresh可以在改变参数的时候，延迟刷行，利用using。注释掉下面三行
+                    using (odp.DeferRefresh())
+                    {
+                        odp.MethodParameters[1] = "";
+                        //odp.MethodParameters[3] = int.Parse(pagesize);
+                        odp.MethodParameters[3] = GlobalBindingHelper.PageSize;
+                        odp.MethodParameters[4] = int.Parse(str_offset);
+                    }
                 }
                 catch (Exception e)
                 {

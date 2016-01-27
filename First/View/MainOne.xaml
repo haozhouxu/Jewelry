@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:First.View"
       xmlns:man="clr-namespace:First"
+      xmlns:hpr="clr-namespace:First.Helper"
       xmlns:vm="clr-namespace:First.ViewModel"
       xmlns:sys="clr-namespace:System;assembly=mscorlib" 
       xmlns:dic="clr-namespace:System.Collections.Specialized;assembly=System"
@@ -29,7 +30,7 @@
 left join (select count(*) as TotalCount from Data {0} ) c
 on 1=1
                 </sys:String>
-                <sys:Int32>100</sys:Int32>
+                <sys:Int32>20</sys:Int32>
                 <sys:Int32>1</sys:Int32>
                 <dic:ListDictionary>
                     <sys:String x:Key="format">goldprice &gt;= {0}</sys:String>
@@ -66,6 +67,11 @@ on 1=1
                 <dic:ListDictionary>
                     <sys:String x:Key="format">buySource like '%{0}%'</sys:String>
                     <x:Static x:Key="val" Member="sys:String.Empty" />
+                </dic:ListDictionary>
+                <!--条件-->
+                <dic:ListDictionary>
+                    <sys:String x:Key="format">State='{0}'</sys:String>
+                    <x:Static x:Key="val"  Member="hpr:GlobalBindingHelper.GotoPage"/>
                 </dic:ListDictionary>
                 <!--<dic:ListDictionary>
                     <sys:String x:Key="format">G000025E='{0}'</sys:String>

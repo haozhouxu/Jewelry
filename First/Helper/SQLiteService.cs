@@ -440,9 +440,19 @@ namespace First
                 //}
                 string sqlpara = string.Empty;
                 List<string> list = GetCommonCondition(conditions);
+
+                foreach (var item in list)
+                {
+                    if (item.Contains("全部"))
+                    {
+                        list.Remove(item);
+                        break;
+                    }
+                }
+
                 if (list.Count > 0)
                     sqlpara = sqlpara + " where " + string.Join(" and ", list);
-                sql = string.Format(sql, sqlpara) + string.Format(" limit {0} offset {1}", pageSize, pageSize * (offset - 1));
+                sql = string.Format(sql, sqlpara) + string.Format(" limit {0} offset {1}", GlobalBindingHelper.PageSize, GlobalBindingHelper.PageSize * (offset - 1));
 
                 _totalCount = 0;
                 MainOneViewModel vmNew = LoadDataAsMainOneViewModel(dbFile, sql);
@@ -453,9 +463,9 @@ namespace First
                         vmNew.TotalCount = _totalCount;
                     else
                         vmNew.TotalCount = 0;
-                    vmNew.PageCount = vmNew.TotalCount % pageSize > 0 ? (vmNew.TotalCount / pageSize + 1) : (vmNew.TotalCount / pageSize);
+                    vmNew.PageCount = vmNew.TotalCount % GlobalBindingHelper.PageSize > 0 ? (vmNew.TotalCount / GlobalBindingHelper.PageSize + 1) : (vmNew.TotalCount / GlobalBindingHelper.PageSize);
                     vmNew.PageIndex = offset;
-                    vmNew.PageSize = pageSize;
+                    vmNew.PageSize = GlobalBindingHelper.PageSize;
                     //vmNew.ModelGroupString = modelGroupString;
                 }
                 return vmNew;

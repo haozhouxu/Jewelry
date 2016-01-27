@@ -14,6 +14,10 @@ namespace First.Helper
         public static string JewelryType = "珠宝";
         public static string OwnType = "归属人";
         public static string ColorType = "颜色";
+        //导航页
+        public static string GotoPage = "全部";
+        //每页显示的条数
+        public static int PageSize = int.Parse(System.Configuration.ConfigurationSettings.AppSettings["pagesize"]);
 
     }
 }
