@@ -26,7 +26,7 @@
         <Label Name="labelTech" Height="28" HorizontalAlignment="Left" Margin="80,180,0,0" VerticalAlignment="Top" FontWeight="Bold" >
             
         </Label>
-        <Label Name="labelCompanyName" Content="版权所有（C）阿芬珠宝有限公司" Height="28" HorizontalAlignment="Left" Margin="25,210,0,0"  VerticalAlignment="Top" Width="450" FontWeight="Bold"/>
+        <Label Name="labelCompanyName" Content="版权所有（C）珠宝有限公司" Height="28" HorizontalAlignment="Left" Margin="25,210,0,0"  VerticalAlignment="Top" Width="450" FontWeight="Bold"/>
         <Label Name="labelCopyright" Content="警告：本软件受版权法的保护,未经许可不得擅自复制，违者必究" Height="28" HorizontalAlignment="Left" Margin="25,240,0,0" VerticalAlignment="Top" Width="378" VerticalContentAlignment="Center" Foreground="#FFE91313" />
         <Button Content="确定" Height="28" HorizontalAlignment="Left" Margin="390,285,0,0" Click="Button_Click" VerticalAlignment="Top" Width="75" />
     </Grid>
