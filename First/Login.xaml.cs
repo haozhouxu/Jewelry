@@ -18,6 +18,7 @@ using System.Windows.Threading;
 using System.Threading;
 using System.Reflection;
 using First.Helper;
+using System.Management;
 
 namespace First
 {
@@ -69,6 +70,17 @@ namespace First
         void login_Click(object sender, RoutedEventArgs e)
         {
             UserLogin();
+            ////检查是否是指定的电脑
+            //ThrowMsg("正在检查硬件...", false);
+            //if (CheckUser())
+            //{
+            //    UserLogin();
+            //}
+            //else
+            //{
+            //    ThrowMsg("您的电脑不能登录，请联系管理员！", false);
+            //}
+
             //string user = tb_UseName.Text.Trim();
             //string pwd = pb_Password.Password.Trim();
 
@@ -91,10 +103,25 @@ namespace First
             //}
         }
 
+        private bool CheckUser()
+        {
+            if (helper.SHA256Encrypt(getCpu()+ helper.SHA256Encrypt(GetDiskVolumeSerialNumber()+ helper.SHA256Encrypt(GetMACAddress()))).Equals(GlobalBindingHelper.UserMachineId))
+            {
+                return true;
+            }
+            return false;
+        }
 
         private bool hasclick = false;//用户是否已经请求
         private void UserLogin()
         {
+            //检查是否是指定的电脑
+            ThrowMsg("正在检查硬件...", false);
+            if (!CheckUser())
+            {
+                ThrowMsg("您的电脑不能登录，请联系管理员！", false);
+                return;
+            }
             string UserName = login.tb_UseName.Text.Trim();
             string UserPassword = login.pb_Password.Password.Trim();
             //var sb = login.FindResource("loginClick") as Storyboard;
@@ -253,6 +280,78 @@ namespace First
             catch
             {
 
+            }
+        }
+
+        /// <summary>
+        /// 获得CPU的序列号
+        /// </summary>
+        /// <returns></returns>
+        public string getCpu()
+        {
+            try
+            {
+                string strCpu = null;
+                ManagementClass myCpu = new ManagementClass("win32_Processor");
+                ManagementObjectCollection myCpuConnection = myCpu.GetInstances();
+                foreach (ManagementObject myObject in myCpuConnection)
+                {
+                    strCpu = myObject.Properties["Processorid"].Value.ToString();
+                    break;
+                }
+                return strCpu;
+            }
+            catch (Exception)
+            {
+                return "CPU";
+                //throw;
+            }
+        }
+
+        /// <summary>
+        /// 取得设备硬盘的卷标号
+        /// </summary>
+        /// <returns></returns>
+        public string GetDiskVolumeSerialNumber()
+        {
+            try
+            {
+                ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+                ManagementObject disk = new ManagementObject("win32_logicaldisk.deviceid=\"c:\"");
+                disk.Get();
+                return disk.GetPropertyValue("VolumeSerialNumber").ToString();
+            }
+            catch (Exception)
+            {
+                return "DISK";
+                //throw;
+            }
+        }
+
+        public string GetMACAddress()
+        {
+            try
+            {
+                ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+                ManagementObjectCollection moc = mc.GetInstances();
+
+                string MACAddress = String.Empty;
+
+                foreach (ManagementObject mo in moc)
+                {
+                    if (MACAddress == String.Empty)
+                    { // only return MAC Address from first card
+                        if ((bool)mo["IPEnabled"] == true) MACAddress = mo["MacAddress"].ToString();
+                    }
+                    mo.Dispose();
+                }
+
+                return MACAddress;
+            }
+            catch (Exception)
+            {
+                return "MAC";
+                //throw;
             }
         }
     }

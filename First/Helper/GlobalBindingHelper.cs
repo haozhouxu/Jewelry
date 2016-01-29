@@ -19,5 +19,8 @@ namespace First.Helper
         //每页显示的条数
         public static int PageSize = int.Parse(System.Configuration.ConfigurationSettings.AppSettings["pagesize"]);
 
+        //指定的电脑
+        public static string UserMachineId= "T4SQS2H4MmZyVqEcQeNAr8im6XKz9Po/BYZ8slj0+gQ=";
+
     }
 }
