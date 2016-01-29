@@ -20,7 +20,7 @@ namespace First.Helper
         public static int PageSize = int.Parse(System.Configuration.ConfigurationSettings.AppSettings["pagesize"]);
 
         //指定的电脑
-        public static string UserMachineId= "T4SQS2H4MmZyVqEcQeNAr8im6XKz9Po/BYZ8slj0+gQ=";
+        public static string UserMachineId= "iLLTZYSDlx/8TWy3OCsroMibbiBvfZN8LX+hxBiU7Sk=";
 
     }
 }

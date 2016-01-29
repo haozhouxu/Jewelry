@@ -119,7 +119,7 @@ namespace First
             ThrowMsg("正在检查硬件...", false);
             if (!CheckUser())
             {
-                ThrowMsg("您的电脑不能登录，请联系管理员！", false);
+                ThrowMsg("您的电脑不能登录，请联系管理员！", true);
                 return;
             }
             string UserName = login.tb_UseName.Text.Trim();
