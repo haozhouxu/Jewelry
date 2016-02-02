@@ -244,6 +244,7 @@ on 1=1
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition />
                     <ColumnDefinition Width="15"/>
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Row="0" Grid.Column="0" Text="图片" Style="{StaticResource tb_header_cell_left}" />
@@ -252,10 +253,11 @@ on 1=1
                 <TextBox Grid.Row="0" Grid.Column="3" Text="颜色" Style="{StaticResource tb_header_cell}" />
                 <TextBox Grid.Row="0" Grid.Column="4" Text="货存地" Style="{StaticResource tb_header_cell}" />
                 <TextBox Grid.Row="0" Grid.Column="5" Text="状态" Style="{StaticResource tb_header_cell}" />
-                <TextBox Grid.Row="0" Grid.Column="6" Text="入货时间" Style="{StaticResource tb_header_cell}" />
-                <TextBox Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="2" Text="操作" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="6" Text="归属" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="7" Text="入货时间" Style="{StaticResource tb_header_cell}" />
+                <TextBox Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="2" Text="操作" Style="{StaticResource tb_header_cell}" />
 
-                <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9" VerticalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewerStyle}">
+                <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="10" VerticalScrollBarVisibility="Visible" Style="{StaticResource ScrollViewerStyle}">
                     <ItemsControl x:Name="ic_form" ItemsSource="{Binding Path='OCJ'}"  >
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -264,6 +266,7 @@ on 1=1
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
                                         <ColumnDefinition />
                                         <ColumnDefinition />
                                         <ColumnDefinition />
@@ -289,8 +292,9 @@ on 1=1
                                     <TextBox Grid.Row="0" Grid.Column="3" Style="{StaticResource ro_cell}" Text="{Binding Path=Color}" TextWrapping="Wrap"/>
                                     <TextBox Grid.Row="0" Grid.Column="4" Style="{StaticResource ro_cell}" Text="{Binding Path=BuySource}" TextWrapping="Wrap"/>
                                     <TextBox Grid.Row="0" Grid.Column="5" Style="{StaticResource ro_cell}" Text="{Binding Path=State}" TextWrapping="Wrap"/>
-                                    <TextBox Grid.Row="0" Grid.Column="6" Style="{StaticResource ro_cell}" Text="{Binding Path=BuyTime,StringFormat='yyyy-MM-dd'}" TextWrapping="Wrap"/>
-                                    <Grid Grid.Row="0" Grid.Column="7" Tag="操作" >
+                                    <TextBox Grid.Row="0" Grid.Column="6" Style="{StaticResource ro_cell}" Text="{Binding Path=OwnWho}" TextWrapping="Wrap"/>
+                                    <TextBox Grid.Row="0" Grid.Column="7" Style="{StaticResource ro_cell}" Text="{Binding Path=BuyTime,StringFormat='yyyy-MM-dd'}" TextWrapping="Wrap"/>
+                                    <Grid Grid.Row="0" Grid.Column="8" Tag="操作" >
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
                                         </Grid.RowDefinitions>
