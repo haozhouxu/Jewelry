@@ -117,11 +117,11 @@ namespace First
         {
             //检查是否是指定的电脑
             ThrowMsg("正在检查硬件...", false);
-            //if (!CheckUser())
-            //{
-            //    ThrowMsg("您的电脑不能登录，请联系管理员！", true);
-            //    return;
-            //}
+            if (!CheckUser())
+            {
+                ThrowMsg("您的电脑不能登录，请联系管理员！", true);
+                return;
+            }
             string UserName = login.tb_UseName.Text.Trim();
             string UserPassword = login.pb_Password.Password.Trim();
             //var sb = login.FindResource("loginClick") as Storyboard;
